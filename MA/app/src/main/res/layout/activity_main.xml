@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dreadhead_blue"
+    android:background="@color/novi_sad_torquoise"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -14,42 +14,107 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="-20dp"
-        app:cardCornerRadius="20dp"
-        app:cardUseCompatPadding="false">
+        app:cardBackgroundColor="@color/freaky_green"
+        app:cardCornerRadius="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/superior_white"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/wendy_one"
-                android:text="Aura."
-                android:textColor="@color/dreadhead_blue"
-                android:textSize="96sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:fontFamily="@font/wendy_one"
-                android:text="Plan &amp; find events for you."
-                android:textColor="@color/dreadhead_blue"
-                android:textSize="24sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="283dp"
-                app:cardBackgroundColor="#8BFFFFFF"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="-20dp"
+                app:cardCornerRadius="20dp"
+                app:cardUseCompatPadding="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/superior_white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/wendy_one"
+                        android:text="Aura."
+                        android:textColor="@color/dreadhead_blue"
+                        android:textSize="96sp" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:fontFamily="@font/wendy_one"
+                        android:text="Plan &amp; find events for you."
+                        android:textColor="@color/dreadhead_blue"
+                        android:textSize="24sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="283dp"
+                        app:cardBackgroundColor="#8BFFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:fontFamily="@font/asset"
+                                android:gravity="bottom"
+                                android:text="TOP 5 EVENTS."
+                                android:textAlignment="gravity"
+                                android:textColor="@color/black"
+                                android:textSize="24sp" />
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="12dp"
+                                android:clipToPadding="false"
+                                android:paddingBottom="8dp">
+
+                                <LinearLayout
+                                    android:id="@+id/eventCards"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:orientation="horizontal"
+                                    android:paddingHorizontal="4dp">
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="274dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="#3AFFFFFF"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,13 +122,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/textView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="12dp"
                         android:fontFamily="@font/asset"
                         android:gravity="bottom"
-                        android:text="TOP 5 EVENTS."
+                        android:text="TOP 5 OFFERINGS."
                         android:textAlignment="gravity"
                         android:textColor="@color/black"
                         android:textSize="24sp" />
@@ -71,17 +136,15 @@
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginHorizontal="12dp"
-                        android:clipToPadding="false"
-                        android:paddingBottom="8dp">
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="16dp">
 
                         <LinearLayout
-                            android:id="@+id/eventCards"
+                            android:id="@+id/offeringCards"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="4dp">
+                            android:orientation="horizontal">
 
                         </LinearLayout>
                     </HorizontalScrollView>
@@ -91,43 +154,29 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="match_parent"
-        android:layout_height="242dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="#3AFFFFFF"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:cardUseCompatPadding="false">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/wendy_one"
+        android:gravity="bottom|center_horizontal"
+        android:text="ABOUT AURA. CORPORATION"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:fontFamily="@font/asset"
-            android:gravity="bottom"
-            android:text="TOP 5 OFFERINGS."
-            android:textAlignment="gravity"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp">
-
-            <LinearLayout
-                android:id="@+id/offeringCards"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:fontFamily="@font/wendy_one"
+        android:gravity="bottom|center_horizontal"
+        android:text="Pogledaj dom svoj, andjele i skini paucinu s' ociju videces prizore potresne videces nesrecne i bolesne videces cemer, smrt i jad"
+        android:textAlignment="gravity"
+        android:textColor="@color/nonchalant_blue"
+        android:textSize="12sp" />
 
 </LinearLayout>
