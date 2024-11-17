@@ -9,4 +9,5 @@
     <color name="stillwater_black">#1B1B1B</color>
     <color name="low_opacity">#25FFFFFF</color>
     <color name="novi_sad_torquoise">#92B6B1</color>
+    <color name="transparent">#00000000</color>
 </resources>

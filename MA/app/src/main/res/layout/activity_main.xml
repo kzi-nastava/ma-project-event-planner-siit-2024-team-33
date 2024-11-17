@@ -76,12 +76,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
-                                android:fontFamily="@font/asset"
+                                android:fontFamily="@font/inter_28pt_bold"
                                 android:gravity="bottom"
                                 android:text="TOP 5 EVENTS."
                                 android:textAlignment="gravity"
                                 android:textColor="@color/black"
-                                android:textSize="24sp" />
+                               android:textSize="24sp" />
 
                             <HorizontalScrollView
                                 android:layout_width="match_parent"
