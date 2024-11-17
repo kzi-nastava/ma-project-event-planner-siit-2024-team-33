@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="superior_white">#E8DDB5</color>
+    <color name="nonchalant_blue">#666A86</color>
+    <color name="dreadhead_blue">#788AA3</color>
+    <color name="freaky_green">#B2C9AB</color>
+    <color name="stillwater_black">#1B1B1B</color>
+    <color name="low_opacity">#25FFFFFF</color>
+    <color name="novi_sad_torquoise">#92B6B1</color>
+    <color name="transparent">#00000000</color>
+</resources>
