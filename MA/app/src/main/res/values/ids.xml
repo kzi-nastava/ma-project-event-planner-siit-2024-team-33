@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvCategory" type="id" />
+    <item name="spinnerCategory" type="id" />
+    <item name="tvNewCategoryPrompt" type="id" />
+    <item name="etNewCategory" type="id" />
+</resources>
