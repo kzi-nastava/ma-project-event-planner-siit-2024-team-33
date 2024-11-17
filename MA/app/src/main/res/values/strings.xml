@@ -13,4 +13,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="topEventsDesc">In a small village nestled between the mountains, there lived a curious cat named Whiskers. Every day, Whiskers would explore the lush green fields a nd the sparkling streams that</string>
     <string name="eventCardDesc">Join us for an engaging and thought-provoking event as we delve into the recent assassination attempt on President Donald Trump. This discussion will explore the political, social</string>
+    <string name="title_activity_service_create">activity_service_create</string>
 </resources>

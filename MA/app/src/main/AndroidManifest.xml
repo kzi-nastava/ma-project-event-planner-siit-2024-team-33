@@ -15,6 +15,11 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".activity_service_create"
+            android:exported="false"
+            android:label="@string/title_activity_service_create"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
             android:name=".MainPageActivity"
             android:exported="false" />
         <activity
