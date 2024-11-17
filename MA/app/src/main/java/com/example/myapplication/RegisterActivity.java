@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         goToHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, MainPageActivity.class);
                 startActivity(intent);
 
                 finish();
