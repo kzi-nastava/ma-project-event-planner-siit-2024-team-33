@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E8DDB5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book a Service"
+            android:textSize="22sp"
+            android:textColor="#333333"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="center"
+            android:paddingBottom="16dp" />
+
+        <!-- Select Event -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Event"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/event_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_background" />
+        </LinearLayout>
+
+        <!-- Select Date -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Date"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="8dp" />
+
+            <DatePicker
+                android:id="@+id/date_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Time From -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time From"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="8dp" />
+
+            <TimePicker
+                android:id="@+id/time_from_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
+        </LinearLayout>
+
+        <!-- Time To -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time To"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="8dp" />
+
+            <TimePicker
+                android:id="@+id/time_to_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
+        </LinearLayout>
+
+        <!-- Note -->
+        <TextView
+            android:id="@+id/duration_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration must be between 30 mins and 120 mins."
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:fontFamily="sans-serif"
+            android:paddingBottom="16dp"
+            android:layout_gravity="center" />
+
+        <!-- Book Service Button -->
+        <Button
+            android:id="@+id/book_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book Service"
+            android:background="#788AA3"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+</ScrollView>

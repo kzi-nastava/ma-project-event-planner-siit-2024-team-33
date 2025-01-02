@@ -63,8 +63,7 @@
                 android:fontFamily="@font/inter_28pt_bold"
                 android:textColor="@color/superior_white" />
 
-            <include
-                layout="@layout/offering_card" />
+
             <include
                 layout="@layout/offering_card" />
             <include

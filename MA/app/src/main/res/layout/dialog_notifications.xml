@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#E8DDB5"
+    android:padding="16dp"
+    android:elevation="4dp"
+    android:layout_gravity="center">
+
+    <!-- Top Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications."
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#788AA3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you want to receive notifications?"
+            android:textSize="14sp"
+            android:textColor="#333333" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On"
+            android:textSize="14sp"
+            android:textColor="#788AA3" />
+    </LinearLayout>
+
+    <!-- Toggle Switch -->
+    <Switch
+        android:id="@+id/toggle_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="Toggle Notifications" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/notification_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <include layout="@layout/notification" />
+            <include layout="@layout/notification" />
+            <include layout="@layout/notification" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <!-- Paginator -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/button_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Previous" />
+
+        <TextView
+            android:id="@+id/pagination_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:text="Page 1"
+            android:textColor="#788AA3" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next →" />
+    </LinearLayout>
+
+    <!-- Bottom Section -->
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete read notifications"
+        android:background="#B2C9AB"
+        android:textColor="#E8DDB5"
+        android:padding="12dp"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

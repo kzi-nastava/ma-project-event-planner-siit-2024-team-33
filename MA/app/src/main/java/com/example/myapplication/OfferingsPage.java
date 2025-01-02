@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -76,4 +77,24 @@ public class OfferingsPage extends Fragment {
 
         return view;
     }
+
+    private void showFilterDialog() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.fragment_products_filter, null);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(dialogView);
+
+        final AlertDialog dialog = builder.create();
+
+
+        Button confirmButton = dialogView.findViewById(R.id.btn_confirm);
+        confirmButton.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
 }
