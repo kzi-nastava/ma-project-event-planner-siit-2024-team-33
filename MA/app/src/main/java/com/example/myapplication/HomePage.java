@@ -68,6 +68,7 @@ public class HomePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        eventService = new EventService();
 
         gestureDetector = new GestureDetector(getContext(), new GestureListener());
 
@@ -77,7 +78,7 @@ public class HomePage extends Fragment {
                 return gestureDetector.onTouchEvent(event);
             }
         });
-        loadTop5Events();
+        loadTop5Events(1);
 
         addingEventCards(view);
         addingProductCards(view);
@@ -117,8 +118,8 @@ public class HomePage extends Fragment {
                 .commit();
     }
 
-    private void loadTop5Events() {
-        eventService.getTop5Events(2)
+    private void loadTop5Events(Integer id) {
+        eventService.getTop5Events(id)
                 .enqueue(new Callback<List<MinimalEventDTO>>() {
                     @Override
                     public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
@@ -138,6 +139,8 @@ public class HomePage extends Fragment {
     private void addingEventCards(View view) {
         LinearLayout parentLayout = view.findViewById(R.id.eventCardsPlace);
         LayoutInflater inflater = LayoutInflater.from(getContext());
+
+        parentLayout.removeAllViews();
 
         if (eventTypes != null) {
             for (MinimalEventDTO event : events) {
