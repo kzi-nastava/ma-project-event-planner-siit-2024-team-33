@@ -1,9 +1,9 @@
-package com.example.myapplication;
+package com.example.myapplication.services;
 
 import com.example.myapplication.api.EventApi;
-import com.example.myapplication.dto.FilterEventDTO;
-import com.example.myapplication.dto.MinimalEventDTO;
-import com.example.myapplication.dto.MinimalEventTypeDTO;
+import com.example.myapplication.dto.eventDTO.FilterEventDTO;
+import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EventService {
-    private static final String BASE_URL = "http://localhost:8080/api/events/";
+    private static final String BASE_URL = "http://10.0.2.2:8080/api/events/";
     private final EventApi eventApi;
 
     public EventService() {

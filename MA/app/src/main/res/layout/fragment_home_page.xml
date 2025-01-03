@@ -56,13 +56,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#BED2B9"
+                android:gravity="center"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:elevation="4dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+99 Events"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000" />
+            </LinearLayout>
+            <!-- here -->
             <LinearLayout
                 android:id="@+id/products_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_corners">
+                android:background="@drawable/rounded_corners"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:id="@+id/productsTitle"
@@ -91,24 +110,6 @@
 <!--                    android:textSize="20sp" />-->
 <!--                -->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="#BED2B9"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:layout_marginTop="16dp"
-                    android:elevation="4dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+99 Events"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="#000" />
-                </LinearLayout>
 
 
                 <!-- Product Cards Place -->

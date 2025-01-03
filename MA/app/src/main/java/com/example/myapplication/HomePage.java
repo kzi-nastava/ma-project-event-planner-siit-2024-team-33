@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.myapplication.dto.MinimalEventDTO;
-import com.example.myapplication.dto.MinimalEventTypeDTO;
+import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
+import com.example.myapplication.services.EventService;
 
 import java.util.List;
 import retrofit2.Call;
@@ -65,8 +67,7 @@ public class HomePage extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         eventService = new EventService();
 
@@ -78,13 +79,14 @@ public class HomePage extends Fragment {
                 return gestureDetector.onTouchEvent(event);
             }
         });
-        loadTop5Events(1);
 
-        addingEventCards(view);
+        loadTop5Events(2, view);
+
         addingProductCards(view);
 
         return view;
     }
+
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final int SWIPE_THRESHOLD = 100;
@@ -118,23 +120,48 @@ public class HomePage extends Fragment {
                 .commit();
     }
 
-    private void loadTop5Events(Integer id) {
-        eventService.getTop5Events(id)
-                .enqueue(new Callback<List<MinimalEventDTO>>() {
-                    @Override
-                    public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            events = response.body();
-                            addingEventCards(getView());
-                        }
-                    }
+    private void loadTop5Events(Integer id, View view) {
+        eventService.getTop5Events(id).enqueue(new Callback<List<MinimalEventDTO>>() {
+            @Override
+            public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
+                Log.d("RetrofitDebug", "onResponse called");
 
-                    @Override
-                    public void onFailure(Call<List<MinimalEventDTO>> call, Throwable t) {
-                        // Handle failure
-                    }
-                });
+                Log.d("RetrofitCall", "Request URL: " + call.request().url());
+                Log.d("RetrofitCall", "Request Headers: " + call.request().headers());
+                Log.d("RetrofitCall", "Request Method: " + call.request().method());
+                try {
+                    Log.d("RetrofitCall", "Request Body: " + (call.request().body() != null ? call.request().body().toString() : "null"));
+                } catch (Exception e) {
+                    Log.e("RetrofitCall", "Error logging request body", e);
+                }
+
+                if (response != null) {
+                    Log.d("RetrofitResponse", "Response Code: " + response.code());
+                    Log.d("RetrofitResponse", "Response Message: " + response.message());
+                    Log.d("RetrofitResponse", "Response Body: " + response.body());
+                } else {
+                    Log.e("RetrofitResponse", "Response is null");
+                }
+
+                if (response.isSuccessful() && response.body() != null) {
+                    events = response.body();
+                    addingEventCards(view);
+                } else {
+                    Log.e("RetrofitResponse", "Response unsuccessful. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MinimalEventDTO>> call, Throwable t) {
+                Log.e("RetrofitError", "Failed to fetch data");
+                Log.e("RetrofitError", "Request URL: " + call.request().url());
+                Log.e("RetrofitError", "Request Headers: " + call.request().headers());
+                Log.e("RetrofitError", "Request Method: " + call.request().method());
+                Log.e("RetrofitError", "Error Message: " + t.getMessage(), t);
+            }
+        });
     }
+
 
     private void addingEventCards(View view) {
         LinearLayout parentLayout = view.findViewById(R.id.eventCardsPlace);
@@ -142,7 +169,7 @@ public class HomePage extends Fragment {
 
         parentLayout.removeAllViews();
 
-        if (eventTypes != null) {
+        if (events != null) {
             for (MinimalEventDTO event : events) {
                 View cardView = inflater.inflate(R.layout.event_card, parentLayout, false);
 
@@ -161,11 +188,6 @@ public class HomePage extends Fragment {
             }
         }
 
-        View moreEventsCard = inflater.inflate(R.layout.event_card, parentLayout, false);
-        TextView moreEventsTitle = moreEventsCard.findViewById(R.id.item_title);
-        moreEventsTitle.setText("+99 more events");
-        moreEventsCard.setAlpha(0.7f);
-        parentLayout.addView(moreEventsCard);
     }
 
 

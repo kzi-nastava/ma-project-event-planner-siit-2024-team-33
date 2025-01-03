@@ -1,4 +1,4 @@
-package com.example.myapplication.dto;
+package com.example.myapplication.dto.eventDTO;
 
 import com.example.myapplication.models.EventType;
 import com.example.myapplication.models.Organizer;
