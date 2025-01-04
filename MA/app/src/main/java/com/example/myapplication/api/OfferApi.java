@@ -1,6 +1,7 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.models.Availability;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface OfferApi {
             @Query("name") String name,
             @Query("category") String categoryName,
             @Query("lowestPrice") Integer lowestPrice,
-            @Query("isAvailable") String isAvailable,
+            @Query("isAvailable") Availability isAvailable,
             @Query("eventTypes") List<Integer> eventTypes,
             @Query("id") Integer id
     );

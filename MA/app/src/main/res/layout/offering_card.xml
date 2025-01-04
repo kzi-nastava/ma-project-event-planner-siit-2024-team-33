@@ -59,7 +59,9 @@
                     android:textSize="16sp"
                     android:textColor="@color/stillwater_black"
                     android:fontFamily="@font/inter_18pt_regular"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:maxLines="4"
+                    android:ellipsize="end" />
 
                 <Button
                     android:id="@+id/offering_button"

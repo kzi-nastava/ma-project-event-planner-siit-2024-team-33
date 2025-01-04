@@ -18,7 +18,10 @@ import android.widget.TextView;
 
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
+import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.services.EventService;
+import com.example.myapplication.services.OfferService;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.filefilter.ConditionalFileFilter;
 
 import java.util.List;
 import retrofit2.Call;
@@ -42,8 +45,11 @@ public class HomePage extends Fragment {
     private String mParam1;
     private String mParam2;
     private EventService eventService;
+    private OfferService offerService;
     private List<MinimalEventTypeDTO> eventTypes;
     private List<MinimalEventDTO> events;
+    private List<MinimalOfferDTO> offers;
+
     public HomePage() {
         // Required empty public constructor
     }
@@ -70,6 +76,7 @@ public class HomePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         eventService = new EventService();
+        offerService = new OfferService();
 
         gestureDetector = new GestureDetector(getContext(), new GestureListener());
 
@@ -162,6 +169,47 @@ public class HomePage extends Fragment {
         });
     }
 
+    private void loadTop5Offers(Integer id, View view) {
+        offerService.getTop5Offers(id).enqueue(new Callback<List<MinimalOfferDTO>>() {
+            @Override
+            public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
+                Log.d("RetrofitDebug", "onResponse called");
+
+                Log.d("RetrofitCall", "Request URL: " + call.request().url());
+                Log.d("RetrofitCall", "Request Headers: " + call.request().headers());
+                Log.d("RetrofitCall", "Request Method: " + call.request().method());
+                try {
+                    Log.d("RetrofitCall", "Request Body: " + (call.request().body() != null ? call.request().body().toString() : "null"));
+                } catch (Exception e) {
+                    Log.e("RetrofitCall", "Error logging request body", e);
+                }
+
+                if (response != null) {
+                    Log.d("RetrofitResponse", "Response Code: " + response.code());
+                    Log.d("RetrofitResponse", "Response Message: " + response.message());
+                    Log.d("RetrofitResponse", "Response Body: " + response.body());
+                } else {
+                    Log.e("RetrofitResponse", "Response is null");
+                }
+
+                if (response.isSuccessful() && response.body() != null) {
+                    offers = response.body();
+                    addingEventCards(view);
+                } else {
+                    Log.e("RetrofitResponse", "Response unsuccessful. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MinimalOfferDTO>> call, Throwable t) {
+                Log.e("RetrofitError", "Failed to fetch data");
+                Log.e("RetrofitError", "Request URL: " + call.request().url());
+                Log.e("RetrofitError", "Request Headers: " + call.request().headers());
+                Log.e("RetrofitError", "Request Method: " + call.request().method());
+                Log.e("RetrofitError", "Error Message: " + t.getMessage(), t);
+            }
+        });
+    }
 
     private void addingEventCards(View view) {
         LinearLayout parentLayout = view.findViewById(R.id.eventCardsPlace);
@@ -192,33 +240,30 @@ public class HomePage extends Fragment {
 
 
     private void addingProductCards(View view) {
-        //parent layout where we add cards
         LinearLayout parentLayout = view.findViewById(R.id.offeringCardsPlace);
-        for (int i = 0; i <= 4; i++) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            View cardView = inflater.inflate(R.layout.offering_card, parentLayout, false);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        parentLayout.removeAllViews();
 
-            addingMargins(cardView);
+        if (offers != null) {
+            for (MinimalOfferDTO offer : offers) {
+                View cardView = inflater.inflate(R.layout.offering_card, parentLayout, false);
 
-            TextView itemTitle = cardView.findViewById(R.id.offering_title);
-            TextView itemText = cardView.findViewById(R.id.offering_description);
-            ImageView itemImage = cardView.findViewById(R.id.offering_image);
-            Button itemButton = cardView.findViewById(R.id.offering_button);
+                addingMargins(cardView);
 
-            if (i < 4) {
-                // Setting data for cards
-                itemTitle.setText("Offering Title " + (i + 1));
-                itemText.setText("In a quaint little village nestled between rolling hills, there lived a curious cat named Whiskers...");
-                itemImage.setImageResource(R.drawable.pic123);
-            } else {
-                itemTitle.setText("+99 more offerings");
-                itemText.setVisibility(View.GONE);
-                itemImage.setVisibility(View.GONE);
+                TextView itemTitle = cardView.findViewById(R.id.offering_title);
+                TextView itemText = cardView.findViewById(R.id.offering_description);
+                ImageView itemImage = cardView.findViewById(R.id.offering_image);
+                Button itemButton = cardView.findViewById(R.id.offering_button);
+
+
+                itemTitle.setText(offer.name);
+                itemText.setText(offer.description);
+                itemImage.setImageResource(R.drawable.trumpshot);
                 itemButton.setVisibility(View.GONE);
-                cardView.setAlpha(0.7f);
+
+                parentLayout.addView(cardView);
             }
 
-            parentLayout.addView(cardView);
         }
     }
 

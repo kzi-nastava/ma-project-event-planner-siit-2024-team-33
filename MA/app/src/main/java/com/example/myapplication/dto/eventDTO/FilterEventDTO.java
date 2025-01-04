@@ -7,7 +7,7 @@ public class FilterEventDTO {
     public String location;
     public String firstPossibleDate;
     public String lastPossibleDate;
-    public List<MinimalEventTypeDTO> eventTypes;
+    public List<Integer> eventTypes;
     public Integer numOfAttendees;
 
     public String getName(){
@@ -22,7 +22,7 @@ public class FilterEventDTO {
     public String getLastPossibleDate(){
         return lastPossibleDate;
     }
-    public List<MinimalEventTypeDTO> getEventTypes(){
+    public List<Integer> getEventTypes(){
         return eventTypes;
     }
     public Integer getNumOfAttendees(){

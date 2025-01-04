@@ -3,14 +3,15 @@ package com.example.myapplication.dto.offerDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
 import com.example.myapplication.models.Availability;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OfferFilterDTO {
-    private Boolean isProduct;
-    private Boolean isService;
-    private String name;
-    private String category;
-    private Integer lowestPrice;
-    private Availability isAvailable;
-    private List<MinimalEventTypeDTO> eventTypes;
+    public Boolean isProduct;
+    public Boolean isService;
+    public String name;
+    public String category;
+    public Integer lowestPrice;
+    public Availability isAvailable;
+    public List<Integer> eventTypes = new ArrayList<>();
 }

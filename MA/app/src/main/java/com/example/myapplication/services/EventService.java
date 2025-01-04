@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EventService {
     private static final String BASE_URL = "http://10.0.2.2:8080/api/events/";
+//  private static final String BASE_URL = "http://185.156.155.96:8080/api/events/";
     private final EventApi eventApi;
 
     public EventService() {
@@ -38,25 +39,15 @@ public class EventService {
     }
 
     public Call<List<MinimalEventDTO>> getFilteredEvents(FilterEventDTO filter, Integer id) {
-        List<Integer> ids = extractIntegers(filter.getEventTypes());
         return eventApi.getFilteredEvents(
                 filter.getName(),
                 filter.getLocation(),
                 filter.getNumOfAttendees(),
                 filter.getFirstPossibleDate(),
                 filter.getLastPossibleDate(),
-                ids,
+                filter.eventTypes,
                 id
         );
     }
 
-    private List<Integer> extractIntegers(List<MinimalEventTypeDTO> eventTypeDTOs) {
-        List<Integer> integerList = new ArrayList<>();
-        for (MinimalEventTypeDTO dto : eventTypeDTOs) {
-            if (dto.id != null) {
-                integerList.add(dto.id);
-            }
-        }
-        return integerList;
-    }
 }
