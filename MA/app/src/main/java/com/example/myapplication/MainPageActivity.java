@@ -49,9 +49,9 @@ public class MainPageActivity extends AppCompatActivity {
                 {
                     selectedFragment = new OfferingsPage();
                 }
-                else if (item.getItemId() == R.id.nav_profile)
-                {
-                    selectedFragment = new ProfilePage();
+                else if (item.getItemId() == R.id.nav_profile) {
+                    ProfilePopupFragment profilePopupFragment = new ProfilePopupFragment();
+                    profilePopupFragment.show(getSupportFragmentManager(), profilePopupFragment.getTag());
                 }
 
                 return loadFragment(selectedFragment);

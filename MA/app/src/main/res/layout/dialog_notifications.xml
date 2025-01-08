@@ -60,10 +60,6 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <include layout="@layout/notification" />
-            <include layout="@layout/notification" />
-            <include layout="@layout/notification" />
-
         </LinearLayout>
     </ScrollView>
 

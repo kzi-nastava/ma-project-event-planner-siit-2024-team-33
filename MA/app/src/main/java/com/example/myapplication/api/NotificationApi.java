@@ -23,7 +23,7 @@ public interface NotificationApi {
             @Body PostNotificationDTO postNotificationDTO
     );
 
-    @GET
+    @GET("xdd")
     Call<List<GetNotificationDTO>> getNotifications(
             @Query("receiverId") int receiverId
     );
