@@ -18,7 +18,7 @@ public interface ReportApi {
             @Body PostReportDTO postReportDTO
     );
 
-    @GET
+    @GET("reports")
     Call<List<GetReportDTO>> getReports();
 
     @GET("{reportId}")

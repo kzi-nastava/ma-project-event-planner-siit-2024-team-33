@@ -20,7 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="105dp"
             android:layout_gravity="center"
-            android:layout_marginTop="0dp"
             android:src="@drawable/logo" />
 
         <TextView
@@ -34,7 +33,7 @@
 
         <!-- Reports RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reportsRecyclerView"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
@@ -42,43 +41,37 @@
         <!-- Pagination Controls -->
         <LinearLayout
             android:id="@+id/paginationLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
 
             <Button
                 android:id="@+id/previousPageButton"
                 style="@style/PaginationButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:enabled="false"
-                android:text="← Previous" />
+                android:text="← Previous"
+                android:visibility="invisible"
+                android:layout_marginEnd="16dp" />
+
             <LinearLayout
+                android:id="@+id/pageNumbersLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="4dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2"
-                    android:layout_marginEnd="4dp"/>
+                <!-- Dynamic page numbers will be added here programmatically -->
             </LinearLayout>
+
             <Button
                 android:id="@+id/nextPageButton"
                 style="@style/PaginationButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next →" />
+                android:text="Next →"
+                android:visibility="invisible"
+                android:layout_marginStart="16dp" />
         </LinearLayout>
 
     </LinearLayout>

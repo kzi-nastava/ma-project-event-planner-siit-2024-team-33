@@ -29,12 +29,13 @@ public class ProfilePopupFragment extends DialogFragment {
 
         profileInfoButton.setOnClickListener(v -> openProfilePage());
         favoritesButton.setOnClickListener(v -> dismiss());
-        scheduleButton.setOnClickListener(v -> dismiss());
-        signInButton.setOnClickListener(v -> dismiss());
+        scheduleButton.setOnClickListener(v -> openStuffComments());
+        signInButton.setOnClickListener(v -> openStuff());
         notificationsButton.setOnClickListener(v -> openNotificationsDialog());
 
         return view;
     }
+
 
     @Override
     public void onStart() {
@@ -57,5 +58,17 @@ public class ProfilePopupFragment extends DialogFragment {
 
         NotificationsDialog notificationsDialog = new NotificationsDialog(getContext());
         notificationsDialog.show();
+    }
+
+    private void openStuffComments(){
+        dismiss();
+        Intent intent = new Intent(getActivity(),CommentsActivity.class);
+        startActivity(intent);
+    }
+    private void openStuff() {
+        dismiss();
+
+        Intent intent = new Intent(getActivity(), ReportsActivity.class);
+        startActivity(intent);
     }
 }

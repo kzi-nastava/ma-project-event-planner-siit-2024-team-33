@@ -16,7 +16,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class ReportService {
-    private static final String BASE_URL = "http://10.0.2.2/api/reports/";
+    private static final String BASE_URL = "http://10.0.2.2:8080/api/reports/";
     private final ReportApi reportApi;
 
 
@@ -33,7 +33,7 @@ public class ReportService {
         return reportApi.submitReport(postReportDTO);
     }
 
-    Call<List<GetReportDTO>> getReports(){
+    public Call<List<GetReportDTO>> getReports(){
         return reportApi.getReports();
     }
 
@@ -42,11 +42,11 @@ public class ReportService {
     }
 
 
-    Call<String> suspendUser(Integer userId){
+    public Call<String> suspendUser(Integer userId){
         return reportApi.suspendUser(userId);
     }
 
-    Call<Long> getSuspensionTimeRemaining(Integer userId){
+    public Call<Long> getSuspensionTimeRemaining(Integer userId){
         return reportApi.getSuspensionTimeRemaining(userId);
     }
 

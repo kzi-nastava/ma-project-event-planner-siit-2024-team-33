@@ -39,7 +39,7 @@ public interface RatingApi {
             @Path("offerId") int offerId
     );
 
-    @GET("ratings")
+    @GET("all")
     Call<List<GetRatingDTO>> getAllRatings();
 
     @GET("ratings/{ratingId}")
