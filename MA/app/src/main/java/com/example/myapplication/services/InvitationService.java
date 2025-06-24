@@ -23,8 +23,8 @@ public class InvitationService {
         invitationApi = retrofit.create(InvitationApi.class);
     }
 
-    public Call<Void> createInvitations(Integer inviterId, PostInvitationDTO postInvitationDTO) {
-        return invitationApi.createInvitations(inviterId, postInvitationDTO);
+    public Call<Void> createInvitations(PostInvitationDTO postInvitationDTO) {
+        return invitationApi.createInvitations(postInvitationDTO);
     }
 
     public Call<List<GetInvitationDTO>> getInvitationsForEvent(Integer eventId) {

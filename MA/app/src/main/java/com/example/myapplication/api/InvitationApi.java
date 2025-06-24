@@ -15,8 +15,6 @@ public interface InvitationApi {
 
     @POST("{inviterId}")
     Call<Void> createInvitations(
-            //@Path("eventID") Integer eventId,
-            @Path("inviterId") Integer inviterId,
             @Body PostInvitationDTO postInvitationDTO
     );
 
