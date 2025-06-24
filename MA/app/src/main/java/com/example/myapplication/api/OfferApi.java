@@ -1,5 +1,6 @@
 package com.example.myapplication.api;
 
+import com.example.myapplication.dto.common.PaginatedResponse;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.models.Availability;
 
@@ -11,18 +12,17 @@ import retrofit2.http.Query;
 
 public interface OfferApi {
 
-    @GET("top5")
-    Call<List<MinimalOfferDTO>> getTop5Offers(
-            @Query("id") Integer id
-    );
+    @GET("offers/top5/authentified")
+    Call<List<MinimalOfferDTO>> getTop5OffersAuthorized();
 
-    @GET("rest")
-    Call<List<MinimalOfferDTO>> getAllOffers(
-            @Query("id") Integer id
-    );
+    @GET("offers/top5/unauthentified")
+    Call<List<MinimalOfferDTO>> getTop5OffersUnauthorized();
 
-    @GET("filter")
-    Call<List<MinimalOfferDTO>> getOfferList(
+    @GET("offers/rest")
+    Call<List<MinimalOfferDTO>> getAllOffers();
+
+    @GET("offers/filter/authentified")
+    Call<PaginatedResponse<MinimalOfferDTO>> getFilteredOffersAuthorized(
             @Query("isProduct") Boolean isProduct,
             @Query("isService") Boolean isService,
             @Query("name") String name,
@@ -30,6 +30,20 @@ public interface OfferApi {
             @Query("lowestPrice") Integer lowestPrice,
             @Query("isAvailable") Availability isAvailable,
             @Query("eventTypes") List<Integer> eventTypes,
-            @Query("id") Integer id
+            @Query("page") int page,
+            @Query("size") int size
+    );
+
+    @GET("offers/filter/unauthentified")
+    Call<PaginatedResponse<MinimalOfferDTO>> getFilteredOffersUnauthorized(
+            @Query("isProduct") Boolean isProduct,
+            @Query("isService") Boolean isService,
+            @Query("name") String name,
+            @Query("category") String categoryName,
+            @Query("lowestPrice") Integer lowestPrice,
+            @Query("isAvailable") Availability isAvailable,
+            @Query("eventTypes") List<Integer> eventTypes,
+            @Query("page") int page,
+            @Query("size") int size
     );
 }

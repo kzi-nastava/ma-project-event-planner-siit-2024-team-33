@@ -74,7 +74,7 @@ public class EventsPage extends Fragment {
     }
 
     private void loadAllEvents(View view) {
-        eventService.getAllEvents(2).enqueue(new Callback<List<MinimalEventDTO>>() {
+        eventService.getAllEvents().enqueue(new Callback<List<MinimalEventDTO>>() {
             @Override
             public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {

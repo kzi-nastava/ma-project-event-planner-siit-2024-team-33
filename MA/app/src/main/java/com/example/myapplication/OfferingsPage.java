@@ -85,7 +85,7 @@ public class OfferingsPage extends Fragment {
     private void loadAllOffers(View view) {
         // Make sure offerService is initialized before calling
         if (offerService != null) {
-            offerService.getAllOffers(2).enqueue(new Callback<List<MinimalOfferDTO>>() {
+            offerService.getAllOffers().enqueue(new Callback<List<MinimalOfferDTO>>() {
                 @Override
                 public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
                     Log.d("RetrofitDebug", "onResponse called");

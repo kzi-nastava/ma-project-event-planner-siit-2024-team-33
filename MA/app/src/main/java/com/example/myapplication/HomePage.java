@@ -87,7 +87,7 @@ public class HomePage extends Fragment {
             }
         });
 
-        loadTop5Events(2, view);
+        loadTop5Events(view);
 
         addingProductCards(view);
 
@@ -127,8 +127,8 @@ public class HomePage extends Fragment {
                 .commit();
     }
 
-    private void loadTop5Events(Integer id, View view) {
-        eventService.getTop5Events(id).enqueue(new Callback<List<MinimalEventDTO>>() {
+    private void loadTop5Events(View view) {
+        eventService.getTop5EventsUnauthorized().enqueue(new Callback<List<MinimalEventDTO>>() {
             @Override
             public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
                 Log.d("RetrofitDebug", "onResponse called");
@@ -169,8 +169,8 @@ public class HomePage extends Fragment {
         });
     }
 
-    private void loadTop5Offers(Integer id, View view) {
-        offerService.getTop5Offers(id).enqueue(new Callback<List<MinimalOfferDTO>>() {
+    private void loadTop5Offers(View view) {
+        offerService.getTop5OffersUnauthorized().enqueue(new Callback<List<MinimalOfferDTO>>() {
             @Override
             public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
                 Log.d("RetrofitDebug", "onResponse called");
@@ -273,14 +273,12 @@ public class HomePage extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
 
-        // Set the desired margin (in pixels)
         int marginInPixels = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, // converting to dp
-                14, // desired margin in dp
-                getResources().getDisplayMetrics() // getting display metrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                14,
+                getResources().getDisplayMetrics()
         );
 
-        // Apply margins
         params.setMargins(marginInPixels, marginInPixels, marginInPixels, marginInPixels);
         cardView.setLayoutParams(params);
     }
