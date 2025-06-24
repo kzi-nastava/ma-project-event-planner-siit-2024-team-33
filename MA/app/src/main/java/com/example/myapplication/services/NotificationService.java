@@ -29,8 +29,8 @@ public class NotificationService {
         return notificationApi.sendNotification(postNotificationDTO);
     }
 
-    public Call<List<GetNotificationDTO>> getNotifications(int receiverId) {
-        return notificationApi.getNotifications(receiverId);
+    public Call<List<GetNotificationDTO>> getNotifications() {
+        return notificationApi.getNotifications();
     }
 
     public Call<Void> deleteNotification(Integer id) {

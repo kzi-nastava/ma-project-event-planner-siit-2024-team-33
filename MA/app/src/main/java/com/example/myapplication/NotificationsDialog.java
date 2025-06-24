@@ -78,8 +78,7 @@ public class NotificationsDialog extends Dialog {
     }
 
     private void fetchAllNotifications() {
-        int receiverId = 2;
-        notificationService.getNotifications(receiverId).enqueue(new Callback<List<GetNotificationDTO>>() {
+        notificationService.getNotifications().enqueue(new Callback<List<GetNotificationDTO>>() {
             @Override
             public void onResponse(Call<List<GetNotificationDTO>> call, Response<List<GetNotificationDTO>> response) {
                 if (response.isSuccessful()) {

@@ -24,9 +24,7 @@ public interface NotificationApi {
     );
 
     @GET("xdd")
-    Call<List<GetNotificationDTO>> getNotifications(
-            @Query("receiverId") int receiverId
-    );
+    Call<List<GetNotificationDTO>> getNotifications();
 
     @DELETE("{id}")
     Call<Void> deleteNotification(
