@@ -25,8 +25,8 @@ public class RatingService {
     }
 
 
-    public Call<Rating> submitRating(PostRatingDTO postRatingDTO, int userId, int offerId) {
-        return ratingApi.submitRating(postRatingDTO, userId, offerId);
+    public Call<Rating> submitRating(PostRatingDTO postRatingDTO, int offerId) {
+        return ratingApi.submitRating(postRatingDTO,offerId);
     }
 
     public Call<Void> approveRating(int commentId) {

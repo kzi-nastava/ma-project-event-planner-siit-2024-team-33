@@ -20,7 +20,6 @@ public interface RatingApi {
     @POST("ratings")
     Call<Rating> submitRating(
             @Body PostRatingDTO postRatingDTO,
-            @Query("userId") int userId,
             @Query("offerId") int offerId
     );
 
