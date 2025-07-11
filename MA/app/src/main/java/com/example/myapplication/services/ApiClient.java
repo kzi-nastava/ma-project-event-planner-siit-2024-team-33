@@ -8,6 +8,7 @@ import android.content.Context;
 
 public class ApiClient {
     private static Retrofit retrofit = null;
+    private static OkHttpClient clients = null;
 
     public static Retrofit getClient(Context context) {
         if (retrofit == null) {
@@ -20,14 +21,25 @@ public class ApiClient {
                     .addInterceptor(logging)
                     .build();
 
+            clients = client;
+
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.2.8:8080/")
+                    .baseUrl("http://192.168.0.102:8080/")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
+
+    public static Retrofit getRetrofit(String baseurl){
+        return new Retrofit.Builder()
+                .baseUrl(baseurl)
+                .client(clients)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
     public static void reset() {
         retrofit = null;
     }

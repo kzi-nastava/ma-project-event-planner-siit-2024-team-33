@@ -12,6 +12,7 @@ lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.04.01"
 firebaseCrashlyticsBuildtools = "3.0.2"
+cronetEmbedded = "119.6045.31"
 
 [libraries]
 okhttp = "com.squareup.okhttp3:okhttp:4.10.0"
@@ -37,6 +38,7 @@ firebase_crashlytics_buildtools = { group = "com.google.firebase", name = "fireb
 retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
 retrofitgson = "com.squareup.retrofit2:converter-gson:2.9.0"
 okhttplog = "com.squareup.okhttp3:logging-interceptor:4.9.0"
+cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 
 
 [plugins]

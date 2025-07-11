@@ -1,6 +1,8 @@
 package com.example.myapplication.services;
 
+import com.example.myapplication.LoginActivity;
 import com.example.myapplication.api.EventApi;
+import com.example.myapplication.api.UserApi;
 import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.eventDTO.FilterEventDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
@@ -15,16 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EventService {
 //    private static final String BASE_URL = "http://10.0.2.2:8080/api/events/";
-private static final String BASE_URL = "http://192.168.2.8:8080/api/events/";
+private static final String BASE_URL = "http://192.168.0.102:8080/api/events/";
     private final EventApi eventApi;
 
     public EventService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        eventApi = retrofit.create(EventApi.class);
+        eventApi = ApiClient.getRetrofit(BASE_URL).create(EventApi.class);
     }
 
     public Call<List<MinimalEventDTO>> getEventsByOrganizer(Integer organizerId) {
