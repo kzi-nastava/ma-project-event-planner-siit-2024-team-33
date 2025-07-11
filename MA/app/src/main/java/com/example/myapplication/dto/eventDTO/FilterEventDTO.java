@@ -10,6 +10,14 @@ public class FilterEventDTO {
     public List<Integer> eventTypes;
     public Integer numOfAttendees;
 
+    public FilterEventDTO(String name, String location,Integer numOfAttendees, String firstPossibleDate, String lastPossibleDate, List<Integer> eventTypes){
+        this.eventTypes=eventTypes;
+        this.location=location;
+        this.name=name;
+        this.firstPossibleDate=firstPossibleDate;
+        this.lastPossibleDate=lastPossibleDate;
+        this.numOfAttendees=numOfAttendees;
+    }
     public String getName(){
         return name;
     }

@@ -1,12 +1,21 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.api.EventApi;
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.eventDTO.FilterEventDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
+import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.services.ApiClient;
+import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.EventService;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -22,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,10 +43,14 @@ public class EventsPage extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private FilterEventDTO filter;
     private String mParam1;
     private String mParam2;
     private EventService eventService;
     private List<MinimalEventDTO> events;
+    private AuthenticationService authService;
+    private int currentPage = 0;
+    private final int pageSize = 5;
 
     public EventsPage() {
         // Required empty public constructor
@@ -59,8 +73,8 @@ public class EventsPage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        eventService = new EventService();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,25 +83,62 @@ public class EventsPage extends Fragment {
         Button filterButton = view.findViewById(R.id.open_filters);
         filterButton.setOnClickListener(v -> showFilterDialog());
 
-        loadAllEvents(view);
+        Button btnNext = view.findViewById(R.id.btn_next);
+        Button btnPrev = view.findViewById(R.id.btn_previous);
+
+        btnNext.setOnClickListener(v -> {
+            currentPage++;
+            loadAllEvents(view);
+        });
+
+        btnPrev.setOnClickListener(v -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadAllEvents(view);
+            }
+        });
+
         return view;
     }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        authService = new AuthenticationService(requireContext());
+
+        SharedPreferences prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String token = prefs.getString("jwt", null);
+
+        if (token != null) {
+            eventService = new EventService();
+            filter = new FilterEventDTO("", "", 0, "", "", Collections.emptyList());
+            loadAllEvents(view);
+        } else {
+            Log.w("EventsPage", "JWT token is not yet available, skipping API call.");
+        }
+    }
+
 
     private void loadAllEvents(View view) {
-        eventService.getAllEvents(2).enqueue(new Callback<List<MinimalEventDTO>>() {
+        Call<PageResponse<MinimalEventDTO>> call;
+
+        call = eventService.getFilteredEvents(this.filter, this.currentPage, this.pageSize);
+        call.enqueue(new Callback<PageResponse<MinimalEventDTO>>(){
             @Override
-            public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
+            public void onResponse(Call<PageResponse<MinimalEventDTO>> call, Response<PageResponse<MinimalEventDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    events = response.body();
+                    events = response.body().getContent();
                     displayAllEvents(view);
+                    PageResponse<MinimalEventDTO> page = response.body();
+                    boolean isLastPage = page.getNumber() + 1 >= page.getTotalPages();
+                    updatePaginationButtons(view, isLastPage);
                 } else {
-                    Log.e("EventsPage", "Failed to fetch events. Code: " + response.code());
+                    Log.e("EventsPage", "Failed to load events: " + response.code());
                 }
             }
-
             @Override
-            public void onFailure(Call<List<MinimalEventDTO>> call, Throwable t) {
-                Log.e("EventsPage", "Error fetching events: " + t.getMessage(), t);
+            public void onFailure(Call<PageResponse<MinimalEventDTO>> call, Throwable t) {
+                Log.e("EventsPage", "Error loading events: " + t.getMessage());
             }
         });
     }
@@ -135,22 +186,25 @@ public class EventsPage extends Fragment {
         DatePicker datePickerLast = dialogView.findViewById(R.id.datepicker_last);
         Spinner spinnerCategory = dialogView.findViewById(R.id.spinner_category);
 
-        FilterEventDTO filter = new FilterEventDTO();
-        filter.name = etName.getText().toString().trim();
-        filter.location = etLocation.getText().toString().trim();
+
+        this.filter.name = etName.getText().toString().trim();
+        this.filter.location = etLocation.getText().toString().trim();
 
         String attendeesText = etAttendees.getText().toString().trim();
         try {
-            filter.numOfAttendees = attendeesText.isEmpty() ? 0 : Integer.parseInt(attendeesText);
+            this.filter.numOfAttendees = attendeesText.isEmpty() ? 0 : Integer.parseInt(attendeesText);
         } catch (NumberFormatException e) {
             Log.e("EventsPage", "Invalid number format for attendees");
         }
 
-        filter.firstPossibleDate = getFormattedDate(datePickerFirst);
-        filter.lastPossibleDate = getFormattedDate(datePickerLast);
-        filter.eventTypes = getSelectedEventTypeIds(spinnerCategory);
+        this.filter.firstPossibleDate = getFormattedDate(datePickerFirst);
+        this.filter.lastPossibleDate = getFormattedDate(datePickerLast);
+        this.filter.eventTypes = getSelectedEventTypeIds(spinnerCategory);
 
-        getFilteredEvents(filter, 2);
+        View rootView = getView();
+        if (rootView != null) {
+            loadAllEvents(rootView);
+        }
     }
 
     private List<Integer> getSelectedEventTypeIds(Spinner spinner) {
@@ -168,26 +222,15 @@ public class EventsPage extends Fragment {
         int year = datePicker.getYear();
         return String.format("%04d-%02d-%02d", year, month, day);
     }
+    private void updatePaginationButtons(View view, boolean isLastPage) {
+        Button btnNext = view.findViewById(R.id.btn_next);
+        Button btnPrev = view.findViewById(R.id.btn_previous);
+        TextView pageIndicator = view.findViewById(R.id.page_indicator);
 
-    private void getFilteredEvents(FilterEventDTO filter, Integer id) {
-        eventService.getFilteredEvents(filter, id).enqueue(new Callback<List<MinimalEventDTO>>() {
-            @Override
-            public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    events = response.body();
-                    View rootView = getView();
-                    if (rootView != null) {
-                        displayAllEvents(rootView);
-                    }
-                } else {
-                    Log.e("EventsPage", "Filtering failed. Code: " + response.code());
-                }
-            }
+        btnPrev.setEnabled(currentPage > 0);
+        btnNext.setEnabled(!isLastPage);
 
-            @Override
-            public void onFailure(Call<List<MinimalEventDTO>> call, Throwable t) {
-                Log.e("EventsPage", "Error fetching filtered events: " + t.getMessage(), t);
-            }
-        });
+        pageIndicator.setText("Page " + (currentPage + 1));
     }
+
 }

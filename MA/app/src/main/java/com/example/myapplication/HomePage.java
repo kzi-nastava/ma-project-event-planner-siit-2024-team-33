@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.OfferService;
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.filefilter.ConditionalFileFilter;
@@ -37,6 +38,8 @@ public class HomePage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private GestureDetector gestureDetector;
@@ -86,10 +89,9 @@ public class HomePage extends Fragment {
                 return gestureDetector.onTouchEvent(event);
             }
         });
-
-        loadTop5Events(2, view);
-
-        addingProductCards(view);
+        loadTop5Events(view);
+        loadTop5Offers(view);
+        //addingProductCards(view);
 
         return view;
     }
@@ -127,86 +129,58 @@ public class HomePage extends Fragment {
                 .commit();
     }
 
-    private void loadTop5Events(Integer id, View view) {
-        eventService.getTop5Events(id).enqueue(new Callback<List<MinimalEventDTO>>() {
+    private void loadTop5Events(View view) {
+        Log.d("EVENTS_API", "Calling GetTop5EventsAuthorized()");
+
+        Call<List<MinimalEventDTO>> call;
+        if (AuthenticationService.isLoggedIn()) {
+            call = eventService.GetTop5EventsAuthorized();
+        } else {
+            call = eventService.GetTop5EventsUnauthorized();
+        }
+
+        call.enqueue(new Callback<List<MinimalEventDTO>>() {
             @Override
             public void onResponse(Call<List<MinimalEventDTO>> call, Response<List<MinimalEventDTO>> response) {
-                Log.d("RetrofitDebug", "onResponse called");
-
-                Log.d("RetrofitCall", "Request URL: " + call.request().url());
-                Log.d("RetrofitCall", "Request Headers: " + call.request().headers());
-                Log.d("RetrofitCall", "Request Method: " + call.request().method());
-                try {
-                    Log.d("RetrofitCall", "Request Body: " + (call.request().body() != null ? call.request().body().toString() : "null"));
-                } catch (Exception e) {
-                    Log.e("RetrofitCall", "Error logging request body", e);
-                }
-
-                if (response != null) {
-                    Log.d("RetrofitResponse", "Response Code: " + response.code());
-                    Log.d("RetrofitResponse", "Response Message: " + response.message());
-                    Log.d("RetrofitResponse", "Response Body: " + response.body());
-                } else {
-                    Log.e("RetrofitResponse", "Response is null");
-                }
+                Log.d("EVENTS_API", "Response received. Success: " + response.isSuccessful());
 
                 if (response.isSuccessful() && response.body() != null) {
                     events = response.body();
                     addingEventCards(view);
                 } else {
-                    Log.e("RetrofitResponse", "Response unsuccessful. Code: " + response.code());
+                    Log.e("EVENTS_API", "Failed with code: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<List<MinimalEventDTO>> call, Throwable t) {
-                Log.e("RetrofitError", "Failed to fetch data");
-                Log.e("RetrofitError", "Request URL: " + call.request().url());
-                Log.e("RetrofitError", "Request Headers: " + call.request().headers());
-                Log.e("RetrofitError", "Request Method: " + call.request().method());
-                Log.e("RetrofitError", "Error Message: " + t.getMessage(), t);
+                Log.e("EVENTS_API", "Request failed", t);
             }
         });
     }
 
-    private void loadTop5Offers(Integer id, View view) {
-        offerService.getTop5Offers(id).enqueue(new Callback<List<MinimalOfferDTO>>() {
+
+    private void loadTop5Offers(View view) {
+        Call<List<MinimalOfferDTO>> call;
+        if(AuthenticationService.isLoggedIn()){
+            call =offerService.getTop5Offers();
+        }else{
+            call =offerService.GetTop5OffersUnauthentified();
+        }
+        call.enqueue(new Callback<List<MinimalOfferDTO>>() {
             @Override
             public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
-                Log.d("RetrofitDebug", "onResponse called");
-
-                Log.d("RetrofitCall", "Request URL: " + call.request().url());
-                Log.d("RetrofitCall", "Request Headers: " + call.request().headers());
-                Log.d("RetrofitCall", "Request Method: " + call.request().method());
-                try {
-                    Log.d("RetrofitCall", "Request Body: " + (call.request().body() != null ? call.request().body().toString() : "null"));
-                } catch (Exception e) {
-                    Log.e("RetrofitCall", "Error logging request body", e);
-                }
-
-                if (response != null) {
-                    Log.d("RetrofitResponse", "Response Code: " + response.code());
-                    Log.d("RetrofitResponse", "Response Message: " + response.message());
-                    Log.d("RetrofitResponse", "Response Body: " + response.body());
-                } else {
-                    Log.e("RetrofitResponse", "Response is null");
-                }
-
-                if (response.isSuccessful() && response.body() != null) {
+                if (response==null)
+                    Log.e("RetroFit","response is null");
+                if(response.isSuccessful() && response.body()!=null){
                     offers = response.body();
-                    addingEventCards(view);
-                } else {
-                    Log.e("RetrofitResponse", "Response unsuccessful. Code: " + response.code());
+                    addingProductCards(view);
                 }
             }
 
             @Override
             public void onFailure(Call<List<MinimalOfferDTO>> call, Throwable t) {
-                Log.e("RetrofitError", "Failed to fetch data");
-                Log.e("RetrofitError", "Request URL: " + call.request().url());
-                Log.e("RetrofitError", "Request Headers: " + call.request().headers());
-                Log.e("RetrofitError", "Request Method: " + call.request().method());
-                Log.e("RetrofitError", "Error Message: " + t.getMessage(), t);
+
             }
         });
     }
@@ -220,7 +194,8 @@ public class HomePage extends Fragment {
         if (events != null) {
             for (MinimalEventDTO event : events) {
                 View cardView = inflater.inflate(R.layout.event_card, parentLayout, false);
-
+                Log.d("","ASDSADSADSASDASDASDASDSA ");
+                Log.d("",events.toString());
                 addingMargins(cardView);
 
                 TextView itemTitle = cardView.findViewById(R.id.item_title);
@@ -238,7 +213,6 @@ public class HomePage extends Fragment {
 
     }
 
-
     private void addingProductCards(View view) {
         LinearLayout parentLayout = view.findViewById(R.id.offeringCardsPlace);
         LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -254,6 +228,7 @@ public class HomePage extends Fragment {
                 TextView itemText = cardView.findViewById(R.id.offering_description);
                 ImageView itemImage = cardView.findViewById(R.id.offering_image);
                 Button itemButton = cardView.findViewById(R.id.offering_button);
+
 
 
                 itemTitle.setText(offer.name);
@@ -273,14 +248,12 @@ public class HomePage extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
 
-        // Set the desired margin (in pixels)
         int marginInPixels = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, // converting to dp
-                14, // desired margin in dp
-                getResources().getDisplayMetrics() // getting display metrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                14,
+                getResources().getDisplayMetrics()
         );
 
-        // Apply margins
         params.setMargins(marginInPixels, marginInPixels, marginInPixels, marginInPixels);
         cardView.setLayoutParams(params);
     }

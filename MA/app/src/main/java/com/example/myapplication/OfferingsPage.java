@@ -17,14 +17,19 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.dto.offerDTO.OfferFilterDTO;
 import com.example.myapplication.models.Availability;
+import com.example.myapplication.services.ApiClient;
+import com.example.myapplication.services.AuthenticationService;
+import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.OfferService;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,11 +40,14 @@ public class OfferingsPage extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private AuthenticationService authService;
+    private int currentPage = 0;
+    private final int pageSize = 5;
     private String mParam1;
     private String mParam2;
     private OfferService offerService;
     private List<MinimalOfferDTO> offers;
+    private OfferFilterDTO filter;
 
     public OfferingsPage() {
         // Required empty public constructor
@@ -62,52 +70,65 @@ public class OfferingsPage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        // Ensure OfferService is initialized
-        offerService = new OfferService();
+        offerService = ApiClient.getClient(requireContext()).create(OfferService.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_offerings_page, container, false);
 
-        // Ensure the filter button is not null
         Button filterButton = view.findViewById(R.id.offering_filters_button);
         if (filterButton != null) {
             filterButton.setOnClickListener(v -> showFilterDialog());
         } else {
             Log.e("OfferingsPage", "Filter button not found in layout");
         }
-
+        authService = new AuthenticationService(requireContext());
+        this.filter = new OfferFilterDTO(false, false, "", "", 0, Availability.AVAILABLE, Collections.emptyList());
         loadAllOffers(view);
+        Button btnNext = view.findViewById(R.id.btn_next);
+        Button btnPrev = view.findViewById(R.id.btn_previous);
+
+        btnNext.setOnClickListener(v -> {
+            currentPage++;
+            loadAllOffers(view);
+        });
+
+        btnPrev.setOnClickListener(v -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadAllOffers(view);
+            }
+        });
         return view;
     }
 
     private void loadAllOffers(View view) {
-        // Make sure offerService is initialized before calling
-        if (offerService != null) {
-            offerService.getAllOffers(2).enqueue(new Callback<List<MinimalOfferDTO>>() {
-                @Override
-                public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
-                    Log.d("RetrofitDebug", "onResponse called");
+        Call<PageResponse<MinimalOfferDTO>> call;
 
-                    if (response.isSuccessful() && response.body() != null) {
-                        offers = response.body();
-                        displayAllOffers(view);
-                    } else {
-                        Log.e("RetrofitResponse", "Response unsuccessful. Code: " + response.code());
-                    }
-                }
+        call = offerService.getOfferList(this.filter, this.currentPage, this.pageSize);
 
-                @Override
-                public void onFailure(Call<List<MinimalOfferDTO>> call, Throwable t) {
-                    Log.e("RetrofitError", "Failed to fetch offers");
-                    Log.e("RetrofitError", "Error Message: " + t.getMessage(), t);
+        call.enqueue(new Callback<PageResponse<MinimalOfferDTO>>() {
+            @Override
+            public void onResponse(Call<PageResponse<MinimalOfferDTO>> call, Response<PageResponse<MinimalOfferDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    offers = response.body().getContent();
+                    displayAllOffers(view);
+                    PageResponse<MinimalOfferDTO> page = response.body();
+                    boolean isLastPage = page.getNumber() + 1 >= page.getTotalPages();
+                    updatePaginationButtons(view, isLastPage);                } else {
+                    Log.e("OfferingsPage", "Failed to load offers: " + response.code());
                 }
-            });
-        } else {
-            Log.e("OfferingsPage", "OfferService is not initialized");
-        }
+            }
+
+            @Override
+            public void onFailure(Call<PageResponse<MinimalOfferDTO>> call, Throwable t) {
+                Log.e("OfferingsPage", "Error loading offers: " + t.getMessage());
+            }
+        });
     }
+
+
 
     private void displayAllOffers(View view) {
         LinearLayout parentLayout = view.findViewById(R.id.offeringCardsPlace);
@@ -115,7 +136,7 @@ public class OfferingsPage extends Fragment {
 
         parentLayout.removeAllViews();
 
-        if (offers != null && parentLayout != null) {
+        if (offers != null && !offers.isEmpty()) {
             for (MinimalOfferDTO offer : offers) {
                 View offerView = inflater.inflate(R.layout.offering_card, parentLayout, false);
 
@@ -159,20 +180,20 @@ public class OfferingsPage extends Fragment {
         CheckBox cbShowProducts = dialogView.findViewById(R.id.cb_show_products);
         CheckBox cbShowServices = dialogView.findViewById(R.id.cb_show_services);
 
-        OfferFilterDTO filter = new OfferFilterDTO();
 
-        filter.name = etName != null && !etName.getText().toString().isEmpty() ? etName.getText().toString() : "";
-        filter.category = etCategory != null && !etCategory.getText().toString().isEmpty() ? etCategory.getText().toString() : "";
-        filter.lowestPrice = seekBarPrice != null ? seekBarPrice.getProgress() : 0;
-        filter.isAvailable = getAvailabilityFromRadioButton(rgAvailability);
-        filter.isProduct = cbShowProducts != null && cbShowProducts.isChecked();
-        filter.isService = cbShowServices != null && cbShowServices.isChecked();
-
-        filter.eventTypes = getSelectedOfferTypes(spinnerOfferType);
-
-        Integer id = 2;
-
-        getFilteredOffers(filter, id);
+        this.filter = new OfferFilterDTO(
+                cbShowProducts != null && cbShowProducts.isChecked(),
+                cbShowServices != null && cbShowServices.isChecked(),
+                etName != null && !etName.getText().toString().isEmpty() ? etName.getText().toString() : "",
+                etCategory != null && !etCategory.getText().toString().isEmpty() ? etCategory.getText().toString() : "",
+                seekBarPrice != null ? seekBarPrice.getProgress() : 0,
+                getAvailabilityFromRadioButton(rgAvailability),
+                getSelectedOfferTypes(spinnerOfferType)
+        );
+        View rootView = getView();
+        if (rootView != null) {
+            loadAllOffers(rootView);
+        }
     }
 
     private Availability getAvailabilityFromRadioButton(RadioGroup rgAvailability) {
@@ -203,27 +224,15 @@ public class OfferingsPage extends Fragment {
         return selectedTypes;
     }
 
-    private void getFilteredOffers(OfferFilterDTO filter, Integer id) {
-        Call<List<MinimalOfferDTO>> call = offerService.getOfferList(filter.isProduct, filter.isService, filter.name, filter.category, filter.lowestPrice, filter.isAvailable, filter.eventTypes, id);
+    private void updatePaginationButtons(View view, boolean isLastPage) {
+        Button btnNext = view.findViewById(R.id.btn_next);
+        Button btnPrev = view.findViewById(R.id.btn_previous);
+        TextView pageIndicator = view.findViewById(R.id.page_indicator);
 
-        call.enqueue(new Callback<List<MinimalOfferDTO>>() {
-            @Override
-            public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    offers = response.body();
-                    View rootView = getView();
-                    if (rootView != null) {
-                        displayAllOffers(rootView);
-                    }
-                } else {
-                    Log.e("RetrofitError", "Filtering failed. Code: " + response.code());
-                }
-            }
+        btnPrev.setEnabled(currentPage > 0);
+        btnNext.setEnabled(!isLastPage);
 
-            @Override
-            public void onFailure(Call<List<MinimalOfferDTO>> call, Throwable t) {
-                Log.e("RetrofitError", "Failed to fetch filtered offers: " + t.getMessage());
-            }
-        });
+        pageIndicator.setText("Page " + (currentPage + 1));
     }
+
 }

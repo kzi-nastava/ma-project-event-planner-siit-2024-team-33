@@ -1,5 +1,6 @@
 package com.example.myapplication.api;
 
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 
 import java.util.List;
@@ -13,20 +14,24 @@ public interface EventApi {
     @GET("organizer/{id}")
     Call<List<MinimalEventDTO>> getEventsByOrganizer(@Path("id") Integer organizerId);
 
-    @GET("top5")
-    Call<List<MinimalEventDTO>> getTop5Events(@Query("id") Integer id);
+    @GET("top5/authentified")
+    Call<List<MinimalEventDTO>> GetTop5EventsAuthorized();
+
+    @GET("top5/unauthentified")
+    Call<List<MinimalEventDTO>> GetTop5EventsUnauthorized();
 
     @GET("rest")
-    Call<List<MinimalEventDTO>> getAllEvents(@Query("id") Integer id);
+    Call<List<MinimalEventDTO>> getAllEvents();
 
-    @GET("filter")
-    Call<List<MinimalEventDTO>> getFilteredEvents(
+    @GET("filter/authentified")
+    Call<PageResponse<MinimalEventDTO>> getFilteredEvents(
             @Query("name") String name,
             @Query("location") String location,
             @Query("numOfAttendees") Integer numOfAttendees,
             @Query("firstPossibleDate") String firstPossibleDate,
             @Query("lastPossibleDate") String lastPossibleDate,
             @Query("eventTypes") List<Integer> eventTypes,
-            @Query("id") Integer id
+            @Query("page") int page,
+            @Query("size") int size
     );
 }

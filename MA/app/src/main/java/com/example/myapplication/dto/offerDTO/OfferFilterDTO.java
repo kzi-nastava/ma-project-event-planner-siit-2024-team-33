@@ -14,4 +14,14 @@ public class OfferFilterDTO {
     public Integer lowestPrice;
     public Availability isAvailable;
     public List<Integer> eventTypes = new ArrayList<>();
+
+    public OfferFilterDTO(Boolean isProduct, Boolean isService, String name, String category, Integer lowestPrice, Availability isAvailable, List<Integer> eventTypes){
+        this.category = category;
+        this.isAvailable=isAvailable;
+        this.eventTypes = eventTypes;
+        this.lowestPrice=lowestPrice;
+        this.name=name;
+        this.isService=isService;
+        this.isProduct=isProduct;
+    }
 }
