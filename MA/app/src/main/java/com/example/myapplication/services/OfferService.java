@@ -1,5 +1,6 @@
 package com.example.myapplication.services;
 
+import com.example.myapplication.api.EventApi;
 import com.example.myapplication.api.OfferApi;
 import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.offerDTO.OfferFilterDTO;
@@ -17,14 +18,7 @@ public class OfferService {
     private static final String BASE_URL = "http://192.168.2.8:8080/api/offers/";
     private final OfferApi offerApi;
 
-    public OfferService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        offerApi = retrofit.create(OfferApi.class);
-    }
+    public OfferService() {offerApi = ApiClient.getRetrofit(BASE_URL).create(OfferApi.class);}
 
 
     public Call<List<MinimalOfferDTO>> getTop5Offers() {

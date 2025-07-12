@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +16,15 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.dto.PageResponse;
+import com.example.myapplication.dto.eventDTO.FilterEventDTO;
+import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.dto.offerDTO.OfferFilterDTO;
@@ -69,8 +76,6 @@ public class OfferingsPage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        offerService = ApiClient.getClient(requireContext()).create(OfferService.class);
     }
 
     @Override
@@ -83,9 +88,6 @@ public class OfferingsPage extends Fragment {
         } else {
             Log.e("OfferingsPage", "Filter button not found in layout");
         }
-        authService = new AuthenticationService(requireContext());
-        this.filter = new OfferFilterDTO(false, false, "", "", 0, Availability.AVAILABLE, Collections.emptyList());
-        loadAllOffers(view);
         Button btnNext = view.findViewById(R.id.btn_next);
         Button btnPrev = view.findViewById(R.id.btn_previous);
 
@@ -103,28 +105,56 @@ public class OfferingsPage extends Fragment {
         return view;
     }
 
-    private void loadAllOffers(View view) {
-        Call<PageResponse<MinimalOfferDTO>> call;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        call = offerService.getOfferList(this.filter, this.currentPage, this.pageSize);
+        authService = new AuthenticationService(requireContext());
+
+        SharedPreferences prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String token = prefs.getString("jwt", null);
+
+        if (token != null) {
+            offerService = new OfferService();
+            this.filter = new OfferFilterDTO(false, false, "", "", 0, Availability.AVAILABLE, Collections.emptyList());
+            loadAllOffers(view);
+        } else {
+            Log.w("OffersPage", "JWT token is not yet available, skipping API call.");
+        }
+    }
+
+    private void loadAllOffers(View view) {
+        Call<PageResponse<MinimalOfferDTO>> call  = offerService.getOfferList(this.filter, this.currentPage, this.pageSize);;
+
 
         call.enqueue(new Callback<PageResponse<MinimalOfferDTO>>() {
             @Override
             public void onResponse(Call<PageResponse<MinimalOfferDTO>> call, Response<PageResponse<MinimalOfferDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    offers = response.body().getContent();
-                    displayAllOffers(view);
                     PageResponse<MinimalOfferDTO> page = response.body();
+                    List<MinimalOfferDTO> newOffers = page.getContent();
+
+                    if (newOffers != null && !newOffers.isEmpty()) {
+                        offers = newOffers;
+                        displayAllOffers(view);
+                    } else {
+                        offers = Collections.emptyList();
+                        displayAllOffers(view);
+                        Toast.makeText(requireContext(), "No events found for this filter.", Toast.LENGTH_SHORT).show();
+                    }
+
                     boolean isLastPage = page.getNumber() + 1 >= page.getTotalPages();
-                    updatePaginationButtons(view, isLastPage);                } else {
-                    Log.e("OfferingsPage", "Failed to load offers: " + response.code());
+                    updatePaginationButtons(view, isLastPage);
+                }else {
+                    Log.e("Offerspage", "Failed to load offers: " + response.code());
+                    Toast.makeText(requireContext(), "Failed to load offers.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<PageResponse<MinimalOfferDTO>> call, Throwable t) {
-                Log.e("OfferingsPage", "Error loading offers: " + t.getMessage());
-            }
+                Log.e("Offerspage", "Error loading offers: " + t.getMessage());
+                Toast.makeText(requireContext(), "Error loading offers.", Toast.LENGTH_SHORT).show();            }
         });
     }
 
@@ -144,8 +174,8 @@ public class OfferingsPage extends Fragment {
                 TextView itemText = offerView.findViewById(R.id.offering_description);
 
                 if (itemTitle != null && itemText != null) {
-                    itemTitle.setText(offer.name);
-                    itemText.setText(offer.description);
+                    itemTitle.setText(offer.getName());
+                    itemText.setText(offer.getDescription());
                 }
 
                 parentLayout.addView(offerView);
@@ -157,6 +187,13 @@ public class OfferingsPage extends Fragment {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_products_filter, null);
         BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         dialog.setContentView(dialogView);
+
+        Spinner spinner = dialogView.findViewById(R.id.spinner_event_type);
+        //Kad Milos ili ko vec implementira
+//        List<MinimalEventTypeDTO> types = ...
+//        ArrayAdapter<MinimalEventTypeDTO> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, types);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
 
         Button confirmButton = dialogView.findViewById(R.id.btn_confirm);
         if (confirmButton != null) {

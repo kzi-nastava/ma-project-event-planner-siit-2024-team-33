@@ -24,11 +24,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -120,28 +122,41 @@ public class EventsPage extends Fragment {
 
 
     private void loadAllEvents(View view) {
-        Call<PageResponse<MinimalEventDTO>> call;
+        Call<PageResponse<MinimalEventDTO>> call = eventService.getFilteredEvents(filter, currentPage, pageSize);
 
-        call = eventService.getFilteredEvents(this.filter, this.currentPage, this.pageSize);
-        call.enqueue(new Callback<PageResponse<MinimalEventDTO>>(){
+        call.enqueue(new Callback<PageResponse<MinimalEventDTO>>() {
             @Override
             public void onResponse(Call<PageResponse<MinimalEventDTO>> call, Response<PageResponse<MinimalEventDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    events = response.body().getContent();
-                    displayAllEvents(view);
                     PageResponse<MinimalEventDTO> page = response.body();
+                    List<MinimalEventDTO> newEvents = page.getContent();
+
+                    if (newEvents != null && !newEvents.isEmpty()) {
+                        events = newEvents;
+                        displayAllEvents(view);
+                    } else {
+                        events = Collections.emptyList();
+                        displayAllEvents(view);
+                        Toast.makeText(requireContext(), "No events found for this filter.", Toast.LENGTH_SHORT).show();
+                    }
+
                     boolean isLastPage = page.getNumber() + 1 >= page.getTotalPages();
                     updatePaginationButtons(view, isLastPage);
                 } else {
                     Log.e("EventsPage", "Failed to load events: " + response.code());
+                    Toast.makeText(requireContext(), "Failed to load events.", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<PageResponse<MinimalEventDTO>> call, Throwable t) {
                 Log.e("EventsPage", "Error loading events: " + t.getMessage());
+                Toast.makeText(requireContext(), "Error loading events.", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 
     private void displayAllEvents(View view) {
         LinearLayout parentLayout = view.findViewById(R.id.eventCardsPlace);
@@ -175,31 +190,54 @@ public class EventsPage extends Fragment {
             dialog.dismiss();
         });
 
+        CheckBox checkboxFirstDate = dialogView.findViewById(R.id.checkbox_first_date);
+        DatePicker datePickerFirst = dialogView.findViewById(R.id.datepicker_first);
+        datePickerFirst.setVisibility(View.GONE);
+        checkboxFirstDate.setOnCheckedChangeListener((buttonView, isChecked) ->
+                datePickerFirst.setVisibility(isChecked ? View.VISIBLE : View.GONE)
+        );
+
+        CheckBox checkboxLastDate = dialogView.findViewById(R.id.checkbox_last_date);
+        DatePicker datePickerLast = dialogView.findViewById(R.id.datepicker_last);
+        datePickerLast.setVisibility(View.GONE);
+        checkboxLastDate.setOnCheckedChangeListener((buttonView, isChecked) ->
+                datePickerLast.setVisibility(isChecked ? View.VISIBLE : View.GONE)
+        );
+
         dialog.show();
     }
+
 
     private void handleFilterDialogConfirmation(View dialogView) {
         EditText etName = dialogView.findViewById(R.id.et_name);
         EditText etLocation = dialogView.findViewById(R.id.et_location);
         EditText etAttendees = dialogView.findViewById(R.id.et_attendees);
+
+        CheckBox checkboxFirstDate = dialogView.findViewById(R.id.checkbox_first_date);
+        CheckBox checkboxLastDate = dialogView.findViewById(R.id.checkbox_last_date);
+
         DatePicker datePickerFirst = dialogView.findViewById(R.id.datepicker_first);
         DatePicker datePickerLast = dialogView.findViewById(R.id.datepicker_last);
         Spinner spinnerCategory = dialogView.findViewById(R.id.spinner_category);
 
-
-        this.filter.name = etName.getText().toString().trim();
-        this.filter.location = etLocation.getText().toString().trim();
+        filter.name = etName.getText().toString().trim();
+        filter.location = etLocation.getText().toString().trim();
 
         String attendeesText = etAttendees.getText().toString().trim();
         try {
-            this.filter.numOfAttendees = attendeesText.isEmpty() ? 0 : Integer.parseInt(attendeesText);
+            filter.numOfAttendees = attendeesText.isEmpty() ? 0 : Integer.parseInt(attendeesText);
         } catch (NumberFormatException e) {
             Log.e("EventsPage", "Invalid number format for attendees");
+            filter.numOfAttendees = 0;
         }
 
-        this.filter.firstPossibleDate = getFormattedDate(datePickerFirst);
-        this.filter.lastPossibleDate = getFormattedDate(datePickerLast);
-        this.filter.eventTypes = getSelectedEventTypeIds(spinnerCategory);
+        filter.firstPossibleDate = checkboxFirstDate.isChecked() ? getFormattedDate(datePickerFirst) : "";
+        filter.lastPossibleDate = checkboxLastDate.isChecked() ? getFormattedDate(datePickerLast) : "";
+        filter.eventTypes = getSelectedEventTypeIds(spinnerCategory);
+        Log.e("SUPER GASCINA",filter.firstPossibleDate);
+        Log.e("SUPER GASCINA",filter.lastPossibleDate);
+
+        currentPage = 0;
 
         View rootView = getView();
         if (rootView != null) {
@@ -207,10 +245,11 @@ public class EventsPage extends Fragment {
         }
     }
 
+
     private List<Integer> getSelectedEventTypeIds(Spinner spinner) {
         List<Integer> selectedTypeIds = new ArrayList<>();
         MinimalEventTypeDTO selectedType = (MinimalEventTypeDTO) spinner.getSelectedItem();
-        if (selectedType != null) {
+        if (selectedType != null && selectedType.id != -1) {
             selectedTypeIds.add(selectedType.id);
         }
         return selectedTypeIds;

@@ -38,7 +38,7 @@ public class AuthenticationService {
                     String token = response.body().getAccessToken();
                     prefs.edit().putString(KEY_JWT, token).apply();
                     Log.d("GAS",token);
-                    ApiClient.reset();
+                   // ApiClient.reset();
 
                     callback.onResponse(call, response);
                 } else {
