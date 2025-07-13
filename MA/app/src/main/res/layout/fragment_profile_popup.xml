@@ -67,6 +67,28 @@
         android:textColor="#E8DDB5"
         android:layout_marginTop="8dp" />
 
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:text="Sign Up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/log_out_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:visibility="gone"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"/>
+
+
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="match_parent"
@@ -75,5 +97,6 @@
         android:backgroundTint="#666A86"
         android:textColor="#E8DDB5"
         android:layout_marginTop="8dp" />
+
 
 </LinearLayout>

@@ -19,6 +19,10 @@ public class GetUserDTO {
     private String providerName;
     private String description;
     private List<String> pictures;
+    private String roleName;
+
+    public String getRole() { return roleName; }
+    public void setRole(String role) { this.roleName = role; }
 
     public static GetUserDTO from(AuthentifiedUser user){
         if (user instanceof Provider) return new GetUserDTO((Provider) user);
@@ -37,6 +41,7 @@ public class GetUserDTO {
         this.setSurname(au.getSurname());
         this.setCity(au.getCity());
         this.setPicture(au.getPicture());
+        this.setRole(au.getRole().getName());
     }
 
     public GetUserDTO(Admin admin) {
@@ -46,6 +51,7 @@ public class GetUserDTO {
         this.setSurname(admin.getSurname());
         this.setCity(admin.getCity());
         this.setPicture(admin.getPicture());
+        this.setRole(admin.getRole().getName());
     }
 
     public GetUserDTO(Organizer organizer) {
@@ -57,6 +63,8 @@ public class GetUserDTO {
         this.setPicture(organizer.getPicture());
         this.setResidency(organizer.getResidency());
         this.setPhoneNumber(organizer.getPhoneNumber());
+        this.setRole(organizer.getRole().getName());
+
     }
 
     public GetUserDTO(Provider provider) {
@@ -71,6 +79,7 @@ public class GetUserDTO {
         this.setProviderName(provider.getProviderName());
         this.setDescription(provider.getDescription());
         this.setPictures(provider.getPictures());
+        this.setRole(provider.getRole().getName());
     }
 
     public void setSurname(String surname) {

@@ -1,5 +1,7 @@
 package com.example.myapplication.models;
 
+import com.example.myapplication.dto.userDTO.GetUserDTO;
+
 import java.util.List;
 
 public class Provider extends AuthentifiedUser {
@@ -9,7 +11,11 @@ public class Provider extends AuthentifiedUser {
     private String description;
     private List<String> pictures;
 
-
+    public Provider(GetUserDTO dto) {
+        super(dto);
+        this.residency = dto.getResidency();
+        this.phoneNumber = dto.getPhoneNumber();
+    }
     public List<String> getPictures() {
         return pictures;
     }

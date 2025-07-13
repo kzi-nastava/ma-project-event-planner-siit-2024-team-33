@@ -231,8 +231,8 @@ public class HomePage extends Fragment {
 
 
 
-                itemTitle.setText(offer.name);
-                itemText.setText(offer.description);
+                itemTitle.setText(offer.getName());
+                itemText.setText(offer.getDescription());
                 itemImage.setImageResource(R.drawable.trumpshot);
                 itemButton.setVisibility(View.GONE);
 

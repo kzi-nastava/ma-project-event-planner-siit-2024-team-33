@@ -1,5 +1,7 @@
 package com.example.myapplication.models;
 
+import com.example.myapplication.dto.userDTO.GetUserDTO;
+
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +29,21 @@ public class AuthentifiedUser {
     public List<AuthentifiedUser> blockedUsers;
 
     public List<Notification> notifications;
+
+    public AuthentifiedUser(GetUserDTO dto) {
+        this.setEmail(dto.getEmail());
+        this.setPicture(dto.getPicture());
+        this.setName(dto.getName());
+        this.setSurname(dto.getSurname());
+        this.setCity(dto.getCity());
+        this.setPassword(dto.getPassword());
+        if (dto.getRole() != null) {
+            Role roleObj = new Role(dto.getRole());
+            this.setRole(roleObj);
+        } else {
+            this.setRole(null);
+        }
+    }
 
     public Role getRole() {
         return role;
