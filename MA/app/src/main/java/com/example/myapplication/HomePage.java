@@ -133,11 +133,7 @@ public class HomePage extends Fragment {
         Log.d("EVENTS_API", "Calling GetTop5EventsAuthorized()");
 
         Call<List<MinimalEventDTO>> call;
-        if (AuthenticationService.isLoggedIn()) {
-            call = eventService.GetTop5EventsAuthorized();
-        } else {
-            call = eventService.GetTop5EventsUnauthorized();
-        }
+        call = eventService.GetTop5Events();
 
         call.enqueue(new Callback<List<MinimalEventDTO>>() {
             @Override

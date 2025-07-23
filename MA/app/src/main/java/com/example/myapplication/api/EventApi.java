@@ -14,17 +14,17 @@ public interface EventApi {
     @GET("organizer/{id}")
     Call<List<MinimalEventDTO>> getEventsByOrganizer(@Path("id") Integer organizerId);
 
-    @GET("top5/authentified")
-    Call<List<MinimalEventDTO>> GetTop5EventsAuthorized();
-
-    @GET("top5/unauthentified")
-    Call<List<MinimalEventDTO>> GetTop5EventsUnauthorized();
+    @GET("top5")
+    Call<List<MinimalEventDTO>> getTop5Events();
 
     @GET("rest")
     Call<List<MinimalEventDTO>> getAllEvents();
-
-    @GET("filter/authentified")
-    Call<PageResponse<MinimalEventDTO>> getFilteredEvents(
+    @GET("service/{serviceId}")
+    Call<List<MinimalEventDTO>> getEventsByService(@Path("serviceId") int serviceId);
+    @GET("/paginated")
+    Call<PageResponse<MinimalEventDTO>> getPaginatedEvents(@Query("page") int page, @Query("size") int size);
+    @GET("filter")
+    Call<PageResponse<MinimalEventDTO>> getEventList(
             @Query("name") String name,
             @Query("location") String location,
             @Query("numOfAttendees") Integer numOfAttendees,

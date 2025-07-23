@@ -12,17 +12,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RatingService {
-    private static final String BASE_URL = "http://10.0.2.2:8080/api/ratings/";
+    private static final String BASE_URL = "http://192.168.2.8:8080/api/ratings/";
     private final RatingApi ratingApi;
 
-    public RatingService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ratingApi = retrofit.create(RatingApi.class);
-    }
+    public RatingService() {ratingApi = ApiClient.getRetrofit(BASE_URL).create(RatingApi.class);}
 
 
     public Call<Rating> submitRating(PostRatingDTO postRatingDTO, int userId, int offerId) {

@@ -122,7 +122,7 @@ public class EventsPage extends Fragment {
 
 
     private void loadAllEvents(View view) {
-        Call<PageResponse<MinimalEventDTO>> call = eventService.getFilteredEvents(filter, currentPage, pageSize);
+        Call<PageResponse<MinimalEventDTO>> call = eventService.getEventList(filter, currentPage, pageSize);
 
         call.enqueue(new Callback<PageResponse<MinimalEventDTO>>() {
             @Override

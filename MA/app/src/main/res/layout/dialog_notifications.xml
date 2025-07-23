@@ -5,11 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#E8DDB5"
-    android:padding="16dp"
-    android:elevation="4dp"
-    android:layout_gravity="center">
+    android:minWidth="320dp"
+    android:maxWidth="600dp"
+    android:padding="24dp"
+    android:elevation="6dp"
+    android:layout_gravity="center_horizontal">
 
-    <!-- Top Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,12 +40,12 @@
             android:textColor="#788AA3" />
     </LinearLayout>
 
-    <!-- Toggle Switch -->
     <Switch
         android:id="@+id/toggle_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:textColor="@color/black"
         android:text="Toggle Notifications" />
 
     <ScrollView
@@ -77,7 +78,9 @@
             android:id="@+id/button_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="← Previous" />
+            android:background="@android:color/transparent"
+            android:textColor="@color/black"
+            android:text="←" />
 
         <TextView
             android:id="@+id/pagination_text"
@@ -91,7 +94,9 @@
             android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next →" />
+            android:background="@android:color/transparent"
+            android:textColor="@color/black"
+            android:text="→" />
     </LinearLayout>
 
     <!-- Bottom Section -->

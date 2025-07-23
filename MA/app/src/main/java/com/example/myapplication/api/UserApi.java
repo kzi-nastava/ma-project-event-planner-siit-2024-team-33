@@ -29,11 +29,11 @@ public interface UserApi {
     @GET("/api/users/terminate/profile")
     Call<Boolean> terminateUser();
 
-    @POST("/api/users/{blockerId}/block/{blockedId}")
-    Call<String> blockUser(@Path("blockerId") int blockerId, @Path("blockedId") int blockedId);
+    @POST("/api/users/block/{blockedEmail}")
+    Call<String> blockUser(@Path("blockedEmail") String blockedEmail);
 
-    @DELETE("/api/users/{blockerId}/block/{blockedId}")
-    Call<String> unblockUser(@Path("blockerId") int blockerId, @Path("blockedId") int blockedId);
+    @DELETE("/api/users/block/{blockedEmail}")
+    Call<String> unblockUser(@Path("blockedId") String blockedEmail);
 }
 
 

@@ -35,15 +35,12 @@ public class CommentsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_page_comments);
 
-        // Initialize RatingService
         ratingService = new RatingService();
 
-        // Initialize views
         commentsList = findViewById(R.id.comments_list);
         previousPageButton = findViewById(R.id.previousPageButton);
         nextPageButton = findViewById(R.id.nextPageButton);
 
-        // Set up pagination buttons
         previousPageButton.setOnClickListener(v -> {
             if (currentPage > 1) {
                 currentPage--;
@@ -56,7 +53,6 @@ public class CommentsActivity extends Activity {
             fetchComments();
         });
 
-        // Fetch and display comments
         fetchComments();
     }
 
@@ -103,14 +99,11 @@ public class CommentsActivity extends Activity {
 
             approveButton.setOnClickListener(v -> approveComment(comment.getId()));
 
-            // Delete button logic
             deleteButton.setOnClickListener(v -> deleteComment(comment.getId()));
 
-            // Add the view to the list
             commentsList.addView(commentView);
         }
 
-        // Manage pagination buttons
         previousPageButton.setEnabled(currentPage > 1);
         nextPageButton.setEnabled(end < comments.size());
     }

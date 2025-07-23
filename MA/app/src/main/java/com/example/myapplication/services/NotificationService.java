@@ -1,5 +1,6 @@
 package com.example.myapplication.services;
 
+import com.example.myapplication.api.EventApi;
 import com.example.myapplication.api.NotificationApi;
 import com.example.myapplication.dto.notificationDTO.GetNotificationDTO;
 import com.example.myapplication.dto.notificationDTO.PostNotificationDTO;
@@ -13,17 +14,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NotificationService {
-    private static final String BASE_URL = "http://10.0.2.2:8080/api/notifications/";
-    private final NotificationApi notificationApi;
+    private static final String BASE_URL = "http://192.168.2.8:8080/api/notifications/";
+    private  final NotificationApi notificationApi;
 
-    public NotificationService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        notificationApi = retrofit.create(NotificationApi.class);
-    }
+    public NotificationService() {notificationApi = ApiClient.getRetrofit(BASE_URL).create(NotificationApi.class);}
 
     public Call<Void> sendNotification(PostNotificationDTO postNotificationDTO) {
         return notificationApi.sendNotification(postNotificationDTO);

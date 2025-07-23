@@ -1,5 +1,6 @@
 package com.example.myapplication.services;
 
+import com.example.myapplication.api.NotificationApi;
 import com.example.myapplication.api.ReportApi;
 import com.example.myapplication.api.ServiceReservationApi;
 import com.example.myapplication.dto.serviceReservationDTO.CreatedServiceReservationDTO;
@@ -15,20 +16,13 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class ServiceReservationService {
-    private static final String BASE_URL = "http//10.0.2.2/api/reservations/";
+    private static final String BASE_URL = "http//192.168.2.8/api/reservations/";
 
     private final ServiceReservationApi serviceReservationApi;
 
-    public ServiceReservationService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    public ServiceReservationService() {serviceReservationApi =ApiClient.getRetrofit(BASE_URL).create(ServiceReservationApi.class);}
 
-        serviceReservationApi = retrofit.create(ServiceReservationApi.class);
-    }
-
-    Call<CreatedServiceReservationDTO> reserveService(Integer serviceID, PostServiceReservationDTO postServiceReservationDTO){
+    public Call<CreatedServiceReservationDTO> reserveService(Integer serviceID, PostServiceReservationDTO postServiceReservationDTO){
         return serviceReservationApi.reserveService(serviceID,postServiceReservationDTO);
     }
 

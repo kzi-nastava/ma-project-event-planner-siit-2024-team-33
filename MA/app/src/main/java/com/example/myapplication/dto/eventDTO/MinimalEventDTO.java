@@ -7,6 +7,9 @@ public class MinimalEventDTO {
     private String description;
     private double cost;
 
+    public Integer getId() {
+        return id;
+    }
 
     public String getImage() {
         return image;

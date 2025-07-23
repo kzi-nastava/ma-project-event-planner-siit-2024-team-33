@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class NotificationsDialog extends Dialog {
     private int currentPage = 1;
     private static final int PAGE_SIZE = 4;
     private Set<Integer> selectedNotificationIds = new HashSet<>();
-    private List<GetNotificationDTO> allNotifications = null; // Holds all notifications
+    private List<GetNotificationDTO> allNotifications = null;
     private int totalPages = 1;
 
     public NotificationsDialog(Context context) {
@@ -44,7 +45,6 @@ public class NotificationsDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_notifications);
 
-        // Find Views
         Switch toggleNotifications = findViewById(R.id.toggle_notifications);
         Button buttonPrevious = findViewById(R.id.button_previous);
         Button buttonNext = findViewById(R.id.button_next);
@@ -104,7 +104,6 @@ public class NotificationsDialog extends Dialog {
 
     private void displayCurrentPageNotifications() {
         if (allNotifications == null || allNotifications.isEmpty()) {
-            // Handle empty list case
             notificationList.removeAllViews();
             paginationText.setText("No notifications to display");
             return;
@@ -115,9 +114,8 @@ public class NotificationsDialog extends Dialog {
         int startIndex = (currentPage - 1) * PAGE_SIZE;
         int endIndex = Math.min(startIndex + PAGE_SIZE, allNotifications.size());
 
-        // Ensure startIndex and endIndex are valid
         if (startIndex >= allNotifications.size()) {
-            currentPage = Math.max(1, totalPages); // Adjust currentPage if it exceeds the range
+            currentPage = Math.max(1, totalPages);
             startIndex = (currentPage - 1) * PAGE_SIZE;
             endIndex = Math.min(startIndex + PAGE_SIZE, allNotifications.size());
         }
@@ -129,21 +127,26 @@ public class NotificationsDialog extends Dialog {
 
             TextView notificationContent = notificationView.findViewById(R.id.notification_description);
             TextView notificationDate = notificationView.findViewById(R.id.notification_time);
+            CheckBox checkBox = notificationView.findViewById(R.id.notification_checkbox);
 
             notificationContent.setText(notification.getContent());
             notificationDate.setText(notification.getDateOfSending());
 
-            notificationView.setTag(notification.getIndex());
+            int notificationId = notification.getIndex();
 
-            notificationView.setOnClickListener(v -> {
-                if (selectedNotificationIds.contains(notification.getIndex())) {
-                    selectedNotificationIds.remove(notification.getIndex());
-                    notificationView.setBackgroundColor(Color.TRANSPARENT);
+            checkBox.setChecked(selectedNotificationIds.contains(notificationId));
+
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    selectedNotificationIds.add(notificationId);
                 } else {
-                    selectedNotificationIds.add(notification.getIndex());
-                    notificationView.setBackgroundColor(Color.LTGRAY);
+                    selectedNotificationIds.remove(notificationId);
                 }
             });
+
+            notificationView.setOnClickListener(v -> showNotificationDetailsDialog(
+                    notification.getContent(), notification.getContent(), notification.getDateOfSending()
+            ));
 
             notificationList.addView(notificationView);
         }
@@ -176,6 +179,24 @@ public class NotificationsDialog extends Dialog {
             public void onFailure(Call<Void> call, Throwable t) {
             }
         });
+    }
+
+    private void showNotificationDetailsDialog(String title, String content, String time) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_notification_details);
+
+        TextView titleView = dialog.findViewById(R.id.full_title);
+        TextView contentView = dialog.findViewById(R.id.full_description);
+        TextView timeView = dialog.findViewById(R.id.full_time);
+        Button closeBtn = dialog.findViewById(R.id.close_button);
+
+        titleView.setText(title);
+        contentView.setText(content);
+        timeView.setText("Sent at: " + time);
+
+        closeBtn.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     private void removeNotification(Integer notificationId) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:background="@drawable/comment_card_background"
     app:cardCornerRadius="8dp">
@@ -14,16 +14,32 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Report Title -->
-        <TextView
-            android:id="@+id/reportTitle"
-            android:layout_width="wrap_content"
+        <!-- Header Row: Title + Suspension Time -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Report Title"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
 
-        <!-- Description -->
+            <TextView
+                android:id="@+id/reportTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Report Title"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/suspensionTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suspension: 0h"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textSize="14sp" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/reportDescription"
             android:layout_width="wrap_content"
@@ -32,7 +48,6 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp" />
 
-        <!-- User and Email -->
         <TextView
             android:id="@+id/reportedUser"
             android:layout_width="wrap_content"
@@ -46,7 +61,6 @@
             android:layout_height="wrap_content"
             android:text="Email: johndoe@example.com" />
 
-        <!-- Actions -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
