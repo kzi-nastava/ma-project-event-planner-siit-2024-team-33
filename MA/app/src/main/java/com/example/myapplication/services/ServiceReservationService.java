@@ -6,6 +6,7 @@ import com.example.myapplication.api.ServiceReservationApi;
 import com.example.myapplication.dto.serviceReservationDTO.CreatedServiceReservationDTO;
 import com.example.myapplication.dto.serviceReservationDTO.GetServiceReservationDTO;
 import com.example.myapplication.dto.serviceReservationDTO.PostServiceReservationDTO;
+import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -16,7 +17,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class ServiceReservationService {
-    private static final String BASE_URL = "http//192.168.2.8/api/reservations/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/reservations/";
 
     private final ServiceReservationApi serviceReservationApi;
 

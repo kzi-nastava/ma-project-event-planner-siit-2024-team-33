@@ -1,12 +1,13 @@
 package com.example.myapplication.services;
 
 import com.example.myapplication.api.UserApi;
+import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;
 import retrofit2.http.Path;
 
 public class UsersService {
-    private static final String BASE_URL = "http://192.168.2.8:8080/api/events/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/events/";
     private final UserApi usersApi;
 
     public UsersService() {usersApi = ApiClient.getRetrofit(BASE_URL).create(UserApi.class);}

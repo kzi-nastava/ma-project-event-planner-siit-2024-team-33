@@ -4,6 +4,7 @@ import com.example.myapplication.api.RatingApi;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
 import com.example.myapplication.models.Rating;
+import com.example.myapplication.utils.Settings;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RatingService {
-    private static final String BASE_URL = "http://192.168.2.8:8080/api/ratings/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/ratings/";
     private final RatingApi ratingApi;
 
     public RatingService() {ratingApi = ApiClient.getRetrofit(BASE_URL).create(RatingApi.class);}

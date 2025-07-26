@@ -3,6 +3,7 @@ package com.example.myapplication.services;
 import com.example.myapplication.api.InvitationApi;
 import com.example.myapplication.dto.invitationDTO.GetInvitationDTO;
 import com.example.myapplication.dto.invitationDTO.PostInvitationDTO;
+import com.example.myapplication.utils.Settings;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InvitationService {
-    private static final String BASE_URL = "http://192.168.2.8:8080/api/invitations/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/invitations/";
     private final InvitationApi invitationApi;
 
     public InvitationService() {invitationApi = ApiClient.getRetrofit(BASE_URL).create(InvitationApi.class);}

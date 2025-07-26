@@ -4,6 +4,7 @@ import com.example.myapplication.api.RatingApi;
 import com.example.myapplication.api.ReportApi;
 import com.example.myapplication.dto.reportDTO.GetReportDTO;
 import com.example.myapplication.dto.reportDTO.PostReportDTO;
+import com.example.myapplication.utils.Settings;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class ReportService {
-    private static final String BASE_URL = "http://10.0.2.2:8080/api/reports/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/reports/";
     private final ReportApi reportApi;
 
 

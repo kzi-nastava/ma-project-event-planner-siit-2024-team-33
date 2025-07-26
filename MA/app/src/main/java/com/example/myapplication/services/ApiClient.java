@@ -6,6 +6,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import android.content.Context;
 
+import com.example.myapplication.utils.Settings;
+
 public class ApiClient {
     private static Retrofit retrofit = null;
     private static OkHttpClient clients = null;
@@ -24,7 +26,7 @@ public class ApiClient {
             clients = client;
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.2.8:8080/")
+                    .baseUrl(Settings.BASE_URL)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

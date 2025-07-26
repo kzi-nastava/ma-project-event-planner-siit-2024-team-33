@@ -24,7 +24,7 @@ public interface OfferApi {
     Call<List<MinimalOfferDTO>> getAllOffers(
     );
 
-    @GET("filter/authentified")
+    @GET("filter")
     Call<PageResponse<MinimalOfferDTO>> getOfferList(
             @Query("isProduct") Boolean isProduct,
             @Query("isService") Boolean isService,
