@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,16 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.R;
 import com.example.myapplication.dto.PageResponse;
-import com.example.myapplication.dto.eventDTO.FilterEventDTO;
-import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
+import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.dto.offerDTO.OfferFilterDTO;
 import com.example.myapplication.models.Availability;
-import com.example.myapplication.services.ApiClient;
 import com.example.myapplication.services.AuthenticationService;
-import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.OfferService;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.view.View;
+
 import android.widget.Button;
+
+import com.example.myapplication.R;
 
 public class EventPlannerActivityOptional extends AppCompatActivity {
 

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.page.ProfileTypeActivity;
+
 public class OrgActivityMandatory extends AppCompatActivity {
 
     @Override

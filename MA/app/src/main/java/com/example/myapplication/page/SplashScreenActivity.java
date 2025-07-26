@@ -1,14 +1,14 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
+
 import android.os.Handler;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.myapplication.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private static final int SPLASH_DELAY = 5000;

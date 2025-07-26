@@ -1,6 +1,5 @@
 package com.example.myapplication.dto.offerDTO;
 
-import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
 import com.example.myapplication.models.Availability;
 
 import java.util.ArrayList;

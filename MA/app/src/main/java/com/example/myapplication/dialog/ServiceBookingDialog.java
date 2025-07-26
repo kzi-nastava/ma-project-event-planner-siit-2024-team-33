@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,12 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication.R;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.serviceReservationDTO.CreatedServiceReservationDTO;
 import com.example.myapplication.dto.serviceReservationDTO.PostServiceReservationDTO;

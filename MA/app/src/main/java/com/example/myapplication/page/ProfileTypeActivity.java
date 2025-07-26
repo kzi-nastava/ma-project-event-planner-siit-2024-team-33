@@ -1,11 +1,13 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.OrgActivityMandatory;
+import com.example.myapplication.R;
 
 public class ProfileTypeActivity extends AppCompatActivity {
 

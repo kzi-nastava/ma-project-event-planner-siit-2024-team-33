@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPageActivity"
+    tools:context=".page.MainPageActivity"
     android:background="@color/superior_white">
 
     <!-- This is where we view home, events, offering and profile -->

@@ -17,7 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.dialog.NotificationsDialog;
 import com.example.myapplication.models.AuthentifiedUser;
+import com.example.myapplication.page.CommentsActivity;
+import com.example.myapplication.page.LoginActivity;
+import com.example.myapplication.page.ProfilePage;
+import com.example.myapplication.page.RegisterActivity;
+import com.example.myapplication.page.ReportsActivity;
 import com.example.myapplication.services.AuthenticationService;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
@@ -137,13 +143,13 @@ public class ProfilePopupFragment extends DialogFragment {
     private void openNotificationsDialog() {
         dismiss();
 
-        NotificationsDialog notificationsDialog = new NotificationsDialog(getContext());
+        com.example.myapplication.dialog.NotificationsDialog notificationsDialog = new NotificationsDialog(getContext());
         notificationsDialog.show();
     }
 
     private void openStuffComments(){
         dismiss();
-        Intent intent = new Intent(getActivity(),CommentsActivity.class);
+        Intent intent = new Intent(getActivity(), CommentsActivity.class);
         startActivity(intent);
     }
     private void openFavoritesPage() {

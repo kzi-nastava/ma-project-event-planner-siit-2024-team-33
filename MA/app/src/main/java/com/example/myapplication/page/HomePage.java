@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
 import android.os.Bundle;
 
@@ -16,13 +16,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.myapplication.R;
+import com.example.myapplication.ShowProfileFragment;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.dto.eventDTO.MinimalEventTypeDTO;
+import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.OfferService;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.filefilter.ConditionalFileFilter;
 
 import java.util.List;
 import retrofit2.Call;

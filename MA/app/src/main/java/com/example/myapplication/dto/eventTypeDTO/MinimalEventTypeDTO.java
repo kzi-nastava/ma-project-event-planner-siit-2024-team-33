@@ -1,4 +1,4 @@
-package com.example.myapplication.dto.eventDTO;
+package com.example.myapplication.dto.eventTypeDTO;
 
 public class MinimalEventTypeDTO {
     public Integer id;

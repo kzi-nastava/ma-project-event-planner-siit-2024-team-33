@@ -1,8 +1,7 @@
-package com.example.myapplication;
+package com.example.myapplication.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.dto.notificationDTO.GetNotificationDTO;
 import com.example.myapplication.services.NotificationService;
 

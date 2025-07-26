@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import android.widget.Button;
+
+import com.example.myapplication.R;
 
 public class EventPlannerActivityMandatory extends AppCompatActivity {
 

@@ -1,8 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.page;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -16,15 +14,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.myapplication.R;
 import com.example.myapplication.dto.userDTO.GetUserDTO;
-import com.example.myapplication.models.AuthentifiedUser;
 import com.example.myapplication.services.AuthenticationService;
-import com.example.myapplication.utils.JwtUtils;
 
 import com.example.myapplication.dto.LoginDTO.AuthResponse;
-import com.example.myapplication.dto.LoginDTO.LoginRequest;
 import com.example.myapplication.services.ApiClient;
-import com.example.myapplication.api.AuthService;
 import com.example.myapplication.api.UserApi;
 
 import retrofit2.Call;

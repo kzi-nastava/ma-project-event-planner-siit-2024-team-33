@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E8DDB5"
-    tools:context=".EventPlannerActivityOptional">
+    tools:context=".page.EventPlannerActivityOptional">
 
   <TextView
       android:id="@+id/header_text"

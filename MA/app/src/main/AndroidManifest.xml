@@ -16,15 +16,15 @@
         android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
         <activity
-            android:name=".activity_service_create"
+            android:name=".page.activity_service_create"
             android:exported="false"
             android:label="@string/title_activity_service_create"
             android:theme="@style/Theme.MyApplication" />
         <activity
-            android:name=".MainPageActivity"
+            android:name=".page.MainPageActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileTypeActivity"
+            android:name=".page.ProfileTypeActivity"
             android:exported="false" />
         <activity
             android:name=".OrgActivityMandatory"
@@ -33,29 +33,29 @@
             android:name=".OrgActivityOptional"
             android:exported="false" />
         <activity
-            android:name=".EventPlannerActivityOptional"
+            android:name=".page.EventPlannerActivityOptional"
             android:exported="false" />
         <activity
-            android:name=".EventPlannerActivityMandatory"
+            android:name=".page.EventPlannerActivityMandatory"
             android:exported="false" />
         <activity
-            android:name=".ReportsActivity"
+            android:name=".page.ReportsActivity"
             android:exported="false"/>
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".page.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".CommentsActivity"
+            android:name=".page.CommentsActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileTypeFragment"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".page.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".page.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
