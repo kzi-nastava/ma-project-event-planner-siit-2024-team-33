@@ -20,7 +20,6 @@ public interface RatingApi {
     @POST("ratings")
     Call<Rating> submitRating(
             @Body PostRatingDTO postRatingDTO,
-            @Query("userId") int userId,
             @Query("offerId") int offerId
     );
 
@@ -39,7 +38,7 @@ public interface RatingApi {
             @Path("offerId") int offerId
     );
 
-    @GET("all")
+    @GET
     Call<List<GetRatingDTO>> getAllRatings();
 
     @GET("ratings/{ratingId}")
