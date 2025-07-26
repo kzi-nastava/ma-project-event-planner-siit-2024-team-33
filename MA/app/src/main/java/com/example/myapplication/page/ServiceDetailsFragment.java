@@ -3,6 +3,7 @@ package com.example.myapplication.page;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,8 @@ public class ServiceDetailsFragment extends Fragment {
     TextView valueDescription;
     LinearLayout containerValidTypes;
 
+    Button visitProvider;
+
     ImageButton favoriteButton;
 
     public ServiceDetailsFragment() {
@@ -91,6 +94,7 @@ public class ServiceDetailsFragment extends Fragment {
         containerValidTypes = view.findViewById(R.id.containerValidTypes);
         favoriteButton = view.findViewById(R.id.btnFavorite);
         favoriteButton.setOnClickListener(v -> {toggleIsFavorite();});
+        visitProvider = view.findViewById(R.id.btnVisit);
         loadData();
 
         return view;
@@ -103,6 +107,16 @@ public class ServiceDetailsFragment extends Fragment {
                 if(response.isSuccessful() && response.body() != null) {
                     service = response.body();
                     updateTextBoxes();
+                    visitProvider.setOnClickListener(v -> {
+                        Fragment f = ProviderDetailsFragment.newInstance(service.providerId);
+                        FragmentTransaction transaction = requireActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction();
+
+                        transaction.replace(R.id.nav_host_fragment, f);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    });
                 }
                 else
                     Toast.makeText(getContext(), "Error loading Service :(", Toast.LENGTH_SHORT).show();
