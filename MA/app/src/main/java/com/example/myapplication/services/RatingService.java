@@ -15,32 +15,29 @@ public class RatingService {
     private static final String BASE_URL = "http://192.168.2.8:8080/api/ratings/";
     private final RatingApi ratingApi;
 
-    public RatingService() {ratingApi = ApiClient.getRetrofit(BASE_URL).create(RatingApi.class);}
+    public RatingService() {
+        ratingApi = ApiClient.getRetrofit(BASE_URL).create(RatingApi.class);
+    }
 
-
-    public Call<Rating> submitRating(PostRatingDTO postRatingDTO, int userId, int offerId) {
-        return ratingApi.submitRating(postRatingDTO, userId, offerId);
+    public Call<Rating> submitRating(PostRatingDTO postRatingDTO, int offerId) {
+        return ratingApi.submitRating(postRatingDTO, offerId);
     }
 
     public Call<Void> approveRating(int commentId) {
         return ratingApi.approveRating(commentId);
     }
 
-
     public Call<Void> deleteRating(int commentId) {
         return ratingApi.deleteRating(commentId);
     }
-
 
     public Call<List<GetRatingDTO>> getRatingsByOffer(int offerId) {
         return ratingApi.getRatingsByOffer(offerId);
     }
 
-
     public Call<List<GetRatingDTO>> getAllRatings() {
         return ratingApi.getAllRatings();
     }
-
 
     public Call<Rating> getRatingById(int ratingId) {
         return ratingApi.getRatingById(ratingId);
