@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superior_white"
+    android:padding="16dp"
+    style="@style/sigmaColorText"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:spacing="20dp">
+
+        <!-- Service Name -->
+        <TextView
+            android:id="@+id/tvServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Service Name"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Image Carousel Placeholder -->
+        <FrameLayout
+            android:id="@+id/carouselContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/white">
+            <!-- Replace with ViewPager2 or RecyclerView carousel in code -->
+        </FrameLayout>
+
+        <!-- Booking & Interaction Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btnBook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dreadhead_blue"
+                android:text="Book Service"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnChat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dreadhead_blue"
+                android:text="Chat"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@android:drawable/btn_star_big_off" />
+        </LinearLayout>
+
+        <!-- Service Details Info Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:divider="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:showDividers="middle">
+
+            <!-- Each row: label + value -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelProvider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provider:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueProvider"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="Provider Name"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnVisit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dreadhead_blue"
+                    android:text="Visit"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="Category Name"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Price and discount grouped -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valuePrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="€0.00"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueDiscount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="€0.00"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Reservation, cancellation, duration -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Booking:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueBooking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="h in advance"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelCancellation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancellation:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueCancellation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="h in advance"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Duration:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueDuration"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="min – min"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelAvailability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Availability:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueAvailability"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="Available / Unavailable"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelReservationType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reservation Type:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/valueReservationType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text="Automatic / Manual"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Valid event categories horizontal list -->
+            <TextView
+                android:id="@+id/lblValidTypes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Available for:"
+                android:textColor="@color/nonchalant_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/containerValidTypes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp" />
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Provider-Only Section (visibility/edit/delete) -->
+        <LinearLayout
+            android:id="@+id/providerSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For providers:"
+                android:textColor="@color/nonchalant_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnEditService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dreadhead_blue"
+                    android:text="Edit"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnDeleteService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/dreadhead_blue"
+                    android:text="Delete"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Description Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/labelDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/nonchalant_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Service description goes here."
+                android:textColor="@color/nonchalant_blue" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

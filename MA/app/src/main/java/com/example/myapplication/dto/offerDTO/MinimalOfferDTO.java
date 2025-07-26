@@ -4,6 +4,7 @@ import com.example.myapplication.models.OfferType;
 
 public class MinimalOfferDTO {
     private Integer id;
+    public Integer offerId;
     private OfferType type;
     private String name;
     private Double basePrice;

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dto.PageResponse;
@@ -28,6 +29,7 @@ import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.dto.offerDTO.OfferFilterDTO;
 import com.example.myapplication.models.Availability;
+import com.example.myapplication.models.OfferType;
 import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.OfferService;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -169,10 +171,23 @@ public class OfferingsPage extends Fragment {
 
                 TextView itemTitle = offerView.findViewById(R.id.offering_title);
                 TextView itemText = offerView.findViewById(R.id.offering_description);
+                Button infoButton = offerView.findViewById(R.id.offering_button);
 
                 if (itemTitle != null && itemText != null) {
                     itemTitle.setText(offer.getName());
                     itemText.setText(offer.getDescription());
+                    infoButton.setOnClickListener(v -> {
+                        Fragment f = null;
+                        if(offer.getType() == OfferType.SERVICE)
+                            f = ServiceDetailsFragment.newInstance(offer.offerId);
+                        FragmentTransaction transaction = requireActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction();
+
+                        transaction.replace(R.id.nav_host_fragment, f);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    });
                 }
 
                 parentLayout.addView(offerView);

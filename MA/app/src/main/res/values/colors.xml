@@ -11,4 +11,5 @@
     <color name="novi_sad_torquoise">#92B6B1</color>
     <color name="confirm_button">#8f7d4a</color>
     <color name="transparent">#00000000</color>
+    <color name="WhiteTransparent">#2FFFFFFF</color>
 </resources>

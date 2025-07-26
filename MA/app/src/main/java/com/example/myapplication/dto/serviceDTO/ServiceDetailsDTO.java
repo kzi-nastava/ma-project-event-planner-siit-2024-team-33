@@ -3,9 +3,10 @@ package com.example.myapplication.dto.serviceDTO;
 import com.example.myapplication.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ServiceDetailsDTO {
+public class ServiceDetailsDTO implements Serializable {
     public Integer versionId;
     public Integer offerId;
     public MinimalOfferCategoryDTO category;

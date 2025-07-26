@@ -12,4 +12,8 @@
         <item name="android:paddingEnd">8dp</item>
     </style>
 
+    <style name="sigmaColorText">
+        <item name="android:textColor">@color/nonchalant_blue</item>
+    </style>
+
 </resources>

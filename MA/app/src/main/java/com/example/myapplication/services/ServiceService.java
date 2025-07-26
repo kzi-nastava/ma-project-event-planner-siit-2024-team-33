@@ -15,7 +15,7 @@ import java.util.List;
 import retrofit2.Call;
 
 public class ServiceService {
-    private static final String BASE_URL = Settings.BASE_URL + "/api/services";
+    private static final String BASE_URL = Settings.BASE_URL + "/";
     private final ServiceApi serviceApi;
 
     public ServiceService() {

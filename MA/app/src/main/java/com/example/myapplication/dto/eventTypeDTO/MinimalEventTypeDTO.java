@@ -1,6 +1,8 @@
 package com.example.myapplication.dto.eventTypeDTO;
 
-public class MinimalEventTypeDTO {
+import java.io.Serializable;
+
+public class MinimalEventTypeDTO implements Serializable {
     public Integer id;
     public String name;
     public String description;

@@ -18,15 +18,15 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ServiceApi {
-    @GET("/{id}")
+    @GET("/api/services/{id}")
     Call<ServiceDetailsDTO> getDetails(@Path("id") Integer serviceId);
 
-    @POST
+    @POST("/api/services")
     Call<ServiceDetailsDTO> createService(@Body PostServiceDTO data);
 
-    @PUT("/{id}")
+    @PUT("/api/services/{id}")
     Call<Void> editService(@Path("id") Integer serviceId, @Body PutServiceDTO data);
 
-    @DELETE("/{id}")
+    @DELETE("/api/services/{id}")
     Call<Void> deleteService(@Path("id") Integer serviceId);
 }

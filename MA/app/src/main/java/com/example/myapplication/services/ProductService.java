@@ -7,7 +7,7 @@ import com.example.myapplication.utils.Settings;
 import retrofit2.Call;
 
 public class ProductService {
-    private static final String BASE_URL = Settings.BASE_URL + "/api/products";
+    private static final String BASE_URL = Settings.BASE_URL + "/";
     private final ProductApi productApi;
 
     public ProductService() {
