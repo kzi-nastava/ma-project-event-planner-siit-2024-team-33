@@ -125,12 +125,11 @@
             android:id="@+id/submit_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Submit Review"
-            android:background="#EGE7FF"
-            android:textColor="#FFFFFF"
-            android:padding="6dp"
             android:layout_gravity="start"
-            android:radius="6dp" />
+            android:layout_marginTop="10dp"
+            android:padding="6dp"
+            android:radius="6dp"
+            android:text="Submit Review"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </LinearLayout>
