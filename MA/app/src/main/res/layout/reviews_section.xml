@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/dreadhead_blue"
+    android:background="@drawable/reviews_background"
     android:padding="15dp"
     android:layout_marginTop="20dp"
     android:clipToPadding="false"
@@ -127,10 +127,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Submit Review"
-            android:background="#EGE7FF"
-            android:textColor="#FFFFFF"
-            android:padding="6dp"
-            android:layout_gravity="start"
-            android:radius="6dp" />
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColor="@color/white"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:layout_gravity="end"
+            android:radius="8dp" />
     </LinearLayout>
 </LinearLayout>

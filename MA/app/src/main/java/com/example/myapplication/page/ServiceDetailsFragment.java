@@ -17,6 +17,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.component.ImageCarouselFragment;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.serviceDTO.ServiceDetailsDTO;
+import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.FavoritesService;
 import com.example.myapplication.services.ServiceService;
@@ -29,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ServiceDetailsFragment extends Fragment {
+    private ReviewsSectionView reviewsSection;
     private final ServiceService serviceService = new ServiceService();
     private final UsersService usersService = new UsersService();
     private final FavoritesService favoritesService = new FavoritesService();
@@ -91,6 +93,8 @@ public class ServiceDetailsFragment extends Fragment {
         containerValidTypes = view.findViewById(R.id.containerValidTypes);
         favoriteButton = view.findViewById(R.id.btnFavorite);
         favoriteButton.setOnClickListener(v -> {toggleIsFavorite();});
+        reviewsSection = view.findViewById(R.id.reviewsSection);
+
         loadData();
 
         return view;
@@ -195,5 +199,6 @@ public class ServiceDetailsFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.carouselContainer, carouselFrag)
                 .commit();
+        reviewsSection.setOfferId(serviceId);
     }
 }

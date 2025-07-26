@@ -106,9 +106,9 @@ public class ReviewsSectionView extends LinearLayout {
         dto.setValue(selectedStars);
         dto.setComment(comment);
 
-        ratingService.submitRating(dto, offerId).enqueue(new retrofit2.Callback<Rating>() {
+        ratingService.submitRating(dto, offerId).enqueue(new retrofit2.Callback<GetRatingDTO>() {
             @Override
-            public void onResponse(retrofit2.Call<Rating> call, retrofit2.Response<Rating> response) {
+            public void onResponse(retrofit2.Call<GetRatingDTO> call, retrofit2.Response<GetRatingDTO> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Rating submitted!", Toast.LENGTH_SHORT).show();
                     commentText.setText("");
@@ -121,7 +121,7 @@ public class ReviewsSectionView extends LinearLayout {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<Rating> call, Throwable t) {
+            public void onFailure(retrofit2.Call<GetRatingDTO> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to submit rating: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
