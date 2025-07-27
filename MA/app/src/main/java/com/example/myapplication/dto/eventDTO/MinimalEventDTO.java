@@ -1,11 +1,16 @@
 package com.example.myapplication.dto.eventDTO;
 
-public class MinimalEventDTO {
+public class MinimalEventDTO{
     private Integer id;
     private String image;
     private String name;
     private String description;
     private double cost;
+
+    @Override
+    public String toString(){
+        return name;
+    }
 
     public Integer getId() {
         return id;

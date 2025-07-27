@@ -14,6 +14,9 @@ public interface EventApi {
     @GET("organizer/{id}")
     Call<List<MinimalEventDTO>> getEventsByOrganizer(@Path("id") Integer organizerId);
 
+    @GET("organizer/updated")
+    Call<List<MinimalEventDTO>> getEventsForOrganizerUpdated();
+
     @GET("top5")
     Call<List<MinimalEventDTO>> getTop5Events();
 

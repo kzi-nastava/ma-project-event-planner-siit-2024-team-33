@@ -180,6 +180,8 @@ public class OfferingsPage extends Fragment {
                         Fragment f = null;
                         if(offer.getType() == OfferType.SERVICE)
                             f = ServiceDetailsFragment.newInstance(offer.offerId);
+                        else
+                            f = ProductDetailsFragment.newInstance(offer.offerId);
                         FragmentTransaction transaction = requireActivity()
                                 .getSupportFragmentManager()
                                 .beginTransaction();

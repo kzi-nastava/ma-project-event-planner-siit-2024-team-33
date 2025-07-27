@@ -47,4 +47,8 @@ public class EventService {
         );
     }
 
+    public Call<List<MinimalEventDTO>> getEventsForOrganizerUpdated(){
+        return eventApi.getEventsForOrganizerUpdated();
+    }
+
 }

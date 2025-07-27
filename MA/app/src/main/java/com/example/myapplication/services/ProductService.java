@@ -17,4 +17,8 @@ public class ProductService {
     public Call<GetProductDTO> getProductDetails(Integer productId){
         return productApi.getDetails(productId);
     }
+
+    public Call<Void> cancelProductReservation(Integer productId, Integer eventId) {
+        return  productApi.cancelProductReservation(productId, eventId);
+    }
 }

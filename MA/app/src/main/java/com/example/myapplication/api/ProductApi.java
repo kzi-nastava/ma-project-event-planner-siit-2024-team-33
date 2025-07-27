@@ -16,4 +16,10 @@ import retrofit2.http.Path;
 public interface ProductApi {
     @GET("api/products/{id}")
     Call<GetProductDTO> getDetails(@Path("id") Integer productId);
+
+    @DELETE("api/products/{id}/reservations/{eventId}")
+    Call<Void> cancelProductReservation(
+            @Path("id") Integer productId,
+            @Path("eventId") Integer eventId
+    );
 }

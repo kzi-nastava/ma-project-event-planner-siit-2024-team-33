@@ -42,6 +42,16 @@
         android:visibility="gone" />
 
     <Button
+        android:id="@+id/budget_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#666A86"
+        android:text="Budget"
+        android:textColor="#E8DDB5"
+        android:visibility="gone" />
+
+    <Button
         android:id="@+id/offer_categories_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

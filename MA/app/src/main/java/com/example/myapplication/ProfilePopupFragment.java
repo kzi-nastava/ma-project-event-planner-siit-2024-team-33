@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.dialog.NotificationsDialog;
 import com.example.myapplication.models.AuthentifiedUser;
+import com.example.myapplication.page.BudgetPage;
 import com.example.myapplication.page.CommentsActivity;
 import com.example.myapplication.page.CreateServiceFragment;
 import com.example.myapplication.page.LoginActivity;
@@ -35,7 +36,7 @@ import com.google.gson.Gson;
 public class ProfilePopupFragment extends DialogFragment {
 
     private Button profileInfoButton, favoritesButton, scheduleButton, notificationsButton, signInButton;
-    private Button createEventButton, offerCategoriesButton, eventTypesButton, eventStatisticsButton, yourOffersButton, reportsButton, commentsButton, createServiceButton;
+    private Button createEventButton, budgetButton, offerCategoriesButton, eventTypesButton, eventStatisticsButton, yourOffersButton, reportsButton, commentsButton, createServiceButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,6 +50,7 @@ public class ProfilePopupFragment extends DialogFragment {
         notificationsButton = view.findViewById(R.id.notifications_button);
         signInButton = view.findViewById(R.id.sign_in_button);
         createEventButton = view.findViewById(R.id.create_event_button);
+        budgetButton = view.findViewById(R.id.budget_button);
         offerCategoriesButton = view.findViewById(R.id.offer_categories_button);
         eventTypesButton = view.findViewById(R.id.event_types_button);
         eventStatisticsButton = view.findViewById(R.id.event_statistics_button);
@@ -82,6 +84,9 @@ public class ProfilePopupFragment extends DialogFragment {
 
             // Create event only for Organizer
             createEventButton.setVisibility(isOrganizer ? View.VISIBLE : View.GONE);
+
+            budgetButton.setVisibility(isOrganizer ? View.VISIBLE: View.GONE);
+            budgetButton.setOnClickListener(v -> openBudgetPage());
 
             // Offer categories only for Admin
             offerCategoriesButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
@@ -240,6 +245,18 @@ public class ProfilePopupFragment extends DialogFragment {
         dismiss();
         Log.d("gas", "openCreateService: Gas");
         Fragment f = CreateServiceFragment.newInstance(null);
+        FragmentTransaction transaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void openBudgetPage() {
+        dismiss();
+        Fragment f = BudgetPage.newInstance();
         FragmentTransaction transaction = requireActivity()
                 .getSupportFragmentManager()
                 .beginTransaction();
