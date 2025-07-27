@@ -15,11 +15,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.dialog.NotificationsDialog;
 import com.example.myapplication.models.AuthentifiedUser;
 import com.example.myapplication.page.CommentsActivity;
+import com.example.myapplication.page.CreateServiceFragment;
 import com.example.myapplication.page.LoginActivity;
 import com.example.myapplication.page.ProfilePage;
 import com.example.myapplication.page.RegisterActivity;
@@ -45,6 +48,8 @@ public class ProfilePopupFragment extends DialogFragment {
         signInButton = view.findViewById(R.id.sign_in_button);
         Button signUpButton = view.findViewById(R.id.sign_up_button);
         Button logOutButton = view.findViewById(R.id.log_out_button);
+        Button createServiceButton = view.findViewById(R.id.create_service_button);
+        createServiceButton.setVisibility(View.GONE);
 
         AuthentifiedUser user = AuthenticationService.getLoggedInUser();
         ShapeableImageView profileIcon = view.findViewById(R.id.profile_icon);
@@ -89,15 +94,6 @@ public class ProfilePopupFragment extends DialogFragment {
             });
         } else {
             String roleName = user.getRole() != null ? user.getRole().getName() : "";
-            Log.d("GASGASGASGASG",roleName);
-            Log.d("GASGASGASGASG",roleName);
-            Log.d("GASGASGASGASG",roleName);
-            Log.d("GASGASGASGASG",roleName);
-            Log.d("GASGASGASGASG",roleName);
-            Log.d("GASGASGASGASG",roleName);
-            Log.d("IDK",user.getEmail());
-
-
             boolean isOrganizerOrProvider = roleName.equals("ORGANIZER_ROLE") || roleName.equals("PROVIDER_ROLE");
 
             profileInfoButton.setVisibility(isOrganizerOrProvider ? View.VISIBLE : View.GONE);
@@ -117,6 +113,11 @@ public class ProfilePopupFragment extends DialogFragment {
                 logOut();
                 dismiss();
             });
+
+            if (roleName.equals("PROVIDER_ROLE")){
+                createServiceButton.setVisibility(View.VISIBLE);
+                createServiceButton.setOnClickListener(v -> openCreateService());
+            }
         }
 
         return view;
@@ -157,6 +158,19 @@ public class ProfilePopupFragment extends DialogFragment {
 
         Intent intent = new Intent(getActivity(), ReportsActivity.class);
         startActivity(intent);
+    }
+
+    private void openCreateService() {
+        dismiss();
+        Log.d("gas", "openCreateService: Gas");
+        Fragment f = CreateServiceFragment.newInstance(null);
+        FragmentTransaction transaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void logOut() {

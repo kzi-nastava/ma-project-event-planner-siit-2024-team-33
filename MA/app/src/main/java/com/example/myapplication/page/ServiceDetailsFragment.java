@@ -53,6 +53,8 @@ public class ServiceDetailsFragment extends Fragment {
     LinearLayout containerValidTypes;
 
     Button visitProvider;
+    Button editBtn;
+    Button deleteBtn;
 
     ImageButton favoriteButton;
 
@@ -95,9 +97,43 @@ public class ServiceDetailsFragment extends Fragment {
         favoriteButton = view.findViewById(R.id.btnFavorite);
         favoriteButton.setOnClickListener(v -> {toggleIsFavorite();});
         visitProvider = view.findViewById(R.id.btnVisit);
+        editBtn = view.findViewById(R.id.btnEditService);
+        editBtn.setOnClickListener(v -> editClicked());
+        deleteBtn = view.findViewById(R.id.btnDeleteService);
+        deleteBtn.setOnClickListener(v -> deleteClicked());
         loadData();
 
         return view;
+    }
+
+    public void editClicked(){
+        Fragment f = CreateServiceFragment.newInstance(serviceId);
+        FragmentTransaction transaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void deleteClicked(){
+        serviceService.deleteService(serviceId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(), "Service Deleted", Toast.LENGTH_SHORT).show();
+                    getParentFragmentManager().popBackStackImmediate();
+                }
+                else
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void loadData(){

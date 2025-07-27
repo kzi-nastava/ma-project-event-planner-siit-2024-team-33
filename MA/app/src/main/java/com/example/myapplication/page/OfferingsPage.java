@@ -81,17 +81,6 @@ public class OfferingsPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_offerings_page, container, false);
 
-        Button createButton = view.findViewById(R.id.offerings_create_button);
-        createButton.setOnClickListener(v -> {
-            Fragment f = new CreateServiceFragment();
-            FragmentTransaction transaction = requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction();
-
-            transaction.replace(R.id.nav_host_fragment, f);
-            transaction.commit();
-        });
-
         Button filterButton = view.findViewById(R.id.offering_filters_button);
         if (filterButton != null) {
             filterButton.setOnClickListener(v -> showFilterDialog());

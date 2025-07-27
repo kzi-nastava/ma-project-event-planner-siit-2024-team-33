@@ -20,13 +20,13 @@ public class ServiceDetailsDTO implements Serializable {
     public Boolean isVisible;
     public Boolean isAvailable;
 
-    public int reservationInHours;
-    public int cancellationInHours;
+    public Integer reservationInHours;
+    public Integer cancellationInHours;
     public Boolean isAutomatic;
-    public int minLengthInMins;
-    public int maxLengthInMins;
+    public Integer minLengthInMins;
+    public Integer maxLengthInMins;
 
-    public int providerId;
+    public Integer providerId;
     public String providerName;
     public String providerEmail;
 
