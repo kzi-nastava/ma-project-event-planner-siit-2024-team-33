@@ -1,4 +1,4 @@
-package com.example.myapplication.page;
+package com.example.myapplication.reports;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ReportsAdapter;
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.reportDTO.GetReportDTO;
 import com.example.myapplication.services.ReportService;
 
@@ -31,7 +31,7 @@ public class ReportsActivity extends Activity {
     private List<GetReportDTO> reports = new ArrayList<>();
     private boolean isLoading = false;
     private int currentPage = 0;
-    private final int REPORTS_PER_PAGE = 5;
+    private final int REPORTS_PER_PAGE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +66,19 @@ public class ReportsActivity extends Activity {
     private void loadReports() {
         isLoading = true;
 
-        reportService.getReports().enqueue(new Callback<List<GetReportDTO>>() {
+        reportService.getReports(currentPage,REPORTS_PER_PAGE).enqueue(new Callback<PageResponse<GetReportDTO>>() {
             @Override
-            public void onResponse(Call<List<GetReportDTO>> call, Response<List<GetReportDTO>> response) {
+            public void onResponse(Call<PageResponse<GetReportDTO>> call, Response<PageResponse<GetReportDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<GetReportDTO> allReports = response.body();
-                    int totalPages = (int) Math.ceil((double) allReports.size() / REPORTS_PER_PAGE);
+                    PageResponse<GetReportDTO> pageResponse = response.body();
 
-                    // Load reports for the current page
-                    int start = currentPage * REPORTS_PER_PAGE;
-                    int end = Math.min(start + REPORTS_PER_PAGE, allReports.size());
+                    int totalPages = pageResponse.getTotalPages();
                     reports.clear();
-                    if (start < end) {
-                        reports.addAll(allReports.subList(start, end));
-                        adapter.notifyDataSetChanged();
-                    }
 
-                    // Update pagination buttons
+
+                    reports.addAll(pageResponse.getContent());
+                    adapter.notifyDataSetChanged();
+
                     updatePaginationControls(totalPages);
                 } else {
                     Toast.makeText(ReportsActivity.this, "Failed to load reports", Toast.LENGTH_SHORT).show();
@@ -91,7 +87,7 @@ public class ReportsActivity extends Activity {
             }
 
             @Override
-            public void onFailure(Call<List<GetReportDTO>> call, Throwable t) {
+            public void onFailure(Call<PageResponse<GetReportDTO>> call, Throwable t) {
                 Toast.makeText(ReportsActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 isLoading = false;
             }

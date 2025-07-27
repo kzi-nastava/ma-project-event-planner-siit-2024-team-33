@@ -44,7 +44,7 @@
             android:name=".page.EventPlannerActivityMandatory"
             android:exported="false" />
         <activity
-            android:name=".page.ReportsActivity"
+            android:name=".reports.ReportsActivity"
             android:exported="false" />
         <activity
             android:name=".page.RegisterActivity"

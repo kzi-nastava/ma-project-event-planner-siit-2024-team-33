@@ -23,7 +23,7 @@ import com.example.myapplication.page.CommentsActivity;
 import com.example.myapplication.page.LoginActivity;
 import com.example.myapplication.page.ProfilePage;
 import com.example.myapplication.page.RegisterActivity;
-import com.example.myapplication.page.ReportsActivity;
+import com.example.myapplication.reports.ReportsActivity;
 import com.example.myapplication.services.AuthenticationService;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
@@ -188,7 +188,7 @@ public class ProfilePopupFragment extends DialogFragment {
             logOutButton.setVisibility(View.VISIBLE);
 
             profileInfoButton.setOnClickListener(v -> openProfilePage());
-            favoritesButton.setOnClickListener(v -> openFavoritesPage());
+            reportsButton.setOnClickListener(v -> openReportsPage());
             commentsButton.setOnClickListener(v -> openCommentsPage());
             notificationsButton.setOnClickListener(v -> openNotificationsDialog());
 
@@ -233,9 +233,8 @@ public class ProfilePopupFragment extends DialogFragment {
         startActivity(intent);
     }
 
-    private void openFavoritesPage() {
+    private void openReportsPage() {
         dismiss();
-
         Intent intent = new Intent(getActivity(), ReportsActivity.class);
         startActivity(intent);
     }
