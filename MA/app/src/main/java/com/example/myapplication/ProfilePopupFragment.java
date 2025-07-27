@@ -24,6 +24,7 @@ import com.example.myapplication.models.AuthentifiedUser;
 import com.example.myapplication.page.CommentsActivity;
 import com.example.myapplication.page.CreateServiceFragment;
 import com.example.myapplication.page.LoginActivity;
+import com.example.myapplication.page.OfferCategoriesFragment;
 import com.example.myapplication.page.ProfilePage;
 import com.example.myapplication.page.RegisterActivity;
 import com.example.myapplication.reports.ReportsActivity;
@@ -57,8 +58,6 @@ public class ProfilePopupFragment extends DialogFragment {
         createServiceButton = view.findViewById(R.id.create_service_button);
         Button signUpButton = view.findViewById(R.id.sign_up_button);
         Button logOutButton = view.findViewById(R.id.log_out_button);
-        Button createServiceButton = view.findViewById(R.id.create_service_button);
-        createServiceButton.setVisibility(View.GONE);
 
 
         AuthentifiedUser user = AuthenticationService.getLoggedInUser();
@@ -86,6 +85,7 @@ public class ProfilePopupFragment extends DialogFragment {
 
             // Offer categories only for Admin
             offerCategoriesButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
+            offerCategoriesButton.setOnClickListener(v -> OpenOfferCategories());
 
             // Event types only for Admin
             eventTypesButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
@@ -104,6 +104,7 @@ public class ProfilePopupFragment extends DialogFragment {
 
             // Create Service for Provider
             createServiceButton.setVisibility(isProvider ? View.VISIBLE : View.GONE);
+            createServiceButton.setOnClickListener(v -> openCreateService());
 
             // Sign in / sign up hidden
             signInButton.setVisibility(View.GONE);
@@ -192,11 +193,6 @@ public class ProfilePopupFragment extends DialogFragment {
                 logOut();
                 dismiss();
             });
-
-            if (roleName.equals("PROVIDER_ROLE")){
-                createServiceButton.setVisibility(View.VISIBLE);
-                createServiceButton.setOnClickListener(v -> openCreateService());
-            }
         }
 
         return view;
@@ -273,6 +269,16 @@ public class ProfilePopupFragment extends DialogFragment {
         return null;
     }
 
+    private void OpenOfferCategories(){
+        dismiss();
+        Fragment f = OfferCategoriesFragment.newInstance();
+        FragmentTransaction transaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
 
+        transaction.replace(R.id.nav_host_fragment, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
 }
