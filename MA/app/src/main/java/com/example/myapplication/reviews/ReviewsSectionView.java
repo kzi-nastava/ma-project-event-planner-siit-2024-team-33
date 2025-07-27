@@ -16,7 +16,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
 import com.example.myapplication.models.Rating;
+import com.example.myapplication.reports.ReportDialog;
 import com.example.myapplication.services.RatingService;
+import com.example.myapplication.services.ReportService;
 
 
 import java.util.ArrayList;
@@ -56,14 +58,20 @@ public class ReviewsSectionView extends LinearLayout {
         adapter = new ReviewAdapter(new ArrayList<>(), new ReviewAdapter.OnReviewActionListener() {
             @Override
             public void onReport(GetRatingDTO review) {
-                Toast.makeText(getContext(), "Reporting " + review.getAuthorName(), Toast.LENGTH_SHORT).show();
+                ReportDialog reportDialog = new ReportDialog(
+                        getContext(),
+                        new ReportService(),
+                        review.getAuthorId()
+                );
+                reportDialog.show();
             }
 
             @Override
             public void onChat(GetRatingDTO review) {
-                Toast.makeText(getContext(), "Chat with " + review.getAuthorName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Chat with majmuneeeee" , Toast.LENGTH_SHORT).show();
             }
         });
+
 
         reviewList.setLayoutManager(new LinearLayoutManager(getContext()));
         reviewList.setAdapter(adapter);
@@ -106,9 +114,9 @@ public class ReviewsSectionView extends LinearLayout {
         dto.setValue(selectedStars);
         dto.setComment(comment);
 
-        ratingService.submitRating(dto, offerId).enqueue(new retrofit2.Callback<Rating>() {
+        ratingService.submitRating(dto, offerId).enqueue(new retrofit2.Callback<GetRatingDTO>() {
             @Override
-            public void onResponse(retrofit2.Call<Rating> call, retrofit2.Response<Rating> response) {
+            public void onResponse(retrofit2.Call<GetRatingDTO> call, retrofit2.Response<GetRatingDTO> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Rating submitted!", Toast.LENGTH_SHORT).show();
                     commentText.setText("");
@@ -121,7 +129,7 @@ public class ReviewsSectionView extends LinearLayout {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<Rating> call, Throwable t) {
+            public void onFailure(retrofit2.Call<GetRatingDTO> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to submit rating: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

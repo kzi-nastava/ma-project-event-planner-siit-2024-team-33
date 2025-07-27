@@ -1,5 +1,6 @@
 package com.example.myapplication.api;
 
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
 import com.example.myapplication.models.Rating;
@@ -18,28 +19,31 @@ import retrofit2.http.Query;
 public interface RatingApi {
 
     @POST("ratings")
-    Call<Rating> submitRating(
+    Call<GetRatingDTO> submitRating(
             @Body PostRatingDTO postRatingDTO,
             @Query("offerId") int offerId
     );
 
-    @PUT("approve/{commentId}")
+    @PUT("ratings/approve/{commentId}")
     Call<Void> approveRating(
             @Path("commentId") int commentId
     );
 
-    @DELETE("{commentId}")
+    @DELETE("ratings/{commentId}")
     Call<Void> deleteRating(
             @Path("commentId") int commentId
     );
 
-    @GET("offer/{offerId}")
+    @GET("ratings/offer/{offerId}")
     Call<List<GetRatingDTO>> getRatingsByOffer(
             @Path("offerId") int offerId
     );
 
-    @GET
-    Call<List<GetRatingDTO>> getAllRatings();
+    @GET("ratings")
+    Call<PageResponse<GetRatingDTO>> getAllRatings(
+            @Query("page") int page,
+            @Query("size") int size
+    );
 
     @GET("ratings/{ratingId}")
     Call<Rating> getRatingById(

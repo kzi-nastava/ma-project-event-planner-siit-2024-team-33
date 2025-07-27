@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +47,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.author.setText(review.getAuthorName());
         holder.comment.setText(review.getComment());
 
+        // Setup stars
         holder.starsLayout.removeAllViews();
         for (int i = 1; i <= 5; i++) {
             ImageView star = new ImageView(holder.itemView.getContext());
@@ -58,6 +58,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             star.setLayoutParams(params);
             holder.starsLayout.addView(star);
         }
+
+        holder.itemView.setOnLongClickListener(v -> {
+            listener.onReport(reviews.get(position));
+            return true;
+        });
 
         holder.moreButton.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.moreButton);

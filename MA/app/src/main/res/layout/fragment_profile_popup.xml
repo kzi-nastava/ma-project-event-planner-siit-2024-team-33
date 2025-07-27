@@ -32,6 +32,86 @@
 
     <!-- Buttons -->
     <Button
+        android:id="@+id/create_event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Event"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/offer_categories_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offer Categories"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/event_types_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Types"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/event_statistics_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Statistics"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/your_offers_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Offers"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/reports_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reports"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/comments_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/create_service_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Service"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
         android:id="@+id/profile_info_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

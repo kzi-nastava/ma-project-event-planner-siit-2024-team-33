@@ -2,6 +2,7 @@ package com.example.myapplication.services;
 
 import com.example.myapplication.api.RatingApi;
 import com.example.myapplication.api.ReportApi;
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.reportDTO.GetReportDTO;
 import com.example.myapplication.dto.reportDTO.PostReportDTO;
 import com.example.myapplication.utils.Settings;
@@ -17,25 +18,18 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class ReportService {
-    private static final String BASE_URL = Settings.BASE_URL + "/api/reports/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/";
     private final ReportApi reportApi;
 
 
-    public ReportService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    public ReportService() {reportApi = ApiClient.getRetrofit(BASE_URL).create(ReportApi.class);}
 
-        reportApi = retrofit.create(ReportApi.class);
-    }
-
-    Call<String> submitReport(PostReportDTO postReportDTO){
+    public Call<GetReportDTO> submitReport(PostReportDTO postReportDTO){
         return reportApi.submitReport(postReportDTO);
     }
 
-    public Call<List<GetReportDTO>> getReports(){
-        return reportApi.getReports();
+    public Call<PageResponse<GetReportDTO>> getReports(int page, int size) {
+        return reportApi.getReports(page, size);
     }
 
     Call<GetReportDTO> getReport(int reportId){

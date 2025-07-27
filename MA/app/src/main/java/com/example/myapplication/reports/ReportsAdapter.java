@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.reports;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.dto.reportDTO.GetReportDTO;
 import com.example.myapplication.services.ReportService;
 

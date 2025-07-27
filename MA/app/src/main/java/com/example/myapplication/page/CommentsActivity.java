@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.R;
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.services.RatingService;
 
@@ -28,8 +29,9 @@ public class CommentsActivity extends Activity {
     private Button previousPageButton;
     private Button nextPageButton;
 
-    private int currentPage = 1; // For pagination
-    private final int itemsPerPage = 5;
+    private int currentPage = 1;
+    private int totalPages = 1;
+    private final int itemsPerPage = 10;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,9 +60,9 @@ public class CommentsActivity extends Activity {
     }
 
     private void fetchComments() {
-        ratingService.getAllRatings().enqueue(new Callback<List<GetRatingDTO>>() {
+        ratingService.getAllRatings(currentPage - 1, itemsPerPage).enqueue(new Callback<PageResponse<GetRatingDTO>>() {
             @Override
-            public void onResponse(Call<List<GetRatingDTO>> call, Response<List<GetRatingDTO>> response) {
+            public void onResponse(Call<PageResponse<GetRatingDTO>> call, Response<PageResponse<GetRatingDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     displayComments(response.body());
                 } else {
@@ -69,21 +71,18 @@ public class CommentsActivity extends Activity {
             }
 
             @Override
-            public void onFailure(Call<List<GetRatingDTO>> call, Throwable t) {
+            public void onFailure(Call<PageResponse<GetRatingDTO>> call, Throwable t) {
                 Log.e(TAG, "Error fetching comments", t);
                 Toast.makeText(CommentsActivity.this, "Error fetching comments", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    private void displayComments(List<GetRatingDTO> comments) {
+    private void displayComments(PageResponse<GetRatingDTO> pageResponse) {
         commentsList.removeAllViews();
 
-        int start = (currentPage - 1) * itemsPerPage;
-        int end = Math.min(start + itemsPerPage, comments.size());
+        List<GetRatingDTO> comments = pageResponse.getContent();
 
-        for (int i = start; i < end; i++) {
-            GetRatingDTO comment = comments.get(i);
+        for (GetRatingDTO comment : comments) {
             View commentView = getLayoutInflater().inflate(R.layout.comment_item, null);
 
             TextView offerName = commentView.findViewById(R.id.offer_name);
@@ -99,15 +98,16 @@ public class CommentsActivity extends Activity {
             commentText.setText(comment.getComment());
 
             approveButton.setOnClickListener(v -> approveComment(comment.getId()));
-
             deleteButton.setOnClickListener(v -> deleteComment(comment.getId()));
 
             commentsList.addView(commentView);
         }
+        totalPages = pageResponse.getTotalPages();
 
         previousPageButton.setEnabled(currentPage > 1);
-        nextPageButton.setEnabled(end < comments.size());
+        nextPageButton.setEnabled(currentPage < pageResponse.getTotalPages());
     }
+
 
     private void approveComment(int commentId) {
         ratingService.approveRating(commentId).enqueue(new Callback<Void>() {
