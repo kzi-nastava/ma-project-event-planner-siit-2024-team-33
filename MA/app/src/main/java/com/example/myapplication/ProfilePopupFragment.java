@@ -27,6 +27,7 @@ import com.example.myapplication.page.CreateServiceFragment;
 import com.example.myapplication.page.LoginActivity;
 import com.example.myapplication.page.OfferCategoriesFragment;
 import com.example.myapplication.page.ProfilePage;
+import com.example.myapplication.page.ProvidersOffersFragment;
 import com.example.myapplication.page.RegisterActivity;
 import com.example.myapplication.reports.ReportsActivity;
 import com.example.myapplication.services.AuthenticationService;
@@ -100,6 +101,7 @@ public class ProfilePopupFragment extends DialogFragment {
 
             // Your offers for Provider
             yourOffersButton.setVisibility(isProvider ? View.VISIBLE : View.GONE);
+            yourOffersButton.setOnClickListener(v -> openProvidersOffers());
 
             // Reports for Admin
             reportsButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
@@ -298,4 +300,15 @@ public class ProfilePopupFragment extends DialogFragment {
         transaction.commit();
     }
 
+    private void openProvidersOffers(){
+        dismiss();
+        Fragment f = ProvidersOffersFragment.newInstance();
+        FragmentTransaction transaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

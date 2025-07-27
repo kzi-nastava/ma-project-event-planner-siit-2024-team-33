@@ -38,4 +38,8 @@ public class OfferService {
         return offerApi.getOfferList(filter.isProduct, filter.isService, filter.name, filter.category,
                 filter.lowestPrice, filter.isAvailable, filter.eventTypes,page,size);
     }
+
+    public Call<List<MinimalOfferDTO>> GetLoggedUsersOffers(){
+        return offerApi.getLoggedUsersOffers();
+    }
 }

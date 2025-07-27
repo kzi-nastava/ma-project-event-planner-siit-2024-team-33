@@ -36,4 +36,7 @@ public interface OfferApi {
             @Query("page") int page,
             @Query("size") int size
     );
+
+    @GET("mine")
+    Call<List<MinimalOfferDTO>> getLoggedUsersOffers();
 }
