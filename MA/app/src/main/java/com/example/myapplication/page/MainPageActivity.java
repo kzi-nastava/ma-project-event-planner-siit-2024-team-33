@@ -1,10 +1,17 @@
 package com.example.myapplication.page;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.ProfilePopupFragment;
@@ -31,19 +38,13 @@ public class MainPageActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
 
-                if (item.getItemId() == R.id.nav_home)
-                {
+                if (item.getItemId() == R.id.nav_home) {
                     selectedFragment = new HomePage();
-                }
-                else if (item.getItemId() == R.id.nav_events)
-                {
+                } else if (item.getItemId() == R.id.nav_events) {
                     selectedFragment = new EventsPage();
-                }
-                else if (item.getItemId() == R.id.nav_offerings)
-                {
+                } else if (item.getItemId() == R.id.nav_offerings) {
                     selectedFragment = new OfferingsPage();
-                }
-                else if (item.getItemId() == R.id.nav_profile) {
+                } else if (item.getItemId() == R.id.nav_profile) {
                     ProfilePopupFragment profilePopupFragment = new ProfilePopupFragment();
                     profilePopupFragment.show(getSupportFragmentManager(), profilePopupFragment.getTag());
                 }
@@ -51,6 +52,16 @@ public class MainPageActivity extends AppCompatActivity {
                 return loadFragment(selectedFragment);
             }
         });
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getDisplay().getRealMetrics(metrics);
+        int screenWidth = metrics.widthPixels;
+        int drawerWidth = (int) (screenWidth * 0.9);
+
+        View drawer = findViewById(R.id.left_drawer);
+        ViewGroup.LayoutParams params = drawer.getLayoutParams();
+        params.width = drawerWidth;
+        drawer.setLayoutParams(params);
     }
 
     private boolean loadFragment(Fragment fragment) {
