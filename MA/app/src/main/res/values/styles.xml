@@ -16,4 +16,19 @@
         <item name="android:textColor">@color/nonchalant_blue</item>
     </style>
 
+    <style name="MyButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/dreadhead_blue</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="cornerRadius">17dp</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+    </style>
+
+    <style name="MyButton2" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/freaky_green</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="cornerRadius">6dp</item>
+    </style>
+
+
 </resources>

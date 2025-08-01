@@ -2,6 +2,7 @@ package com.example.myapplication.services;
 
 import com.example.myapplication.api.RatingApi;
 import com.example.myapplication.dto.PageResponse;
+import com.example.myapplication.dto.ratingDTO.EventRatingDTO;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
 import com.example.myapplication.models.Rating;
@@ -23,6 +24,14 @@ public class RatingService {
 
     public Call<GetRatingDTO> submitRating(PostRatingDTO postRatingDTO, int offerId) {
         return ratingApi.submitRating(postRatingDTO, offerId);
+    }
+
+    public Call<EventRatingDTO> submitEventRating(EventRatingDTO dto, int eventId) {
+        return ratingApi.submitEventRating(dto, eventId);
+    }
+
+    public Call<List<EventRatingDTO>> getEventRatingsByEvent(int eventId) {
+        return ratingApi.getEventRatingsByEvent(eventId);
     }
 
     public Call<Void> approveRating(int commentId) {
