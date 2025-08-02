@@ -2,6 +2,8 @@ package com.example.myapplication.services;
 
 import com.example.myapplication.api.ProductApi;
 import com.example.myapplication.dto.productDTO.GetProductDTO;
+import com.example.myapplication.dto.productDTO.MinimalProductDTO;
+import com.example.myapplication.dto.productDTO.PostProductReservationDTO;
 import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;
@@ -16,6 +18,12 @@ public class ProductService {
 
     public Call<GetProductDTO> getProductDetails(Integer productId){
         return productApi.getDetails(productId);
+    }
+
+    public Call<MinimalProductDTO> buyProduct(Integer productId, Integer eventId){
+        PostProductReservationDTO data = new PostProductReservationDTO();
+        data.eventId = eventId;
+        return productApi.buyProduct(productId, data);
     }
 
     public Call<Void> cancelProductReservation(Integer productId, Integer eventId) {
