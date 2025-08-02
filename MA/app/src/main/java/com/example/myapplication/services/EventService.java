@@ -3,6 +3,7 @@ package com.example.myapplication.services;
 import com.example.myapplication.api.EventApi;
 import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.eventDTO.FilterEventDTO;
+import com.example.myapplication.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.utils.Settings;
 
@@ -21,6 +22,9 @@ public class EventService {
 
     public Call<List<MinimalEventDTO>> getEventsByOrganizer(Integer organizerId) {
         return eventApi.getEventsByOrganizer(organizerId);
+    }
+    public Call<GetEventDetails> getEventDetails(int eventId) {
+        return eventApi.getEventDetails(eventId);
     }
     public Call<List<MinimalEventDTO>> getEventsByService(int serviceId) {
         return eventApi.getEventsByService(serviceId);

@@ -13,19 +13,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.dto.PageResponse;
+import com.example.myapplication.dto.ratingDTO.EventRatingDTO;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
-import com.example.myapplication.models.Rating;
 import com.example.myapplication.reports.ReportDialog;
 import com.example.myapplication.services.RatingService;
 import com.example.myapplication.services.ReportService;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewsSectionView extends LinearLayout {
     private int offerId = -1;
+    private int eventId = -1;
+
     private RatingService ratingService = new RatingService();
     private RecyclerView reviewList;
     private ReviewAdapter adapter;
@@ -33,11 +35,6 @@ public class ReviewsSectionView extends LinearLayout {
     private EditText commentText;
     private Button submitButton;
     private int selectedStars = 0;
-
-    public void setOfferId(int offerId) {
-        this.offerId = offerId;
-        loadRatings();
-    }
 
     public ReviewsSectionView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -68,16 +65,95 @@ public class ReviewsSectionView extends LinearLayout {
 
             @Override
             public void onChat(GetRatingDTO review) {
-                Toast.makeText(getContext(), "Chat with majmuneeeee" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Chat with majmuneeeee", Toast.LENGTH_SHORT).show();
             }
         });
-
 
         reviewList.setLayoutManager(new LinearLayoutManager(getContext()));
         reviewList.setAdapter(adapter);
 
         submitButton.setOnClickListener(v -> submitReview());
-        loadRatings();
+    }
+
+    public void setOfferId(int offerId) {
+        this.offerId = offerId;
+        this.eventId = -1;
+        loadOfferRatings();
+    }
+
+    public void setEventId(int eventId) {
+        if (this.eventId == eventId) {
+            return;
+        }
+        this.eventId = eventId;
+        this.offerId = -1;
+        loadEventRatings();
+    }
+
+    private void loadOfferRatings() {
+        if (offerId == -1) return;
+
+        ratingService.getRatingsByOffer(offerId).enqueue(new retrofit2.Callback<List<GetRatingDTO>>() {
+            @Override
+            public void onResponse(retrofit2.Call<List<GetRatingDTO>> call, retrofit2.Response<List<GetRatingDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    adapter.updateReviews(response.body());
+                } else {
+                    Toast.makeText(getContext(), "Failed to load ratings. Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<List<GetRatingDTO>> call, Throwable t) {
+                Toast.makeText(getContext(), "Failed to load ratings: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadEventRatings() {
+        if (eventId == -1) return;
+
+        int page = 0;
+        int size = 5;
+        adapter.updateReviews(new ArrayList<>());
+
+        ratingService.getAllEventRatings(page, size).enqueue(new retrofit2.Callback<PageResponse<EventRatingDTO>>() {
+            @Override
+            public void onResponse(retrofit2.Call<PageResponse<EventRatingDTO>> call, retrofit2.Response<PageResponse<EventRatingDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<EventRatingDTO> eventRatings = response.body().getContent();
+                    List<GetRatingDTO> converted = convertEventRatings(eventRatings);
+                    adapter.updateReviews(converted);
+                } else {
+                    Toast.makeText(getContext(), "Failed to load event ratings. Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<PageResponse<EventRatingDTO>> call, Throwable t) {
+                Toast.makeText(getContext(), "Failed to load event ratings: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void clearReviews() {
+        adapter.updateReviews(new ArrayList<>());
+    }
+    private List<GetRatingDTO> convertEventRatings(List<EventRatingDTO> eventRatings) {
+        List<GetRatingDTO> result = new ArrayList<>();
+        for (EventRatingDTO e : eventRatings) {
+            GetRatingDTO r = new GetRatingDTO();
+            r.setId(e.getId());
+            r.setValue(e.getRatingValue());
+            r.setComment(e.getComment());
+            r.setAccepted(e.getAccepted());
+            r.setDeleted(e.getIsDeleted());
+            r.setAuthorId(e.getAuthorId());
+            r.setAuthorName(e.getAuthorEmail());
+            // If needed, map eventId or other fields
+            result.add(r);
+        }
+        return result;
     }
 
     private void setupStarSelector() {
@@ -105,93 +181,65 @@ public class ReviewsSectionView extends LinearLayout {
             return;
         }
 
-        if (offerId == -1) {
-            Toast.makeText(getContext(), "Offer doesn't exist", Toast.LENGTH_SHORT).show();
+        if (offerId == -1 && eventId == -1) {
+            Toast.makeText(getContext(), "Offer or Event doesn't exist", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        PostRatingDTO dto = new PostRatingDTO();
-        dto.setValue(selectedStars);
-        dto.setComment(comment);
+        if (offerId != -1) {
+            PostRatingDTO dto = new PostRatingDTO();
+            dto.setValue(selectedStars);
+            dto.setComment(comment);
 
-        ratingService.submitRating(dto, offerId).enqueue(new retrofit2.Callback<GetRatingDTO>() {
-            @Override
-            public void onResponse(retrofit2.Call<GetRatingDTO> call, retrofit2.Response<GetRatingDTO> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Rating submitted!", Toast.LENGTH_SHORT).show();
-                    commentText.setText("");
-                    selectedStars = 0;
-                    updateStarColors();
-                    loadRatings();
-                } else {
-                    Toast.makeText(getContext(), "Failed to submit rating. Error: " + response.code(), Toast.LENGTH_SHORT).show();
+            ratingService.submitRating(dto, offerId).enqueue(new retrofit2.Callback<GetRatingDTO>() {
+                @Override
+                public void onResponse(retrofit2.Call<GetRatingDTO> call, retrofit2.Response<GetRatingDTO> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getContext(), "Rating submitted!", Toast.LENGTH_SHORT).show();
+                        commentText.setText("");
+                        selectedStars = 0;
+                        updateStarColors();
+                        loadOfferRatings();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to submit rating. Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(retrofit2.Call<GetRatingDTO> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to submit rating: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void loadRatings() {
-        if (offerId == -1) return;
-
-        ratingService.getRatingsByOffer(offerId).enqueue(new retrofit2.Callback<List<GetRatingDTO>>() {
-            @Override
-            public void onResponse(retrofit2.Call<List<GetRatingDTO>> call, retrofit2.Response<List<GetRatingDTO>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    adapter.updateReviews(response.body());
-                } else {
-                    Toast.makeText(getContext(), "Failed to load ratings. Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(retrofit2.Call<GetRatingDTO> call, Throwable t) {
+                    Toast.makeText(getContext(), "Failed to submit rating: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }
+            });
+        } else {
+            EventRatingDTO dto = new EventRatingDTO();
+            dto.setRatingValue(selectedStars);
+            dto.setComment(comment);
 
-            @Override
-            public void onFailure(retrofit2.Call<List<GetRatingDTO>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to load ratings: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            ratingService.submitEventRating(dto, eventId).enqueue(new retrofit2.Callback<EventRatingDTO>() {
+                @Override
+                public void onResponse(retrofit2.Call<EventRatingDTO> call, retrofit2.Response<EventRatingDTO> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getContext(), "Event rating submitted!", Toast.LENGTH_SHORT).show();
+                        commentText.setText("");
+                        selectedStars = 0;
+                        updateStarColors();
+                        loadEventRatings();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to submit event rating. Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(retrofit2.Call<EventRatingDTO> call, Throwable t) {
+                    Toast.makeText(getContext(), "Failed to submit event rating: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
-    private GetRatingDTO createDummy(int id, String offer, int authorId, String name, int value, String comment) {
-        GetRatingDTO dto = new GetRatingDTO();
-        try {
-            java.lang.reflect.Field f;
-
-            f = GetRatingDTO.class.getDeclaredField("id");
-            f.setAccessible(true);
-            f.set(dto, id);
-
-            f = GetRatingDTO.class.getDeclaredField("offerName");
-            f.setAccessible(true);
-            f.set(dto, offer);
-
-            f = GetRatingDTO.class.getDeclaredField("authorId");
-            f.setAccessible(true);
-            f.set(dto, authorId);
-
-            f = GetRatingDTO.class.getDeclaredField("authorName");
-            f.setAccessible(true);
-            f.set(dto, name);
-
-            f = GetRatingDTO.class.getDeclaredField("value");
-            f.setAccessible(true);
-            f.set(dto, value);
-
-            f = GetRatingDTO.class.getDeclaredField("comment");
-            f.setAccessible(true);
-            f.set(dto, comment);
-
-            f = GetRatingDTO.class.getDeclaredField("isAccepted");
-            f.setAccessible(true);
-            f.set(dto, true);
-
-            f = GetRatingDTO.class.getDeclaredField("isDeleted");
-            f.setAccessible(true);
-            f.set(dto, false);
-        } catch (Exception ignored) {}
-        return dto;
+    public void setRatings(List<EventRatingDTO> eventRatings) {
+        List<GetRatingDTO> converted = convertEventRatings(eventRatings);
+        adapter.updateReviews(converted);
     }
+
 }

@@ -1,9 +1,5 @@
 package com.example.myapplication.utils;
 
 public  class Settings {
-    //Change only this please
-    static final private String IP = "192.168.0.103:8080";
-
-    static final public String BASE_URL = "http://" + IP;
-    static final public String WEBSOCKET_URL = "ws://" + IP + "/ws";
+    static final public String BASE_URL = "http://192.168.0.105:8080";
 }

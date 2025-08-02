@@ -16,12 +16,10 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.component.ImageCarouselFragment;
-import com.example.myapplication.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.serviceDTO.ServiceDetailsDTO;
 import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.services.AuthenticationService;
-import com.example.myapplication.services.ChatWebsocketService;
 import com.example.myapplication.services.FavoritesService;
 import com.example.myapplication.services.ServiceService;
 import com.example.myapplication.services.UsersService;
@@ -37,7 +35,6 @@ public class ServiceDetailsFragment extends Fragment {
     private final ServiceService serviceService = new ServiceService();
     private final UsersService usersService = new UsersService();
     private final FavoritesService favoritesService = new FavoritesService();
-    private final ChatWebsocketService chatWebsocketService = ChatWebsocketService.getInstance();
 
     private Integer serviceId;
     private ServiceDetailsDTO service;
@@ -59,7 +56,6 @@ public class ServiceDetailsFragment extends Fragment {
 
     Button visitProvider;
     Button editBtn;
-    Button chatBtn;
     Button deleteBtn;
 
     ImageButton favoriteButton;
@@ -108,13 +104,6 @@ public class ServiceDetailsFragment extends Fragment {
         deleteBtn = view.findViewById(R.id.btnDeleteService);
         deleteBtn.setOnClickListener(v -> deleteClicked());
         reviewsSection = view.findViewById(R.id.reviewsSection);
-        chatBtn = view.findViewById(R.id.btnChat);
-        chatBtn.setOnClickListener(v -> {
-            ChatContactDTO dto = new ChatContactDTO();
-            dto.email = service.providerEmail;
-            dto.username = service.providerName;
-            chatWebsocketService.openChatWith(dto);
-        });
 
         loadData();
 

@@ -1,6 +1,7 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.dto.PageResponse;
+import com.example.myapplication.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public interface EventApi {
     @GET("top5")
     Call<List<MinimalEventDTO>> getTop5Events();
 
+    @GET("{id}")
+    Call<GetEventDetails> getEventDetails(@Path("id") int eventId);
     @GET("rest")
     Call<List<MinimalEventDTO>> getAllEvents();
     @GET("service/{serviceId}")

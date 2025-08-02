@@ -26,10 +26,6 @@ public class OfferService {
         return offerApi.getTop5Offers();
     }
 
-    public Call<List<MinimalOfferDTO>> GetTop5OffersUnauthentified() {
-        return offerApi.GetTop5OffersUnauthentified();
-    }
-
     public Call<List<MinimalOfferDTO>> getAllOffers() {
         return offerApi.getAllOffers();
     }

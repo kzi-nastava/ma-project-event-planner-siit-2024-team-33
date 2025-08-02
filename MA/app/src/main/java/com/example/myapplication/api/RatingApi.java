@@ -1,6 +1,7 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.dto.PageResponse;
+import com.example.myapplication.dto.ratingDTO.EventRatingDTO;
 import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
 import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
 import com.example.myapplication.models.Rating;
@@ -24,6 +25,11 @@ public interface RatingApi {
             @Query("offerId") int offerId
     );
 
+    @GET("events/{eventId}")
+    Call<List<EventRatingDTO>> getEventRatingsByEvent(@Path("eventId") int eventId);
+
+    @POST("/api/ratings/events")
+    Call<EventRatingDTO> submitEventRating(@Body EventRatingDTO dto, @Query("eventId") int eventId);
     @PUT("ratings/approve/{commentId}")
     Call<Void> approveRating(
             @Path("commentId") int commentId
@@ -37,6 +43,12 @@ public interface RatingApi {
     @GET("ratings/offer/{offerId}")
     Call<List<GetRatingDTO>> getRatingsByOffer(
             @Path("offerId") int offerId
+    );
+
+    @GET("/api/ratings/events")
+    Call<PageResponse<EventRatingDTO>> getAllEventRatings(
+            @Query("page") int page,
+            @Query("size") int size
     );
 
     @GET("ratings")

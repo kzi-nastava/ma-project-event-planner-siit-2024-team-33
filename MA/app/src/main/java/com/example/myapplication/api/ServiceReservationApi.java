@@ -13,19 +13,19 @@ import retrofit2.http.Path;
 
 public interface ServiceReservationApi {
 
-    @POST()
+    @POST("{serviceID}/reservations")
     Call<CreatedServiceReservationDTO> reserveService(
             @Path("serviceID") Integer serviceID,
-            @Body PostServiceReservationDTO postServiceReservationDTO
+            @Body PostServiceReservationDTO dto
     );
 
-    @GET("{reservationId}")
+    @GET("{serviceID}/reservations/{reservationId}")
     Call<GetServiceReservationDTO> getServiceReservationById(
             @Path("serviceID") Integer serviceID,
             @Path("reservationId") Integer reservationId
     );
 
-    @PUT("{reservationId}")
+    @PUT("{serviceID}/reservations/{reservationId}")
     Call<CreatedServiceReservationDTO> updateServiceReservation(
             @Path("serviceID") Integer serviceID,
             @Path("reservationId") Integer reservationId,

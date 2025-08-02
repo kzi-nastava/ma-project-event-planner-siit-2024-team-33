@@ -1,6 +1,7 @@
 package com.example.myapplication.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -171,6 +172,12 @@ public class EventsPage extends Fragment {
 
                 itemTitle.setText(event.getName());
                 itemText.setText(event.getDescription());
+
+                eventView.setOnClickListener(v -> {
+                    Intent intent = new Intent(requireContext(), EventDetailsActivity.class);
+                    intent.putExtra("eventId", event.getId());
+                    startActivity(intent);
+                });
 
                 parentLayout.addView(eventView);
             }
