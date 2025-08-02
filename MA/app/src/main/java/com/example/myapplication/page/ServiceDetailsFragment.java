@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.component.ImageCarouselFragment;
+import com.example.myapplication.dialog.ServiceBookingDialog;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.serviceDTO.ServiceDetailsDTO;
 import com.example.myapplication.reviews.ReviewsSectionView;
@@ -57,7 +58,7 @@ public class ServiceDetailsFragment extends Fragment {
     Button visitProvider;
     Button editBtn;
     Button deleteBtn;
-
+    Button bookBtn;
     ImageButton favoriteButton;
 
     public ServiceDetailsFragment() {
@@ -104,7 +105,9 @@ public class ServiceDetailsFragment extends Fragment {
         deleteBtn = view.findViewById(R.id.btnDeleteService);
         deleteBtn.setOnClickListener(v -> deleteClicked());
         reviewsSection = view.findViewById(R.id.reviewsSection);
-
+        bookBtn = view.findViewById(R.id.btnBook);
+        bookBtn.setOnClickListener(v -> showBookingDialog());
+        bookBtn.setEnabled(false);
         loadData();
 
         return view;
@@ -147,6 +150,9 @@ public class ServiceDetailsFragment extends Fragment {
                 if(response.isSuccessful() && response.body() != null) {
                     service = response.body();
                     updateTextBoxes();
+                    service = response.body();
+                    updateTextBoxes();
+                    bookBtn.setEnabled(true);
                     visitProvider.setOnClickListener(v -> {
                         Fragment f = ProviderDetailsFragment.newInstance(service.providerId);
                         FragmentTransaction transaction = requireActivity()
@@ -250,5 +256,19 @@ public class ServiceDetailsFragment extends Fragment {
                 .replace(R.id.carouselContainer, carouselFrag)
                 .commit();
         reviewsSection.setOfferId(serviceId);
+    }
+
+    private void showBookingDialog() {
+        if (service == null || service.minLengthInMins == 0 || service.maxLengthInMins == 0) {
+            Toast.makeText(getContext(), "Service data incomplete.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ServiceBookingDialog dialog = ServiceBookingDialog.newInstance(
+                serviceId,
+                service.minLengthInMins,
+                service.maxLengthInMins
+        );
+        dialog.show(getParentFragmentManager(), "bookingDialog");
     }
 }
