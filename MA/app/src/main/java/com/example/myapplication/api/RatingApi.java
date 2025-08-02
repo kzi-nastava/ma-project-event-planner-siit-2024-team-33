@@ -45,6 +45,12 @@ public interface RatingApi {
             @Path("offerId") int offerId
     );
 
+    @GET("/api/ratings/events")
+    Call<PageResponse<EventRatingDTO>> getAllEventRatings(
+            @Query("page") int page,
+            @Query("size") int size
+    );
+
     @GET("ratings")
     Call<PageResponse<GetRatingDTO>> getAllRatings(
             @Query("page") int page,

@@ -34,6 +34,10 @@ public class RatingService {
         return ratingApi.getEventRatingsByEvent(eventId);
     }
 
+    public Call<PageResponse<EventRatingDTO>> getAllEventRatings(int page, int size) {
+        return ratingApi.getAllEventRatings(page, size);
+    }
+
     public Call<Void> approveRating(int commentId) {
         return ratingApi.approveRating(commentId);
     }

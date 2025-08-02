@@ -2,96 +2,88 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#E8DDB5"
+    android:background="#1e293b"
     android:padding="24dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="8dp"
-        android:padding="24dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Book a Service"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#333333"
-            android:layout_marginBottom="16dp" />
+            android:textColor="#f1f5f9"
+            android:layout_marginBottom="16dp"/>
 
         <!-- Event Selector -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Event"
-            android:textColor="#555555"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
+            android:textColor="#e0e7ff"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_events"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:backgroundTint="#888888"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
 
         <!-- Date Picker -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Date"
-            android:textColor="#555555"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
+            android:textColor="#e0e7ff"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
             android:hint="YYYY-MM-DD"
+            android:focusable="false"
             android:backgroundTint="#888888"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
 
         <!-- Time From -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time From"
-            android:textColor="#555555"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
+            android:textColor="#e0e7ff"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_time_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="time"
             android:hint="HH:MM"
+            android:focusable="false"
             android:backgroundTint="#888888"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
 
         <!-- Time To -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time To"
-            android:textColor="#555555"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
+            android:textColor="#e0e7ff"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_time_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="time"
             android:hint="HH:MM"
+            android:focusable="false"
             android:backgroundTint="#888888"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
 
         <!-- Duration note -->
         <TextView
@@ -99,10 +91,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Duration must be between 30 mins and 120 mins."
-            android:textColor="#FF0000"
+            android:textColor="#ef4444"
             android:textSize="13sp"
             android:visibility="gone"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
 
         <!-- Submit button -->
         <Button
@@ -110,9 +102,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Book Service"
-            android:backgroundTint="#788AA3"
-            android:textColor="#FFFFFF"
-            android:padding="12dp" />
-
+            android:backgroundTint="#ef4444"
+            android:textColor="#ffffff"
+            android:padding="12dp"/>
     </LinearLayout>
 </ScrollView>

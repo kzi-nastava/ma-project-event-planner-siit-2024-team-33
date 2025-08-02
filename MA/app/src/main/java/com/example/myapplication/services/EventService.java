@@ -2,7 +2,6 @@ package com.example.myapplication.services;
 
 import com.example.myapplication.api.EventApi;
 import com.example.myapplication.dto.PageResponse;
-import com.example.myapplication.dto.eventDTO.EventDetails;
 import com.example.myapplication.dto.eventDTO.FilterEventDTO;
 import com.example.myapplication.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;

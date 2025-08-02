@@ -1,8 +1,7 @@
 package com.example.myapplication.page;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,15 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.dto.PageResponse;
 import com.example.myapplication.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.dto.ratingDTO.EventRatingDTO;
-import com.example.myapplication.models.Rating;
+import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.NotificationService;
 import com.example.myapplication.services.RatingService;
 import com.example.myapplication.services.UsersService;
-import com.example.myapplication.reviews.ReviewsSectionView;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -32,6 +37,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private int eventId;
     private GetEventDetails event;
+    private GoogleMap mMap;
 
     private TextView tvEventTitle, tvEventDescription, tvOrganizer, tvLocation, tvStartTime, tvEndTime, tvAttendees, tvEventType;
     private ImageView btnFavorite;
@@ -39,15 +45,13 @@ public class EventDetailsActivity extends AppCompatActivity {
     private LinearLayout starContainer;
     private ReviewsSectionView reviewsSection;
 
-    private int selectedStars = 0;
-    private boolean isFavorite = false;
-    private boolean isJoined = false;
-
     private EventService eventService;
     private RatingService ratingService;
     private NotificationService notificationService;
     private UsersService userService;
-
+    private int currentReviewPage = 1;
+    private int totalReviewPages = 1;
+    private final int reviewsPerPage = 5;
     private String organizerName = "";
     private String organizerEmail = "";
 
@@ -56,7 +60,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_details);
 
-        // Initialize services with no-arg constructors
         eventService = new EventService();
         ratingService = new RatingService();
         notificationService = new NotificationService();
@@ -72,16 +75,11 @@ public class EventDetailsActivity extends AppCompatActivity {
         bindViews();
         fetchEventDetails();
         fetchRatings();
-        checkFavoriteStatus();
-
-        // Removed button listeners here — handled inside ReviewsSectionView now
-
-        setupStarRating();
     }
 
     private void bindViews() {
         tvEventTitle = findViewById(R.id.tvEventTitle);
-        tvEventDescription = findViewById(R.id.tvDescription);
+        tvEventDescription = findViewById(R.id.valueDescription);
         tvOrganizer = findViewById(R.id.tvOrganizer);
         tvLocation = findViewById(R.id.tvLocation);
         tvStartTime = findViewById(R.id.tvStartTime);
@@ -90,7 +88,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvEventType = findViewById(R.id.tvEventType);
 
         btnFavorite = findViewById(R.id.btnFavorite);
-
         starContainer = findViewById(R.id.starContainer);
         reviewsSection = findViewById(R.id.reviewsSection);
     }
@@ -102,28 +99,52 @@ public class EventDetailsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     GetEventDetails res = response.body();
 
-                    // Use the fields from GetEventDetails properly:
+                    event = res;
+
                     String organizerFullName = "";
                     if (res.getMinimalOrganizer() != null) {
                         organizerFullName = res.getMinimalOrganizer().getName() + " " + res.getMinimalOrganizer().getSurname();
+                        organizerEmail = res.getMinimalOrganizer().getEmail();
+                        organizerName = organizerFullName;
                     }
+
                     tvOrganizer.setText("Organizer: " + organizerFullName);
-
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                    String startTimeStr = res.getDateOfEvent() != null ? res.getDateOfEvent().format(formatter) : "N/A";
-                    String endTimeStr = res.getEndOfEvent() != null ? res.getEndOfEvent().format(formatter) : "N/A";
-                    tvStartTime.setText("Start: " + startTimeStr);
-                    tvEndTime.setText("End: " + endTimeStr);
-
+                    tvEventTitle.setText(res.getName() != null ? res.getName() : "Event Title");
+                    tvLocation.setText("Place: " + (res.getPlace() != null ? res.getPlace() : "N/A"));
                     tvAttendees.setText("Attendees: " + res.getNumOfCurrentlyApplied() + " / " + res.getNumOfAttendees());
+                    tvEventType.setText("Event Type: " + (res.getMinimalEventType() != null ? res.getMinimalEventType().getName() : "N/A"));
+                    tvEventDescription.setText(res.getDescription() != null ? res.getDescription() : "No description available.");
 
-                    String eventTypeName = (res.getMinimalEventType() != null) ? res.getMinimalEventType().getName() : "N/A";
-                    tvEventType.setText("Event Type: " + eventTypeName);
+                    // Parse and format times
+                    DateTimeFormatter isoFormatter = DateTimeFormatter.ISO_DATE_TIME;
+                    DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                    try {
+                        if (res.getDateOfEvent() != null) {
+                            LocalDateTime startDateTime = LocalDateTime.parse(res.getDateOfEvent(), isoFormatter);
+                            tvStartTime.setText("Start: " + startDateTime.format(displayFormatter));
+                        }
+                        if (res.getEndOfEvent() != null) {
+                            LocalDateTime endDateTime = LocalDateTime.parse(res.getEndOfEvent(), isoFormatter);
+                            tvEndTime.setText("End: " + endDateTime.format(displayFormatter));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-                    organizerEmail = (res.getMinimalOrganizer() != null) ? res.getMinimalOrganizer().getEmail() : "";
-                    organizerName = organizerFullName;
+                    // Map setup
+                    double latitude = res.getLatitude();
+                    double longitude = res.getLongitude();
+                    SupportMapFragment mapFragment = SupportMapFragment.newInstance();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.mapContainer, mapFragment)
+                            .commit();
 
-                    // You can set other UI elements similarly...
+                    mapFragment.getMapAsync(googleMap -> {
+                        mMap = googleMap;
+                        LatLng location = new LatLng(latitude, longitude);
+                        mMap.addMarker(new MarkerOptions().position(location).title("Event Location"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14));
+                    });
 
                 } else {
                     Toast.makeText(EventDetailsActivity.this, "Failed to load event.", Toast.LENGTH_SHORT).show();
@@ -140,66 +161,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void fetchRatings() {
-        ratingService.getEventRatingsByEvent(eventId).enqueue(new Callback<List<EventRatingDTO>>() {
-            @Override
-            public void onResponse(Call<List<EventRatingDTO>> call, Response<List<EventRatingDTO>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<EventRatingDTO> ratings = response.body();
-                    // convert or pass to your reviewsSection here
-                    reviewsSection.setReviews(ratings);
-                } else {
-                    Toast.makeText(EventDetailsActivity.this, "Failed to load reviews.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<EventRatingDTO>> call, Throwable t) {
-                Toast.makeText(EventDetailsActivity.this, "Failed to load reviews.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        reviewsSection.clearReviews();      // Clear old reviews immediately
+        reviewsSection.setEventId(eventId); // This triggers loading ratings filtered by eventId
     }
 
-    private void checkFavoriteStatus() {
-        eventService.isFavorite(eventId, favorite -> {
-            isFavorite = favorite;
-            btnFavorite.setImageResource(favorite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
-        });
-    }
-
-    private void toggleFavorite() {
-        if (isFavorite) {
-            eventService.removeFavorite(eventId, () -> {
-                isFavorite = false;
-                btnFavorite.setImageResource(R.drawable.ic_favorite_border);
-            });
-        } else {
-            eventService.addFavorite(eventId, () -> {
-                isFavorite = true;
-                btnFavorite.setImageResource(R.drawable.ic_favorite);
-            });
-        }
-    }
-
-    private void setupStarRating() {
-        for (int i = 1; i <= 5; i++) {
-            final int starValue = i;
-            ImageView star = new ImageView(this);
-            star.setImageResource(R.drawable.ic_star_outline);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100, 100);
-            star.setLayoutParams(params);
-            star.setPadding(4, 4, 4, 4);
-            star.setOnClickListener(v -> {
-                selectedStars = starValue;
-                refreshStars();
-            });
-            starContainer.addView(star);
-        }
-    }
-
-    private void refreshStars() {
-        for (int i = 0; i < starContainer.getChildCount(); i++) {
-            ImageView star = (ImageView) starContainer.getChildAt(i);
-            star.setImageResource(i < selectedStars ? R.drawable.ic_star : R.drawable.ic_star_outline);
-        }
-    }
 }

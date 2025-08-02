@@ -12,12 +12,8 @@ import retrofit2.http.Query;
 
 public interface OfferApi {
 
-    @GET("top5/authentified")
+    @GET("top5")
     Call<List<MinimalOfferDTO>> getTop5Offers(
-    );
-
-    @GET("top5/unauthentified")
-    Call<List<MinimalOfferDTO>> GetTop5OffersUnauthentified(
     );
 
     @GET("rest")

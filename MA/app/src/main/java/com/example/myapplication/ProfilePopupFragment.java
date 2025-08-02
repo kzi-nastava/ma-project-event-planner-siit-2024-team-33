@@ -29,6 +29,8 @@ import com.example.myapplication.page.OfferCategoriesFragment;
 import com.example.myapplication.page.ProfilePage;
 import com.example.myapplication.page.ProvidersOffersFragment;
 import com.example.myapplication.page.RegisterActivity;
+import com.example.myapplication.page.UpgradeActivity;
+import com.example.myapplication.page.UpgradeSelectionActivity;
 import com.example.myapplication.reports.ReportsActivity;
 import com.example.myapplication.services.AuthenticationService;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -37,7 +39,7 @@ import com.google.gson.Gson;
 public class ProfilePopupFragment extends DialogFragment {
 
     private Button profileInfoButton, favoritesButton, scheduleButton, notificationsButton, signInButton;
-    private Button createEventButton, budgetButton, offerCategoriesButton, eventTypesButton, eventStatisticsButton, yourOffersButton, reportsButton, commentsButton, createServiceButton;
+    private Button upgradeButton,createEventButton, budgetButton, offerCategoriesButton, eventTypesButton, eventStatisticsButton, yourOffersButton, reportsButton, commentsButton, createServiceButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -59,6 +61,7 @@ public class ProfilePopupFragment extends DialogFragment {
         reportsButton = view.findViewById(R.id.reports_button);
         commentsButton = view.findViewById(R.id.comments_button);
         createServiceButton = view.findViewById(R.id.create_service_button);
+        upgradeButton = view.findViewById(R.id.upgrade_button);
         Button signUpButton = view.findViewById(R.id.sign_up_button);
         Button logOutButton = view.findViewById(R.id.log_out_button);
 
@@ -73,7 +76,7 @@ public class ProfilePopupFragment extends DialogFragment {
             boolean isOrganizer = roleName.equals("ORGANIZER_ROLE");
             boolean isProvider = roleName.equals("PROVIDER_ROLE");
             boolean isAdmin = roleName.equals("ADMIN_ROLE");
-
+            boolean isUser = roleName.equals("AUSER_ROLE");
             // Show/hide buttons as per Angular template logic:
 
             profileInfoButton.setVisibility(View.VISIBLE);
@@ -112,7 +115,8 @@ public class ProfilePopupFragment extends DialogFragment {
             // Create Service for Provider
             createServiceButton.setVisibility(isProvider ? View.VISIBLE : View.GONE);
             createServiceButton.setOnClickListener(v -> openCreateService());
-
+            upgradeButton.setVisibility(isUser ? view.VISIBLE : View.GONE);
+            upgradeButton.setOnClickListener(v -> openUpgrade());
             // Sign in / sign up hidden
             signInButton.setVisibility(View.GONE);
             signUpButton.setVisibility(View.GONE);
@@ -254,6 +258,12 @@ public class ProfilePopupFragment extends DialogFragment {
         transaction.replace(R.id.nav_host_fragment, f);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void openUpgrade(){
+        dismiss();
+        Intent intent = new Intent(getContext(), UpgradeSelectionActivity.class);
+        getContext().startActivity(intent);
     }
 
     private void openBudgetPage() {

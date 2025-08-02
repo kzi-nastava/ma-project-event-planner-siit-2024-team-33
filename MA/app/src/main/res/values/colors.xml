@@ -12,4 +12,5 @@
     <color name="confirm_button">#8f7d4a</color>
     <color name="transparent">#00000000</color>
     <color name="WhiteTransparent">#2FFFFFFF</color>
+    <color name="chopped_red">#D32F2F</color>
 </resources>

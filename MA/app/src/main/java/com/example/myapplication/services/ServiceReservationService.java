@@ -17,7 +17,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class ServiceReservationService {
-    private static final String BASE_URL = Settings.BASE_URL + "/api/reservations/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/services/";
 
     private final ServiceReservationApi serviceReservationApi;
 

@@ -1,7 +1,6 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.dto.PageResponse;
-import com.example.myapplication.dto.eventDTO.EventDetails;
 import com.example.myapplication.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 

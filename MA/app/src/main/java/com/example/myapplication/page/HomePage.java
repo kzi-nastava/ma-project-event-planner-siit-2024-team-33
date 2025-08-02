@@ -3,7 +3,7 @@ package com.example.myapplication.page;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import android.content.Intent;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -159,11 +159,7 @@ public class HomePage extends Fragment {
 
     private void loadTop5Offers(View view) {
         Call<List<MinimalOfferDTO>> call;
-        if(AuthenticationService.isLoggedIn()){
             call =offerService.getTop5Offers();
-        }else{
-            call =offerService.GetTop5OffersUnauthentified();
-        }
         call.enqueue(new Callback<List<MinimalOfferDTO>>() {
             @Override
             public void onResponse(Call<List<MinimalOfferDTO>> call, Response<List<MinimalOfferDTO>> response) {
@@ -203,6 +199,12 @@ public class HomePage extends Fragment {
                 itemTitle.setText(event.getName());
                 itemText.setText(event.getDescription());
                 itemImage.setImageResource(R.drawable.trumpshot);
+
+                cardView.setOnClickListener(v -> {
+                    Intent intent = new Intent(requireContext(), EventDetailsActivity.class);
+                    intent.putExtra("eventId", event.getId());
+                    startActivity(intent);
+                });
 
                 parentLayout.addView(cardView);
             }

@@ -15,12 +15,11 @@ import retrofit2.http.Query;
 
 public interface ReportApi {
 
-    @POST("reports")
-    Call<GetReportDTO> submitReport(
-            @Body PostReportDTO postReportDTO
-    );
+    @POST(".")
+    Call<GetReportDTO> submitReport(@Body PostReportDTO postReportDTO);
 
-    @GET("reports")
+
+    @GET(".")
     Call<PageResponse<GetReportDTO>> getReports(
             @Query("page") int page,
             @Query("size") int size

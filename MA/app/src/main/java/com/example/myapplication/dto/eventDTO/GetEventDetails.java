@@ -9,8 +9,8 @@ public class GetEventDetails {
     private int numOfAttendees;
     private int numOfCurrentlyApplied;
     private String place;
-    private LocalDateTime dateOfEvent;
-    private LocalDateTime endOfEvent;
+    private String dateOfEvent;
+    private String endOfEvent;
     private double latitude;
     private double longitude;
     private MinimalOrganizerDTO minimalOrganizer;
@@ -36,11 +36,11 @@ public class GetEventDetails {
     public String getPlace() { return place; }
     public void setPlace(String place) { this.place = place; }
 
-    public LocalDateTime getDateOfEvent() { return dateOfEvent; }
-    public void setDateOfEvent(LocalDateTime dateOfEvent) { this.dateOfEvent = dateOfEvent; }
+    public String getDateOfEvent() { return dateOfEvent; }
+    public void setDateOfEvent(String dateOfEvent) { this.dateOfEvent = dateOfEvent; }
 
-    public LocalDateTime getEndOfEvent() { return endOfEvent; }
-    public void setEndOfEvent(LocalDateTime endOfEvent) { this.endOfEvent = endOfEvent; }
+    public String getEndOfEvent() { return endOfEvent; }
+    public void setEndOfEvent(String endOfEvent) { this.endOfEvent = endOfEvent; }
 
     public double getLatitude() { return latitude; }
     public void setLatitude(double latitude) { this.latitude = latitude; }

@@ -98,7 +98,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     }
 
     public void updateReviews(List<GetRatingDTO> newReviews) {
-        this.reviews = newReviews;
+        this.reviews.clear();
+        this.reviews.addAll(newReviews);
         notifyDataSetChanged();
     }
 }

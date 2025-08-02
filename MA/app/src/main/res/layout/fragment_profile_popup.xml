@@ -140,6 +140,15 @@
         android:layout_marginTop="8dp" />
 
     <Button
+        android:id="@+id/upgrade_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upgrade profile"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
         android:id="@+id/schedule_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

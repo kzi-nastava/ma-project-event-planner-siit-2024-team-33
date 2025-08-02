@@ -20,11 +20,19 @@
             android:exported="false"
             android:label="@string/title_activity_service_details"
             android:theme="@style/Theme.MyApplication" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="25406576857" />
+        <activity android:name=".page.ProviderUpgradeActivity" />
+        <activity android:name=".page.UpgradeSelectionActivity" />
+
         <activity
             android:name=".page.activity_service_create"
             android:exported="false"
             android:label="@string/title_activity_service_create"
             android:theme="@style/Theme.MyApplication" />
+        <activity android:name=".page.UpgradeActivity"
+            android:exported="false"/>
         <activity
             android:name=".page.MainPageActivity"
             android:exported="false" />
@@ -58,6 +66,8 @@
         <activity
             android:name=".page.LoginActivity"
             android:exported="false" />
+        <activity android:name=".page.EventDetailsActivity"
+            android:exported="true"/>
         <activity
             android:name=".page.SplashScreenActivity"
             android:exported="true" >
