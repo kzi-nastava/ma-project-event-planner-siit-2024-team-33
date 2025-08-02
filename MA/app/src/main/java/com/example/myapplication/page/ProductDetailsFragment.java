@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.component.ImageCarouselFragment;
+import com.example.myapplication.dialog.ProductBookingDialog;
+import com.example.myapplication.dialog.ServiceBookingDialog;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.productDTO.GetProductDTO;
 import com.example.myapplication.models.Availability;
@@ -53,6 +55,7 @@ public class ProductDetailsFragment extends Fragment {
     Button visitProvider;
     Button editBtn;
     Button deleteBtn;
+    Button bookBtn;
 
     ImageButton favoriteButton;
 
@@ -93,6 +96,9 @@ public class ProductDetailsFragment extends Fragment {
         visitProvider = view.findViewById(R.id.btnVisit);
         editBtn = view.findViewById(R.id.btnEditProduct);
         deleteBtn = view.findViewById(R.id.btnDeleteProduct);
+        bookBtn = view.findViewById(R.id.btnBook);
+        bookBtn.setOnClickListener(v -> showBookingDialog());
+        bookBtn.setEnabled(false);
         reviewsSection = view.findViewById(R.id.reviewsSection);
 
         loadData();
@@ -107,6 +113,7 @@ public class ProductDetailsFragment extends Fragment {
                 if(response.isSuccessful() && response.body() != null) {
                     product = response.body();
                     updateTextBoxes();
+                    bookBtn.setEnabled(true);
                     visitProvider.setOnClickListener(v -> {
                         Fragment f = ProviderDetailsFragment.newInstance(product.providerId);
                         FragmentTransaction transaction = requireActivity()
@@ -206,5 +213,15 @@ public class ProductDetailsFragment extends Fragment {
                 .replace(R.id.carouselContainer, carouselFrag)
                 .commit();
         reviewsSection.setOfferId(productId);
+    }
+
+    private void showBookingDialog() {
+        if (product == null) {
+            Toast.makeText(getContext(), "Product data incomplete.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ProductBookingDialog dialog = ProductBookingDialog.newInstance(productId);
+        dialog.show(getParentFragmentManager(), "bookingDialog");
     }
 }
