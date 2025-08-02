@@ -11,14 +11,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.ProfilePopupFragment;
 import com.example.myapplication.R;
+import com.example.myapplication.services.ChatWebsocketService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainPageActivity extends AppCompatActivity {
+    ChatWebsocketService chatWebsocketService = ChatWebsocketService.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +64,25 @@ public class MainPageActivity extends AppCompatActivity {
         int screenWidth = metrics.widthPixels;
         int drawerWidth = (int) (screenWidth * 0.9);
 
+        DrawerLayout parentDrawer = findViewById(R.id.main);
+        chatWebsocketService.getOpenChatTarget().observe(this,
+                chatContactDTO -> {parentDrawer.openDrawer(GravityCompat.START);}
+                );
+
         View drawer = findViewById(R.id.left_drawer);
         ViewGroup.LayoutParams params = drawer.getLayoutParams();
         params.width = drawerWidth;
         drawer.setLayoutParams(params);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        ChatFragment chatFragment = new ChatFragment();
+        fragmentTransaction.replace(R.id.left_drawer, chatFragment);
+        fragmentTransaction.commit();
     }
 
     private boolean loadFragment(Fragment fragment) {
-        // Replace the current Fragment with the new one
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.nav_host_fragment, fragment)

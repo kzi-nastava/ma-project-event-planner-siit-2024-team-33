@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,7 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.component.ImageCarouselFragment;
+import com.example.myapplication.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.dto.providerDTO.ProviderDetailsDTO;
+import com.example.myapplication.services.ChatWebsocketService;
 import com.example.myapplication.services.ProviderService;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import retrofit2.Response;
 
 public class ProviderDetailsFragment extends Fragment {
     private final ProviderService providerService = new ProviderService();
+    private final ChatWebsocketService chatWebsocketService = ChatWebsocketService.getInstance();
 
     private Integer providerId;
     private ProviderDetailsDTO provider;
@@ -35,6 +39,8 @@ public class ProviderDetailsFragment extends Fragment {
     TextView tvDescription;
     TextView tvCity;
     TextView tvPhone;
+
+    Button chatBtn;
 
 
     public ProviderDetailsFragment() {
@@ -69,6 +75,13 @@ public class ProviderDetailsFragment extends Fragment {
         tvEmail = view.findViewById(R.id.tvEmail);
         tvResidency = view.findViewById(R.id.tvResidency);
         tvDescription = view.findViewById(R.id.tvDescription);
+        chatBtn = view.findViewById(R.id.btnChat);
+        chatBtn.setOnClickListener(v -> {
+            ChatContactDTO dto = new ChatContactDTO();
+            dto.email = provider.email;
+            dto.username = provider.name;
+            chatWebsocketService.openChatWith(dto);
+        });
         loadData();
 
         return view;

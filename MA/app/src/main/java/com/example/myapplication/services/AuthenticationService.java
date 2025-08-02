@@ -19,6 +19,7 @@ import retrofit2.Response;
 
 public class AuthenticationService {
     private static AuthService authService;
+    private static ChatWebsocketService chatWebsocketService;
     private static SharedPreferences prefs;
     private static Context context;
     private static final String PREFS_NAME = "auth";
@@ -40,6 +41,9 @@ public class AuthenticationService {
                 if (loginResponse.isSuccessful() && loginResponse.body() != null) {
                     String token = loginResponse.body().getAccessToken();
                     prefs.edit().putString(KEY_JWT, token).apply();
+
+                    chatWebsocketService = ChatWebsocketService.getInstance();
+                    chatWebsocketService.connect();
 
                     UserApi userApi = ApiClient.getClient(context).create(UserApi.class);
                     userApi.getCurrentUser().enqueue(new Callback<GetUserDTO>() {
@@ -98,5 +102,7 @@ public class AuthenticationService {
                 .remove(KEY_ROLE)
                 .remove("user")
                 .apply();
+        chatWebsocketService = ChatWebsocketService.getInstance();
+        chatWebsocketService.disconnect();
     }
 }
