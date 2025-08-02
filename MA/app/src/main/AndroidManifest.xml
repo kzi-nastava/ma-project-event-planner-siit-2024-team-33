@@ -26,6 +26,19 @@
             android:value="25406576857" />
         <activity android:name=".page.ProviderUpgradeActivity" />
         <activity android:name=".page.UpgradeSelectionActivity" />
+        <activity android:name=".page.VerificationActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="localhost"
+                    android:port="8080"
+                    android:pathPrefix="/api/verify" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".page.activity_service_create"
