@@ -74,6 +74,17 @@ public class ProvidersOffersFragment extends Fragment {
             }
         });
 
+        pricesButton.setOnClickListener(v -> {
+            Fragment f = ProvidersPrices.newInstance();
+            FragmentTransaction transaction = requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction();
+
+            transaction.replace(R.id.nav_host_fragment, f);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
         return view;
     }
 
