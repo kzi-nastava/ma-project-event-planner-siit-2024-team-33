@@ -34,7 +34,7 @@
         <activity android:name=".page.activity_service_create" android:exported="false"
             android:label="@string/title_activity_service_create"
             android:theme="@style/Theme.MyApplication" />
-        
+
         <activity android:name=".page.MyInvitationsActivity" />
         <activity android:name=".page.MainPageActivity" android:exported="false"/>
         <activity android:name=".page.ProfileTypeActivity" android:exported="false"/>
@@ -57,7 +57,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".page.RegisterActivity" android:exported="true">
+        <activity android:name=".page.QuickRegistrationActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

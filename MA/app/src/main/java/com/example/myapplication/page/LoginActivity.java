@@ -44,20 +44,19 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Uri data = getIntent().getData();
+
         emailInput = findViewById(R.id.email_input);
         passwordInput = findViewById(R.id.password_input);
         loginButton = findViewById(R.id.login_button);
         registerText = findViewById(R.id.login_register_text);
 
-
-        Uri data = getIntent().getData();
         if (data != null) {
             String emailFromLink = data.getQueryParameter("email");
             if (emailFromLink != null) {
                 emailInput.setText(emailFromLink);
             }
         }
-
         loginButton.setOnClickListener(v -> performLogin());
         registerText.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, ProfileTypeActivity.class);

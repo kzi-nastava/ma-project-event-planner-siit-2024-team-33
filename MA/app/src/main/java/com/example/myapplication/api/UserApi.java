@@ -26,6 +26,7 @@ public interface UserApi {
     @POST("update/profile")
     Call<UpdatedUser> updateUser(@Body UpdateUser updateUser);
 
+
 //    @POST("/api/users/update/password")
 //    Call<Void> updatePassword(@Body UpdatePassword updatePassword);
 

@@ -1,6 +1,8 @@
 package com.example.myapplication.services;
 
 import com.example.myapplication.api.UserApi;
+import com.example.myapplication.dto.userDTO.RegisterUser;
+import com.example.myapplication.dto.userDTO.RegisteredUser;
 import com.example.myapplication.models.UpgradeRequest;
 import com.example.myapplication.models.UpgradeUser;
 import com.example.myapplication.utils.Settings;
@@ -17,7 +19,9 @@ public class UsersService {
     public Call<String> blockUser(@Path("blockedEmail") String blockedEmail){
         return usersApi.blockUser(blockedEmail);
     }
-
+    public Call<RegisteredUser> signup(RegisterUser registerUser) {
+        return usersApi.createUser(registerUser);
+    }
     public Call<String> unblockUser(@Path("blockedEmail") String blockedEmail){
         return usersApi.unblockUser(blockedEmail);
     }

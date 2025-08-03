@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8DDB5"
+    android:paddingTop="40dp"
+    android:paddingBottom="40dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quick Register."
+            android:textColor="#788AA3"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Email (readonly) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email."
+            android:fontFamily="@font/inter_18pt_medium"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#1B1B1B"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Email"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColorHint="@color/novi_sad_torquoise"
+            android:layout_marginHorizontal="20dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:enabled="false"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name."
+            android:fontFamily="@font/inter_18pt_medium"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#1B1B1B"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/name_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Name"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColorHint="@color/novi_sad_torquoise"
+            android:layout_marginHorizontal="20dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Surname -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Surname."
+            android:fontFamily="@font/inter_18pt_medium"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#1B1B1B"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/surname_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Surname"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColorHint="@color/novi_sad_torquoise"
+            android:layout_marginHorizontal="20dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Password -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password."
+            android:fontFamily="@font/inter_18pt_medium"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#1B1B1B"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColorHint="@color/novi_sad_torquoise"
+            android:layout_marginHorizontal="20dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Confirm Password -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password."
+            android:fontFamily="@font/inter_18pt_medium"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#1B1B1B"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/confirm_password_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColorHint="@color/novi_sad_torquoise"
+            android:layout_marginHorizontal="20dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Profile Picture Label -->
+        <TextView
+            android:id="@+id/profile_picture_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile picture."
+            android:fontFamily="@font/inter_18pt_medium"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#1B1B1B"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Confirm"
+            android:textSize="24sp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:padding="12dp"
+            android:backgroundTint="@color/dreadhead_blue"
+            android:textColor="@color/superior_white"
+            android:fontFamily="@font/inter_28pt_bold" />
+
+    </LinearLayout>
+
+</ScrollView>
