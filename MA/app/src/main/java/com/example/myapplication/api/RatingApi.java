@@ -25,11 +25,33 @@ public interface RatingApi {
             @Query("offerId") int offerId
     );
 
-    @GET("events/{eventId}")
-    Call<List<EventRatingDTO>> getEventRatingsByEvent(@Path("eventId") int eventId);
+    @POST("ratings/events")
+    Call<EventRatingDTO> submitEventRating(
+            @Body EventRatingDTO dto,
+            @Query("eventId") int eventId
+    );
 
-    @POST("/api/ratings/events")
-    Call<EventRatingDTO> submitEventRating(@Body EventRatingDTO dto, @Query("eventId") int eventId);
+    @GET("ratings/events/{eventId}")
+    Call<List<EventRatingDTO>> getEventRatingsByEvent(
+            @Path("eventId") int eventId
+    );
+
+    @GET("ratings/events")
+    Call<PageResponse<EventRatingDTO>> getAllEventRatings(
+            @Query("page") int page,
+            @Query("size") int size
+    );
+
+    @PUT("ratings/events/approve/{ratingId}")
+    Call<Void> approveEventRating(
+            @Path("ratingId") int ratingId
+    );
+
+    @DELETE("ratings/events/{ratingId}")
+    Call<Void> deleteEventRating(
+            @Path("ratingId") int ratingId
+    );
+
     @PUT("ratings/approve/{commentId}")
     Call<Void> approveRating(
             @Path("commentId") int commentId
@@ -45,12 +67,6 @@ public interface RatingApi {
             @Path("offerId") int offerId
     );
 
-    @GET("/api/ratings/events")
-    Call<PageResponse<EventRatingDTO>> getAllEventRatings(
-            @Query("page") int page,
-            @Query("size") int size
-    );
-
     @GET("ratings")
     Call<PageResponse<GetRatingDTO>> getAllRatings(
             @Query("page") int page,
@@ -60,5 +76,10 @@ public interface RatingApi {
     @GET("ratings/{ratingId}")
     Call<Rating> getRatingById(
             @Path("ratingId") int ratingId
+    );
+
+    @GET("ratings/provider/{providerId}")
+    Call<List<GetRatingDTO>> getRatingsByProvider(
+            @Path("providerId") int providerId
     );
 }

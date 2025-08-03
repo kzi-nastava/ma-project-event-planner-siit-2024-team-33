@@ -18,7 +18,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class ReportService {
-    private static final String BASE_URL = Settings.BASE_URL + "/api/reports/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/reports";
     private final ReportApi reportApi;
 
 

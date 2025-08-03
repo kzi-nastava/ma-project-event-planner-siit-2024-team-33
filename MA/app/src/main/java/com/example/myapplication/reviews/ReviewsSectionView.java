@@ -117,11 +117,11 @@ public class ReviewsSectionView extends LinearLayout {
         int size = 5;
         adapter.updateReviews(new ArrayList<>());
 
-        ratingService.getAllEventRatings(page, size).enqueue(new retrofit2.Callback<PageResponse<EventRatingDTO>>() {
+        ratingService.getEventRatingsByEvent(eventId).enqueue(new retrofit2.Callback<List<EventRatingDTO>>() {
             @Override
-            public void onResponse(retrofit2.Call<PageResponse<EventRatingDTO>> call, retrofit2.Response<PageResponse<EventRatingDTO>> response) {
+            public void onResponse(retrofit2.Call<List<EventRatingDTO>> call, retrofit2.Response<List<EventRatingDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<EventRatingDTO> eventRatings = response.body().getContent();
+                    List<EventRatingDTO> eventRatings = response.body();
                     List<GetRatingDTO> converted = convertEventRatings(eventRatings);
                     adapter.updateReviews(converted);
                 } else {
@@ -130,7 +130,7 @@ public class ReviewsSectionView extends LinearLayout {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<PageResponse<EventRatingDTO>> call, Throwable t) {
+            public void onFailure(retrofit2.Call<List<EventRatingDTO>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to load event ratings: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

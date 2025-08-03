@@ -22,6 +22,7 @@ public class RatingService {
         ratingApi = ApiClient.getRetrofit(BASE_URL).create(RatingApi.class);
     }
 
+
     public Call<GetRatingDTO> submitRating(PostRatingDTO postRatingDTO, int offerId) {
         return ratingApi.submitRating(postRatingDTO, offerId);
     }
