@@ -44,6 +44,12 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        emailInput = findViewById(R.id.email_input);
+        passwordInput = findViewById(R.id.password_input);
+        loginButton = findViewById(R.id.login_button);
+        registerText = findViewById(R.id.login_register_text);
+
+
         Uri data = getIntent().getData();
         if (data != null) {
             String emailFromLink = data.getQueryParameter("email");
@@ -51,10 +57,6 @@ public class LoginActivity extends AppCompatActivity {
                 emailInput.setText(emailFromLink);
             }
         }
-        emailInput = findViewById(R.id.email_input);
-        passwordInput = findViewById(R.id.password_input);
-        loginButton = findViewById(R.id.login_button);
-        registerText = findViewById(R.id.login_register_text);
 
         loginButton.setOnClickListener(v -> performLogin());
         registerText.setOnClickListener(v -> {
