@@ -20,16 +20,11 @@ import com.example.myapplication.dialog.ServiceBookingDialog;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.serviceDTO.ServiceDetailsDTO;
 import com.example.myapplication.reviews.ReviewsSectionView;
-import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.FavoritesService;
 import com.example.myapplication.services.ServiceService;
 import com.example.myapplication.services.UsersService;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ServiceDetailsFragment extends Fragment {
     private ReviewsSectionView reviewsSection;
@@ -40,7 +35,6 @@ public class ServiceDetailsFragment extends Fragment {
     private Integer serviceId;
     private ServiceDetailsDTO service;
     private Boolean isFavorite;
-
 
     TextView tvServiceName;
     TextView valueProvider;
@@ -59,6 +53,7 @@ public class ServiceDetailsFragment extends Fragment {
     Button editBtn;
     Button deleteBtn;
     Button bookBtn;
+    Button cancelationBtn;
     ImageButton favoriteButton;
 
     public ServiceDetailsFragment() {
@@ -98,7 +93,7 @@ public class ServiceDetailsFragment extends Fragment {
         valueDescription = view.findViewById(R.id.valueDescription);
         containerValidTypes = view.findViewById(R.id.containerValidTypes);
         favoriteButton = view.findViewById(R.id.btnFavorite);
-        favoriteButton.setOnClickListener(v -> {toggleIsFavorite();});
+        favoriteButton.setOnClickListener(v -> toggleIsFavorite());
         visitProvider = view.findViewById(R.id.btnVisit);
         editBtn = view.findViewById(R.id.btnEditService);
         editBtn.setOnClickListener(v -> editClicked());
@@ -108,12 +103,21 @@ public class ServiceDetailsFragment extends Fragment {
         bookBtn = view.findViewById(R.id.btnBook);
         bookBtn.setOnClickListener(v -> showBookingDialog());
         bookBtn.setEnabled(false);
+
+        cancelationBtn = view.findViewById(R.id.btn_cancel_reservation);
+        cancelationBtn.setVisibility(View.VISIBLE);
+        cancelationBtn.setOnClickListener(v -> {
+            // Just open dialog, dialog itself loads reservations
+            CancelReservationDialog dialog = CancelReservationDialog.newInstance(serviceId);
+            dialog.show(getParentFragmentManager(), "cancelReservationDialog");
+        });
+
         loadData();
 
         return view;
     }
 
-    public void editClicked(){
+    public void editClicked() {
         Fragment f = CreateServiceFragment.newInstance(serviceId);
         FragmentTransaction transaction = requireActivity()
                 .getSupportFragmentManager()
@@ -124,32 +128,29 @@ public class ServiceDetailsFragment extends Fragment {
         transaction.commit();
     }
 
-    public void deleteClicked(){
-        serviceService.deleteService(serviceId).enqueue(new Callback<Void>() {
+    public void deleteClicked() {
+        serviceService.deleteService(serviceId).enqueue(new retrofit2.Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
+            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Service Deleted", Toast.LENGTH_SHORT).show();
                     getParentFragmentManager().popBackStackImmediate();
-                }
-                else
+                } else
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void loadData(){
-        serviceService.getServiceDetails(serviceId).enqueue(new Callback<ServiceDetailsDTO>() {
+    public void loadData() {
+        serviceService.getServiceDetails(serviceId).enqueue(new retrofit2.Callback<ServiceDetailsDTO>() {
             @Override
-            public void onResponse(Call<ServiceDetailsDTO> call, Response<ServiceDetailsDTO> response) {
-                if(response.isSuccessful() && response.body() != null) {
-                    service = response.body();
-                    updateTextBoxes();
+            public void onResponse(retrofit2.Call<ServiceDetailsDTO> call, retrofit2.Response<ServiceDetailsDTO> response) {
+                if (response.isSuccessful() && response.body() != null) {
                     service = response.body();
                     updateTextBoxes();
                     bookBtn.setEnabled(true);
@@ -163,61 +164,59 @@ public class ServiceDetailsFragment extends Fragment {
                         transaction.addToBackStack(null);
                         transaction.commit();
                     });
-                }
-                else
+                } else
                     Toast.makeText(getContext(), "Error loading Service :(", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<ServiceDetailsDTO> call, Throwable t) {
+            public void onFailure(retrofit2.Call<ServiceDetailsDTO> call, Throwable t) {
                 Toast.makeText(getContext(), "Error loading Service :(", Toast.LENGTH_SHORT).show();
             }
         });
         loadIsFavorite();
     }
 
-    public void loadIsFavorite(){
-        favoritesService.isOfferFavorite(serviceId).enqueue(new Callback<Boolean>() {
+    public void loadIsFavorite() {
+        favoritesService.isOfferFavorite(serviceId).enqueue(new retrofit2.Callback<Boolean>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if(response.isSuccessful() && response.body() != null) {
-                    if(response.body())
+            public void onResponse(retrofit2.Call<Boolean> call, retrofit2.Response<Boolean> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body())
                         favoriteButton.setImageResource(android.R.drawable.btn_star_big_on);
                     else
                         favoriteButton.setImageResource(android.R.drawable.btn_star_big_off);
                     isFavorite = response.body();
-                }
-                else
+                } else
                     Toast.makeText(getContext(), "Error loading favorite :(", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Boolean> call, Throwable t) {
                 Toast.makeText(getContext(), "Error loading favorite :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void toggleIsFavorite(){
-        Callback<Void> reloadCallback = new Callback<Void>() {
+    public void toggleIsFavorite() {
+        retrofit2.Callback<Void> reloadCallback = new retrofit2.Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
                 loadIsFavorite();
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
                 Toast.makeText(getContext(), "Error toggling favorite :(", Toast.LENGTH_SHORT).show();
             }
         };
 
-        if(isFavorite)
+        if (isFavorite)
             favoritesService.removeOfferFromFavorites(serviceId).enqueue(reloadCallback);
         else
             favoritesService.addOfferToFavorites(serviceId).enqueue(reloadCallback);
     }
 
-    public void updateTextBoxes(){
+    public void updateTextBoxes() {
         tvServiceName.setText(service.name);
         valueProvider.setText(service.providerName);
         valueCategory.setText(service.category != null ? service.category.name : "—");
@@ -238,7 +237,7 @@ public class ServiceDetailsFragment extends Fragment {
             chip.setText(event.name);
             chip.setPadding(24, 12, 24, 12);
             chip.setTextColor(getResources().getColor(R.color.nonchalant_blue));
-            chip.setBackgroundResource(R.drawable.rounded_corners); // Use drawable with rounded bg
+            chip.setBackgroundResource(R.drawable.rounded_corners);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT

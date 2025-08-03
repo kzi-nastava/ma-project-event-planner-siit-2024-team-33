@@ -54,6 +54,16 @@
                 android:textSize="16sp" />
 
             <Button
+                android:id="@+id/btn_cancel_reservation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dreadhead_blue"
+                android:text="cancel"
+                android:textSize="16sp" />
+
+            <Button
                 android:id="@+id/btnChat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
