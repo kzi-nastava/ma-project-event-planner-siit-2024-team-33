@@ -63,10 +63,6 @@ public class ReviewsSectionView extends LinearLayout {
                 reportDialog.show();
             }
 
-            @Override
-            public void onChat(GetRatingDTO review) {
-                Toast.makeText(getContext(), "Chat with majmuneeeee", Toast.LENGTH_SHORT).show();
-            }
         });
 
         reviewList.setLayoutManager(new LinearLayoutManager(getContext()));

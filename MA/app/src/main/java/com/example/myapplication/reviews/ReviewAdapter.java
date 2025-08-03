@@ -25,7 +25,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public interface OnReviewActionListener {
         void onReport(GetRatingDTO review);
-        void onChat(GetRatingDTO review);
     }
 
     public ReviewAdapter(List<GetRatingDTO> reviews, OnReviewActionListener listener) {
@@ -71,7 +70,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
                 return true;
             });
             popup.getMenu().add("Chat").setOnMenuItemClickListener(item -> {
-                listener.onChat(review);
                 return true;
             });
             popup.show();

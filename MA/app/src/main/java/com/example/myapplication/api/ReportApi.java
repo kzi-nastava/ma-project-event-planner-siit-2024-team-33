@@ -15,26 +15,26 @@ import retrofit2.http.Query;
 
 public interface ReportApi {
 
-    @POST("/")
+    @POST("/api/reports")
     Call<GetReportDTO> submitReport(@Body PostReportDTO postReportDTO);
 
 
-    @GET("/")
+    @GET("/api/reports")
     Call<PageResponse<GetReportDTO>> getReports(
             @Query("page") int page,
             @Query("size") int size
     );
-    @GET("/{reportId}")
+    @GET("/api/reports/{reportId}")
     Call<GetReportDTO> getReport(
             @Path("reportId") int reportId
     );
 
-    @POST("/suspend/{userId}")
+    @POST("/api/reports/suspend/{userId}")
     Call<String> suspendUser(
             @Path("userId") Integer userId
     );
 
-    @GET("/suspension-time/{userId}")
+    @GET("/api/reports/suspension-time/{userId}")
     Call<Long> getSuspensionTimeRemaining(
             @Path("userId") Integer userId
     );
