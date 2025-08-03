@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -15,89 +19,93 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
-        tools:targetApi="31" >
-        <activity
-            android:name=".page.ServiceDetailsActivity"
+        tools:targetApi="31">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBwNp4PhqhesGe-CfDLoba3Fi3R1KqmeJM" />
+
+        <!-- Activities -->
+
+        <activity android:name=".page.ServiceDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_service_details"
             android:theme="@style/Theme.MyApplication" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="25406576857" />
-        <activity android:name=".page.ProviderUpgradeActivity" />
-        <activity android:name=".page.UpgradeSelectionActivity" />
-        <activity android:name=".page.VerificationActivity" android:exported="true">
+
+        <activity android:name=".page.ProviderUpgradeActivity" android:exported="false"/>
+        <activity android:name=".page.UpgradeSelectionActivity" android:exported="false"/>
+        <activity android:name=".page.UpgradeActivity" android:exported="false"/>
+        <activity android:name=".page.activity_service_create" android:exported="false"
+            android:label="@string/title_activity_service_create"
+            android:theme="@style/Theme.MyApplication" />
+
+        <activity android:name=".page.MainPageActivity" android:exported="false"/>
+        <activity android:name=".page.ProfileTypeActivity" android:exported="false"/>
+        <activity android:name=".OrgActivityMandatory" android:exported="false"/>
+        <activity android:name=".OrgActivityOptional" android:exported="false"/>
+        <activity android:name=".page.EventPlannerActivityOptional" android:exported="false"/>
+        <activity android:name=".page.EventPlannerActivityMandatory" android:exported="false"/>
+        <activity android:name=".reports.ReportsActivity" android:exported="false"/>
+        <activity android:name=".page.CommentsActivity" android:exported="false"/>
+        <activity android:name=".ProfileTypeFragment" android:exported="false"/>
+
+        <activity android:name=".page.EventDetailsActivity" android:exported="true"/>
+
+        <activity android:name=".page.LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="myapp" android:host="invitation/login" />
+            </intent-filter>
+        </activity>
 
+        <activity android:name=".page.RegisterActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="myapp"
+                    android:host="invitation"
+                    android:pathPrefix="/register" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".page.VerificationActivity" android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="https"
+                    android:host="myapp.example.com"
+                    android:pathPrefix="/invitation"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
                 <data
                     android:scheme="http"
                     android:host="localhost"
                     android:port="8080"
-                    android:pathPrefix="/api/verify" />
+                    android:pathPrefix="/api/verify"/>
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".page.activity_service_create"
-            android:exported="false"
-            android:label="@string/title_activity_service_create"
-            android:theme="@style/Theme.MyApplication" />
-        <activity android:name=".page.UpgradeActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".page.MainPageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".page.ProfileTypeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OrgActivityMandatory"
-            android:exported="false" />
-        <activity
-            android:name=".OrgActivityOptional"
-            android:exported="false" />
-        <activity
-            android:name=".page.EventPlannerActivityOptional"
-            android:exported="false" />
-        <activity
-            android:name=".page.EventPlannerActivityMandatory"
-            android:exported="false" />
-        <activity
-            android:name=".reports.ReportsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".page.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".page.CommentsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileTypeFragment"
-            android:exported="false" />
-        <activity
-            android:name=".page.LoginActivity"
-            android:exported="false" />
-        <activity android:name=".page.EventDetailsActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".page.SplashScreenActivity"
-            android:exported="true" >
+        <activity android:name=".page.SplashScreenActivity" android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>

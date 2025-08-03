@@ -19,11 +19,11 @@ import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.NotificationService;
 import com.example.myapplication.services.RatingService;
 import com.example.myapplication.services.UsersService;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +37,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private int eventId;
     private GetEventDetails event;
-    private GoogleMap mMap;
+    private MapView osmMap;
 
     private TextView tvEventTitle, tvEventDescription, tvOrganizer, tvLocation, tvStartTime, tvEndTime, tvAttendees, tvEventType;
     private ImageView btnFavorite;
@@ -131,20 +131,23 @@ public class EventDetailsActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    // Map setup
                     double latitude = res.getLatitude();
                     double longitude = res.getLongitude();
-                    SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.mapContainer, mapFragment)
-                            .commit();
 
-                    mapFragment.getMapAsync(googleMap -> {
-                        mMap = googleMap;
-                        LatLng location = new LatLng(latitude, longitude);
-                        mMap.addMarker(new MarkerOptions().position(location).title("Event Location"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14));
-                    });
+                    osmMap = findViewById(R.id.osmMap);
+
+                    Configuration.getInstance().setUserAgentValue(getPackageName());
+
+                    osmMap.setMultiTouchControls(true);
+                    osmMap.getController().setZoom(14.0);
+                    GeoPoint location = new GeoPoint(latitude, longitude);
+                    osmMap.getController().setCenter(location);
+
+                    Marker marker = new Marker(osmMap);
+                    marker.setPosition(location);
+                    marker.setTitle("Event Location");
+                    osmMap.getOverlays().add(marker);
+
 
                 } else {
                     Toast.makeText(EventDetailsActivity.this, "Failed to load event.", Toast.LENGTH_SHORT).show();
@@ -158,6 +161,13 @@ public class EventDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    @Override
+    protected void onDestroy() {
+        if (osmMap != null) {
+            osmMap.onDetach();
+        }
+        super.onDestroy();
     }
 
     private void fetchRatings() {

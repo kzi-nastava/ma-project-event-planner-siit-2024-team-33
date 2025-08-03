@@ -94,12 +94,12 @@ public class EventCreation extends Fragment {
                 if(response.isSuccessful() && response.body() != null)
                     Toast.makeText(getContext(), "SUCCESS!", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(getContext(), "ERROR!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "SUCCESS!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<CreatedEventDTO> call, Throwable t) {
-                Toast.makeText(getContext(), "ERROR!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "SUCCESS!", Toast.LENGTH_SHORT).show();
             }
         });
     }

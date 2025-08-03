@@ -1,6 +1,7 @@
 package com.example.myapplication.page;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -43,7 +44,13 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        Uri data = getIntent().getData();
+        if (data != null) {
+            String emailFromLink = data.getQueryParameter("email");
+            if (emailFromLink != null) {
+                emailInput.setText(emailFromLink);
+            }
+        }
         emailInput = findViewById(R.id.email_input);
         passwordInput = findViewById(R.id.password_input);
         loginButton = findViewById(R.id.login_button);
