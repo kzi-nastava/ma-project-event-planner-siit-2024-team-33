@@ -264,7 +264,7 @@ public class ServiceDetailsFragment extends Fragment {
         }
 
         ServiceBookingDialog dialog = ServiceBookingDialog.newInstance(
-                serviceId,
+                service.versionId,
                 service.minLengthInMins,
                 service.maxLengthInMins
         );
