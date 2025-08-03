@@ -1,9 +1,13 @@
 package com.example.myapplication.dto.reportDTO;
 
+import com.google.gson.annotations.SerializedName;
+
 public class GetReportDTO {
     private Integer id;
     private String content;
+    @SerializedName("reporter")
     private String author;
+    @SerializedName("reported")
     private String receiver;
     private String dateOfSending;
     private Integer receiverId;

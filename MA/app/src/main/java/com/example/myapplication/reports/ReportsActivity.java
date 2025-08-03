@@ -2,6 +2,7 @@ package com.example.myapplication.reports;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -74,6 +75,9 @@ public class ReportsActivity extends Activity {
 
                     int totalPages = pageResponse.getTotalPages();
                     reports.clear();
+                    String json = response.body().toString();
+
+                    Log.d("API_RESPONSE", json);
 
 
                     reports.addAll(pageResponse.getContent());

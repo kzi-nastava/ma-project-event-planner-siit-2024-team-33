@@ -49,6 +49,30 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
         holder.reportedUser.setText("Reported User: " + report.getReceiver());
         holder.userEmail.setText("Date Sent: " + report.getDateOfSending());
 
+        reportService.getSuspensionTimeRemaining(report.getReceiverId()).enqueue(new Callback<Long>() {
+            @Override
+            public void onResponse(Call<Long> call, Response<Long> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Long suspensionHours = response.body();
+                    if (suspensionHours == 0) {
+                        holder.suspensionTimeText.setText("NOT BANNED");
+                    } else {
+                        holder.suspensionTimeText.setText("Suspension: " + suspensionHours + "h");
+                    }
+                    holder.suspensionTimeText.setVisibility(View.VISIBLE);
+                } else {
+                    holder.suspensionTimeText.setText("NOT BANNED");
+                    holder.suspensionTimeText.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Long> call, Throwable t) {
+                holder.suspensionTimeText.setText("NOT BANNED");
+                holder.suspensionTimeText.setVisibility(View.VISIBLE);
+            }
+        });
+
         holder.banUserButton.setOnClickListener(v -> {
             reportService.suspendUser(report.getReceiverId()).enqueue(new Callback<String>() {
                 @Override
@@ -93,7 +117,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
 
     static class ReportViewHolder extends RecyclerView.ViewHolder {
 
-        TextView reportTitle, reportDescription, reportedUser, userEmail;
+        TextView reportTitle, reportDescription, reportedUser, userEmail, suspensionTimeText;
         Button banUserButton, unbanUserButton;
 
         public ReportViewHolder(@NonNull View itemView) {
@@ -102,6 +126,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
             reportDescription = itemView.findViewById(R.id.reportDescription);
             reportedUser = itemView.findViewById(R.id.reportedUser);
             userEmail = itemView.findViewById(R.id.userEmail);
+            suspensionTimeText = itemView.findViewById(R.id.suspensionTimeText);  // <<<<< HERE
             banUserButton = itemView.findViewById(R.id.banUserButton);
             unbanUserButton = itemView.findViewById(R.id.unbanUserButton);
         }
