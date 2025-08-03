@@ -1,35 +1,39 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.dto.PageResponse;
+import com.example.myapplication.dto.eventDTO.CreateEventDTO;
+import com.example.myapplication.dto.eventDTO.CreatedEventDTO;
 import com.example.myapplication.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface EventApi {
-    @GET("organizer/{id}")
+    @GET("api/events/organizer/{id}")
     Call<List<MinimalEventDTO>> getEventsByOrganizer(@Path("id") Integer organizerId);
 
-    @GET("organizer/updated")
+    @GET("api/events/organizer/updated")
     Call<List<MinimalEventDTO>> getEventsForOrganizerUpdated();
 
-    @GET("top5")
+    @GET("api/events/top5")
     Call<List<MinimalEventDTO>> getTop5Events();
 
-    @GET("{id}")
+    @GET("api/events/{id}")
     Call<GetEventDetails> getEventDetails(@Path("id") int eventId);
-    @GET("rest")
+    @GET("api/events/rest")
     Call<List<MinimalEventDTO>> getAllEvents();
-    @GET("service/{serviceId}")
+    @GET("api/events/service/{serviceId}")
     Call<List<MinimalEventDTO>> getEventsByService(@Path("serviceId") int serviceId);
-    @GET("/paginated")
+    @GET("api/events/paginated")
     Call<PageResponse<MinimalEventDTO>> getPaginatedEvents(@Query("page") int page, @Query("size") int size);
-    @GET("filter")
+    @GET("api/events/filter")
     Call<PageResponse<MinimalEventDTO>> getEventList(
             @Query("name") String name,
             @Query("location") String location,
@@ -40,4 +44,7 @@ public interface EventApi {
             @Query("page") int page,
             @Query("size") int size
     );
+
+    @POST("api/events")
+    Call<CreatedEventDTO> createEvent(@Body CreateEventDTO data);
 }

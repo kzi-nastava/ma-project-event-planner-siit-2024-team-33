@@ -24,6 +24,7 @@ import com.example.myapplication.models.AuthentifiedUser;
 import com.example.myapplication.page.BudgetPage;
 import com.example.myapplication.page.CommentsActivity;
 import com.example.myapplication.page.CreateServiceFragment;
+import com.example.myapplication.page.EventCreation;
 import com.example.myapplication.page.LoginActivity;
 import com.example.myapplication.page.OfferCategoriesFragment;
 import com.example.myapplication.page.ProfilePage;
@@ -88,6 +89,7 @@ public class ProfilePopupFragment extends DialogFragment {
 
             // Create event only for Organizer
             createEventButton.setVisibility(isOrganizer ? View.VISIBLE : View.GONE);
+            createEventButton.setOnClickListener(v -> openCreateEvents());
 
             budgetButton.setVisibility(isOrganizer ? View.VISIBLE: View.GONE);
             budgetButton.setOnClickListener(v -> openBudgetPage());
@@ -313,6 +315,18 @@ public class ProfilePopupFragment extends DialogFragment {
     private void openProvidersOffers(){
         dismiss();
         Fragment f = ProvidersOffersFragment.newInstance();
+        FragmentTransaction transaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void openCreateEvents(){
+        dismiss();
+        Fragment f = EventCreation.newInstance();
         FragmentTransaction transaction = requireActivity()
                 .getSupportFragmentManager()
                 .beginTransaction();
