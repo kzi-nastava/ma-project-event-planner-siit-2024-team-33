@@ -1,7 +1,10 @@
 package com.example.myapplication.page;
 
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.util.Log;
@@ -20,10 +23,16 @@ import com.example.myapplication.R;
 import com.example.myapplication.ShowProfileFragment;
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.dto.invitationDTO.SimpleInvitation;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.EventService;
+import com.example.myapplication.services.InvitationService;
+import com.example.myapplication.services.NotificationWebSocketClient;
 import com.example.myapplication.services.OfferService;
+import com.example.myapplication.utils.NotificationUtils;
+
+import org.java_websocket.client.WebSocketClient;
 
 import java.util.List;
 import retrofit2.Call;
@@ -44,7 +53,7 @@ public class HomePage extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private GestureDetector gestureDetector;
-
+    private NotificationWebSocketClient notificationWebSocketClient;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -53,6 +62,7 @@ public class HomePage extends Fragment {
     private List<MinimalEventTypeDTO> eventTypes;
     private List<MinimalEventDTO> events;
     private List<MinimalOfferDTO> offers;
+    private InvitationService invitationService;
 
     public HomePage() {
         // Required empty public constructor
@@ -81,8 +91,23 @@ public class HomePage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         eventService = new EventService();
         offerService = new OfferService();
+        invitationService = new InvitationService();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                        1001
+                );
+            }
+        }
+
+        NotificationUtils.createNotificationChannel(requireContext());
         gestureDetector = new GestureDetector(getContext(), new GestureListener());
+        String token = AuthenticationService.getJwtToken();
+        notificationWebSocketClient = new NotificationWebSocketClient(requireContext());
+        notificationWebSocketClient.connect(token);
 
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -93,7 +118,9 @@ public class HomePage extends Fragment {
         loadTop5Events(view);
         loadTop5Offers(view);
         //addingProductCards(view);
-
+        if (AuthenticationService.isLoggedIn()) {
+            checkPendingInvitations();
+        }
         return view;
     }
 
@@ -256,4 +283,39 @@ public class HomePage extends Fragment {
         params.setMargins(marginInPixels, marginInPixels, marginInPixels, marginInPixels);
         cardView.setLayoutParams(params);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (notificationWebSocketClient != null) notificationWebSocketClient.disconnect();
+    }
+
+    private void checkPendingInvitations() {
+        invitationService.getMyPendingInvitations(new Callback<List<SimpleInvitation>>() {
+            @Override
+            public void onResponse(Call<List<SimpleInvitation>> call, Response<List<SimpleInvitation>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    showInvitationDialog();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SimpleInvitation>> call, Throwable t) {
+                Log.e("INVITATIONS", "Failed to load pending invitations", t);
+            }
+        });
+    }
+
+    private void showInvitationDialog() {
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Pending Invitations")
+                .setMessage("You have pending invitations. Check them now?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    Intent intent = new Intent(requireContext(), MyInvitationsActivity.class);
+                    startActivity(intent);
+                })
+                .setNegativeButton("Later", null)
+                .show();
+    }
+
 }

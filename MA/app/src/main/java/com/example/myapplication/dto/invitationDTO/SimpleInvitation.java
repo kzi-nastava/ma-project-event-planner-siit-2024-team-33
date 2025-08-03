@@ -2,7 +2,7 @@ package com.example.myapplication.dto.invitationDTO;
 
 import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 
-public class SimpleInvitationDTO {
+public class SimpleInvitation {
     private int id;
     private MinimalEventDTO event;
     private String status;

@@ -93,7 +93,10 @@ public class AuthenticationService {
     }
 
     public static String getJwtToken() {
-        return prefs.getString(KEY_JWT, null);
+        if (prefs == null && context != null) {
+            prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        }
+        return prefs != null ? prefs.getString(KEY_JWT, null) : null;
     }
 
     public static void logout() {

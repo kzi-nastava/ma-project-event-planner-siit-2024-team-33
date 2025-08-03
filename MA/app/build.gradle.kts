@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.core:core:1.12.0")
     implementation("com.github.NaikSoftware:StompProtocolAndroid:1.6.6")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
