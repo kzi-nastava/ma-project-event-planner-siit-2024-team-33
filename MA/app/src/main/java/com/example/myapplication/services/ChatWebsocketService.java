@@ -50,6 +50,9 @@ public class ChatWebsocketService {
 
     @SuppressLint("CheckResult")
     public void connect() {
+        if(getJwtToken() == null)
+            return;
+
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, wsUrl);
 
         List<StompHeader> headers = new ArrayList<>();
