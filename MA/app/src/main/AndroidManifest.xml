@@ -27,6 +27,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBwNp4PhqhesGe-CfDLoba3Fi3R1KqmeJM" />
+        <activity android:name=".page.SplashScreenActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".page.ProviderUpgradeActivity" android:exported="false"/>
         <activity android:name=".page.UpgradeSelectionActivity" android:exported="false"/>
@@ -88,14 +94,6 @@
                     android:pathPrefix="/api/verify"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".page.SplashScreenActivity" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
