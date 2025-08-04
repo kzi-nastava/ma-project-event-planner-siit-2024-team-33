@@ -30,7 +30,12 @@ public interface ReportApi {
     );
 
     @POST("/api/reports/suspend/{userId}")
-    Call<String> suspendUser(
+    Call<Void> suspendUser(
+            @Path("userId") Integer userId
+    );
+
+    @POST("/api/reports/unsuspend/{userId}")
+    Call<Void> unbanUser(
             @Path("userId") Integer userId
     );
 

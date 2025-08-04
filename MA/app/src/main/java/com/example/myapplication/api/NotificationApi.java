@@ -18,20 +18,20 @@ import retrofit2.http.Query;
 
 public interface NotificationApi {
 
-    @POST
+    @POST("notifications")
     Call<Void> sendNotification(
             @Body PostNotificationDTO postNotificationDTO
     );
 
-    @GET("xdd")
+    @GET("notifications")
     Call<List<GetNotificationDTO>> getNotifications();
 
-    @DELETE("{id}")
+    @DELETE("notifications/{id}")
     Call<Void> deleteNotification(
             @Path("id") Integer id
     );
 
-    @PUT("{id}")
+    @PUT("notifications/{id}")
     Call<Map<String, String>> updateNotification(
             @Path("id") Integer id,
             @Body PutNotificationDTO putNotificationDTO

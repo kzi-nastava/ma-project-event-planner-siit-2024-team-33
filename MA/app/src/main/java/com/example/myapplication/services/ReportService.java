@@ -37,8 +37,12 @@ public class ReportService {
     }
 
 
-    public Call<String> suspendUser(Integer userId){
+    public Call<Void> suspendUser(Integer userId){
         return reportApi.suspendUser(userId);
+    }
+
+    public Call<Void> unbanUser(Integer userId){
+        return reportApi.unbanUser(userId);
     }
 
     public Call<Long> getSuspensionTimeRemaining(Integer userId){

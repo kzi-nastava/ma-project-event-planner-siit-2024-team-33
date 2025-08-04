@@ -8,8 +8,10 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.models.AuthentifiedUser;
 import com.example.myapplication.models.UpgradeRequest;
 import com.example.myapplication.models.UpgradeUser;
+import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.UsersService;
 
 import retrofit2.Call;
@@ -22,13 +24,17 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
             residencyInput, phoneInput, providerNameInput, descriptionInput;
     private TextView nameError, surnameError, passwordError, confirmPasswordError, residencyError, phoneError, descriptionError,providerNameError ;
     private final UsersService userService = new UsersService();
+    private AuthentifiedUser authenticatedUser;
+    private AuthenticationService authService;
 
     private Button confirmButton, prevButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_upgrade);  // Note: different XML layout
+        setContentView(R.layout.provider_upgrade);
+
+        authService = new AuthenticationService(this);
 
         nameInput = findViewById(R.id.inputName);
         surnameInput = findViewById(R.id.inputSurname);
@@ -36,23 +42,34 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
         confirmPasswordInput = findViewById(R.id.inputConfirmPassword);
         residencyInput = findViewById(R.id.inputResidency);
         phoneInput = findViewById(R.id.inputPhone);
-
-        providerNameInput = findViewById(R.id.inputProviderName); // New
-        descriptionInput = findViewById(R.id.inputDescription);   // New
+        providerNameInput = findViewById(R.id.inputProviderName);
+        descriptionInput = findViewById(R.id.inputDescription);
 
         confirmButton = findViewById(R.id.confirm_button);
         prevButton = findViewById(R.id.prev_button_second);
 
-        prevButton.setOnClickListener(v -> onBackPressed());
+        residencyError = findViewById(R.id.residencyError);
+        phoneError = findViewById(R.id.phoneError);
+        descriptionError = findViewById(R.id.descriptionError);
+        providerNameError = findViewById(R.id.providerNameError);
+        nameError = findViewById(R.id.nameError);
+        surnameError = findViewById(R.id.surnameError);
+        passwordError = findViewById(R.id.passwordError);
+        confirmPasswordError = findViewById(R.id.confirmPasswordError);
 
-        // Add validation or logic here
+        authenticatedUser = authService.getLoggedInUser();
+        if (authenticatedUser != null) {
+            fillFormWithUser(authenticatedUser);
+        }
+        confirmButton.setEnabled(true);
         confirmButton.setOnClickListener(v -> onSubmit());
+        prevButton.setOnClickListener(v -> onBackPressed());
     }
+
 
     private boolean validateFields() {
         boolean isValid = true;
 
-        // Residency format: "City, Country" with capitalized words
         if (residencyInput.getText().toString().trim()
                 .matches("^[A-Z][a-z]+( [A-Z][a-z]+)*, [A-Z][a-z]+( [A-Z][a-z]+)*$")) {
             residencyError.setVisibility(View.GONE);
@@ -61,7 +78,6 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Phone format: + followed by 10 to 15 digits
         if (phoneInput.getText().toString().trim().matches("^\\+\\d{10,15}$")) {
             phoneError.setVisibility(View.GONE);
         } else {
@@ -69,7 +85,6 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Provider name: max 20 characters
         String providerName = providerNameInput.getText().toString().trim();
         if (!providerName.isEmpty() && providerName.length() <= 20) {
             providerNameError.setVisibility(View.GONE);
@@ -78,7 +93,6 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Description: at least 20 characters
         String description = descriptionInput.getText().toString().trim();
         if (description.length() >= 20) {
             descriptionError.setVisibility(View.GONE);
@@ -87,41 +101,22 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        confirmButton.setEnabled(isValid);
         return isValid;
     }
 
 
     private void onSubmit() {
-        // Basic placeholder validation
-        boolean isValid = true;
-
-        if (nameInput.getText().toString().trim().isEmpty()) {
-            showError(R.id.nameError);
-            isValid = false;
-        }
-        // Add similar validation for other fields...
-
-        if (providerNameInput.getText().toString().trim().isEmpty()) {
-            showError(R.id.providerNameError);
-            isValid = false;
+        if (!validateFields()) {
+            Toast.makeText(this, "Please fill out all required fields correctly.", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        if (descriptionInput.getText().toString().trim().length() < 20) {
-            showError(R.id.descriptionError);
-            isValid = false;
-        }
-
-        if (isValid) {
-            Toast.makeText(this, "Upgrade confirmed!", Toast.LENGTH_SHORT).show();
-            // You can continue to another activity or submit data
-        }
         UpgradeUser upgradeUser = new UpgradeUser(
                 residencyInput.getText().toString().trim(),
                 phoneInput.getText().toString().trim(),
                 providerNameInput.getText().toString().trim(),
                 descriptionInput.getText().toString().trim(),
-                "ORGANIZER_ROLE"
+                "PROVIDER_ROLE"
         );
 
         Call<UpgradeRequest> call = userService.upgradeUser(upgradeUser);
@@ -144,8 +139,22 @@ public class ProviderUpgradeActivity extends AppCompatActivity {
         });
     }
 
+
     private void showError(int errorViewId) {
         TextView errorView = findViewById(errorViewId);
         errorView.setVisibility(View.VISIBLE);
     }
+
+    private void fillFormWithUser(AuthentifiedUser user) {
+        nameInput.setText(user.getName());
+        surnameInput.setText(user.getSurname());
+        passwordInput.setText("********");
+        confirmPasswordInput.setText("********");
+
+        nameInput.setEnabled(false);
+        surnameInput.setEnabled(false);
+        passwordInput.setEnabled(false);
+        confirmPasswordInput.setEnabled(false);
+    }
+
 }

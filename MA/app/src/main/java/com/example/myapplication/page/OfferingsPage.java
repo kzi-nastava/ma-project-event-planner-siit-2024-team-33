@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,7 +32,9 @@ import com.example.myapplication.dto.offerDTO.OfferFilterDTO;
 import com.example.myapplication.models.Availability;
 import com.example.myapplication.models.OfferType;
 import com.example.myapplication.services.AuthenticationService;
+import com.example.myapplication.services.EventTypeService;
 import com.example.myapplication.services.OfferService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -54,6 +57,7 @@ public class OfferingsPage extends Fragment {
     private OfferService offerService;
     private List<MinimalOfferDTO> offers;
     private OfferFilterDTO filter;
+    private EventTypeService eventTypeService;
 
     public OfferingsPage() {
         // Required empty public constructor
@@ -202,14 +206,54 @@ public class OfferingsPage extends Fragment {
         BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         dialog.setContentView(dialogView);
 
+
         Spinner spinner = dialogView.findViewById(R.id.spinner_event_type);
-        //Kad Milos ili ko vec implementira
-//        List<MinimalEventTypeDTO> types = ...
-//        ArrayAdapter<MinimalEventTypeDTO> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, types);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
+        EventTypeService eventTypeService = new EventTypeService();
+
+        eventTypeService.getEventTypes().enqueue(new retrofit2.Callback<List<MinimalEventTypeDTO>>() {
+            @Override
+            public void onResponse(Call<List<MinimalEventTypeDTO>> call, Response<List<MinimalEventTypeDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MinimalEventTypeDTO> types = filterEventTypesByOffers(response.body());
+                    ArrayAdapter<MinimalEventTypeDTO> adapter = new ArrayAdapter<>(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            types
+                    );
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                } else {
+                    Log.e("OfferingsPage", "Failed to load event types: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MinimalEventTypeDTO>> call, Throwable t) {
+                Log.e("OfferingsPage", "Error loading event types: " + t.getMessage());
+            }
+        });
+
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+
+        dialog.setOnShowListener(d -> {
+            bottomNav.animate()
+                    .translationY(-1800)
+                    .setDuration(100)
+                    .start();
+        });
+
+        dialog.setOnDismissListener(d -> {
+            bottomNav.animate()
+                    .translationY(0)
+                    .setDuration(100)
+                    .start();
+        });
 
         Button confirmButton = dialogView.findViewById(R.id.btn_confirm);
+        confirmButton.setOnClickListener(v -> {
+            handleFilterDialogConfirmation(dialogView);
+            dialog.dismiss();
+        });
         if (confirmButton != null) {
             confirmButton.setOnClickListener(v -> {
                 handleFilterDialogConfirmation(dialogView);
@@ -285,5 +329,32 @@ public class OfferingsPage extends Fragment {
 
         pageIndicator.setText("Page " + (currentPage + 1));
     }
+
+    private List<MinimalEventTypeDTO> filterEventTypesByOffers(List<MinimalEventTypeDTO> allTypes) {
+        if (offers == null || offers.isEmpty()) return new ArrayList<>();
+
+        List<MinimalEventTypeDTO> filteredTypes = new ArrayList<>();
+        for (MinimalEventTypeDTO type : allTypes) {
+            boolean typeUsed = false;
+            for (MinimalOfferDTO offer : offers) {
+                List<MinimalEventTypeDTO> offerTypes = offer.getValidEvents();
+                if (offerTypes != null) {
+                    for (MinimalEventTypeDTO eventType : offerTypes) {
+                        if (eventType.id.equals(type.id)) {
+                            typeUsed = true;
+                            break;
+                        }
+                    }
+                }
+                if (typeUsed) break;
+            }
+            if (typeUsed) {
+                filteredTypes.add(type);
+            }
+        }
+
+        return filteredTypes;
+    }
+
 
 }

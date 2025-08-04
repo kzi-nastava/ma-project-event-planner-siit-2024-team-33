@@ -16,12 +16,15 @@ import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.EventService;
+import com.example.myapplication.services.EventTypeService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -43,6 +46,7 @@ public class EventsPage extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private List<MinimalEventTypeDTO> availableEventTypes = new ArrayList<>();
 
     private FilterEventDTO filter;
     private String mParam1;
@@ -153,6 +157,7 @@ public class EventsPage extends Fragment {
                 Toast.makeText(requireContext(), "Error loading events.", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 
@@ -189,6 +194,55 @@ public class EventsPage extends Fragment {
         BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         dialog.setContentView(dialogView);
 
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+
+        dialog.setOnShowListener(d -> {
+            bottomNav.animate()
+                    .translationY(-1500)
+                    .setDuration(100)
+                    .start();
+        });
+
+        dialog.setOnDismissListener(d -> {
+            bottomNav.animate()
+                    .translationY(0)
+                    .setDuration(100)
+                    .start();
+        });
+
+        Spinner spinnerCategory = dialogView.findViewById(R.id.spinner_category);
+        EventTypeService eventTypeService = new EventTypeService();
+
+        eventTypeService.getEventTypes().enqueue(new Callback<List<MinimalEventTypeDTO>>() {
+            @Override
+            public void onResponse(Call<List<MinimalEventTypeDTO>> call, Response<List<MinimalEventTypeDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MinimalEventTypeDTO> allTypes = response.body();
+                    List<MinimalEventTypeDTO> filteredTypes = filterEventTypesByEvents(allTypes);
+
+                    MinimalEventTypeDTO allOption = new MinimalEventTypeDTO();
+                    allOption.id= -1;
+                    allOption.name = "All";
+                    filteredTypes.add(0, allOption);
+
+                    ArrayAdapter<MinimalEventTypeDTO> adapter = new ArrayAdapter<>(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            filteredTypes
+                    );
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerCategory.setAdapter(adapter);
+                } else {
+                    Log.e("EventsPage", "Failed to load event types: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MinimalEventTypeDTO>> call, Throwable t) {
+                Log.e("EventsPage", "Error loading event types: " + t.getMessage());
+            }
+        });
+
         Button confirmButton = dialogView.findViewById(R.id.btn_confirm);
         confirmButton.setOnClickListener(v -> {
             handleFilterDialogConfirmation(dialogView);
@@ -211,6 +265,8 @@ public class EventsPage extends Fragment {
 
         dialog.show();
     }
+
+
 
 
     private void handleFilterDialogConfirmation(View dialogView) {
@@ -277,4 +333,27 @@ public class EventsPage extends Fragment {
         pageIndicator.setText("Page " + (currentPage + 1));
     }
 
+    private List<MinimalEventTypeDTO> filterEventTypesByEvents(List<MinimalEventTypeDTO> allTypes) {
+        if (events == null || events.isEmpty()) return new ArrayList<>();
+
+        List<MinimalEventTypeDTO> filteredTypes = new ArrayList<>();
+        for (MinimalEventTypeDTO type : allTypes) {
+            boolean typeUsed = false;
+            for (MinimalEventDTO event : events) {
+                MinimalEventTypeDTO eventTypes = event.getValidEvent();
+                if (eventTypes != null) {
+                    if (eventTypes.id.equals(type.id)) {
+                        typeUsed = true;
+                        break;
+                    }
+                }
+                if (typeUsed) break;
+            }
+            if (typeUsed) {
+                filteredTypes.add(type);
+            }
+        }
+
+        return filteredTypes;
+    }
 }

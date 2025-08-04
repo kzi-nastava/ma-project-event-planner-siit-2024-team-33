@@ -1,7 +1,8 @@
 package com.example.myapplication.dto.offerDTO;
 
+import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.models.OfferType;
-
+import java.util.List;
 public class MinimalOfferDTO {
     private Integer id;
     public Integer offerId;
@@ -10,9 +11,17 @@ public class MinimalOfferDTO {
     private Double basePrice;
     private String description;
     private String images;
+    private List<MinimalEventTypeDTO> validEvents;
 
     public void setType(OfferType type) {
         this.type = type;
+    }
+    public void setValidEvents(List<MinimalEventTypeDTO> validEvents) {
+        this.validEvents = validEvents;
+    }
+
+    public List<MinimalEventTypeDTO> getValidEvents() {
+        return validEvents;
     }
 
     public void setImages(String images) {

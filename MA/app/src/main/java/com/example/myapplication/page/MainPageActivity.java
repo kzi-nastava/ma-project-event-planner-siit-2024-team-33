@@ -34,7 +34,6 @@ public class MainPageActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        //set the default Fragment
         if (savedInstanceState == null) {
             loadFragment(new HomePage());
         }

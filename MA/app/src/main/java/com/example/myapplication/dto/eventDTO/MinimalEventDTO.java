@@ -1,11 +1,12 @@
 package com.example.myapplication.dto.eventDTO;
 
+import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
+
 public class MinimalEventDTO{
     private Integer id;
-    private String image;
     private String name;
     private String description;
-    private double cost;
+    private MinimalEventTypeDTO validEvent;
 
     @Override
     public String toString(){
@@ -16,13 +17,6 @@ public class MinimalEventDTO{
         return id;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getName() {
         return name;
@@ -40,11 +34,11 @@ public class MinimalEventDTO{
         this.description = description;
     }
 
-    public double getCost() {
-        return cost;
+    public MinimalEventTypeDTO getValidEvent() {
+        return validEvent;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setValidEvent(MinimalEventTypeDTO validEvent) {
+        this.validEvent = validEvent;
     }
 }

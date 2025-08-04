@@ -74,9 +74,9 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
         });
 
         holder.banUserButton.setOnClickListener(v -> {
-            reportService.suspendUser(report.getReceiverId()).enqueue(new Callback<String>() {
+            reportService.suspendUser(report.getReceiverId()).enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(context, "User banned successfully", Toast.LENGTH_SHORT).show();
                     } else {
@@ -85,25 +85,30 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });
 
         holder.unbanUserButton.setOnClickListener(v -> {
-            reportService.getSuspensionTimeRemaining(report.getReceiverId()).enqueue(new Callback<Long>() {
+            reportService.unbanUser(report.getReceiverId()).enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<Long> call, Response<Long> response) {
-                    if (response.isSuccessful() && response.body() == 0) {
-                        Toast.makeText(context, "User already unbanned", Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(context, "User unbanned successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, "Failed to unban user", Toast.LENGTH_SHORT).show();
+                        try {
+                            String errorBody = response.errorBody().string();
+                            Toast.makeText(context, "Failed: " + errorBody, Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Toast.makeText(context, "Failed with unknown error", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Long> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

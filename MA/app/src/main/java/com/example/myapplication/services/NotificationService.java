@@ -15,7 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NotificationService {
-    private static final String BASE_URL = Settings.BASE_URL + "/api/notifications/";
+    private static final String BASE_URL = Settings.BASE_URL + "/api/";
     private  final NotificationApi notificationApi;
 
     public NotificationService() {notificationApi = ApiClient.getRetrofit(BASE_URL).create(NotificationApi.class);}

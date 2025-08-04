@@ -35,7 +35,7 @@ public class UpgradeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_planner_upgrade);
 
-        authService = new AuthenticationService(this); // Proper init
+        authService = new AuthenticationService(this);
         bindViews();
         setupListeners();
 
