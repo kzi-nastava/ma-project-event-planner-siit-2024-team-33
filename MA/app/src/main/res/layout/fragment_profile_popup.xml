@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#788AA3"
+    android:padding="16dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/trumpshot"
+        android:scaleType="centerCrop"
+        android:contentDescription=""
+        android:layout_gravity="center_horizontal"
+        app:shapeAppearanceOverlay="@style/CircularImageView" />
+
+
+
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GEORGY.HUBANI@GMAIL.COM"
+        android:textColor="#E8DDB5"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- Buttons -->
+    <Button
+        android:id="@+id/create_event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Event"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/budget_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#666A86"
+        android:text="Budget"
+        android:textColor="#E8DDB5"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/offer_categories_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offer Categories"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/event_types_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Types"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/event_statistics_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Statistics"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/your_offers_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Offers"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/reports_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reports"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/comments_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/create_service_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Service"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/profile_info_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile Information"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/favorites_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Favorites"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/upgrade_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upgrade profile"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/schedule_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Schedule"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/notifications_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:text="Sign Up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/log_out_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:visibility="gone"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp"/>
+
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:backgroundTint="#666A86"
+        android:textColor="#E8DDB5"
+        android:layout_marginTop="8dp" />
+
+
+</LinearLayout>

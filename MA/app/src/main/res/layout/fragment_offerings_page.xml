@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/superior_white"
-    tools:context=".OfferingsPage">
+    tools:context=".page.OfferingsPage">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,39 +50,55 @@
                 android:fontFamily="@font/inter_28pt_bold"
                 android:textColor="@color/superior_white" />
 
-            <Button
-                android:id="@+id/offerings_create_button"
+            <LinearLayout
+                android:id="@+id/offeringCardsPlace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Creation"
-                android:textSize="24sp"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="10dp"
-                android:padding="12dp"
-                android:backgroundTint="@color/dreadhead_blue"
-                android:fontFamily="@font/inter_28pt_bold"
-                android:textColor="@color/superior_white" />
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:padding="8dp" />
 
-            <include
-                layout="@layout/offering_card" />
-            <include
-                layout="@layout/offering_card" />
-            <include
-                layout="@layout/offering_card" />
-            <include
-                layout="@layout/offering_card" />
-            <include
-                layout="@layout/offering_card" />
-            <include
-                layout="@layout/offering_card" />
-            <include
-            layout="@layout/offering_card" />
-            <include
-            layout="@layout/offering_card" />
+            <LinearLayout
+                android:id="@+id/pagination_controls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="24dp">
 
+                <Button
+                    android:id="@+id/btn_previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/nonchalant_blue"
+                    android:fontFamily="@font/inter_28pt_bold"
+                    android:textColor="@color/superior_white"
+                    android:text="Previous"
+                    android:enabled="false"/>
+
+                <TextView
+                    android:id="@+id/page_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="Page 1"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/nonchalant_blue"
+                    android:fontFamily="@font/inter_28pt_bold"
+                    android:textColor="@color/superior_white"
+                    android:text="Next" />
+            </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

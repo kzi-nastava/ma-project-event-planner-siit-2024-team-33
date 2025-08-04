@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/superior_white"
-    tools:context=".HomePage">
+    tools:context=".page.HomePage">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -57,12 +57,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
+
             <LinearLayout
                 android:id="@+id/products_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_corners">
+                android:background="@drawable/rounded_corners"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:id="@+id/productsTitle"
@@ -90,6 +92,9 @@
                     android:layout_marginStart="25dp"
                     android:textSize="20sp" />
 
+
+
+
                 <!-- Product Cards Place -->
                 <LinearLayout
                     android:id="@+id/offeringCardsPlace"
@@ -97,9 +102,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp">
-
-                    <include
-                        layout="@layout/offering_card" />
                 </LinearLayout>
 
             </LinearLayout>

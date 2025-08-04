@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/reviews_background"
+    android:padding="15dp"
+    android:layout_marginTop="20dp"
+    android:clipToPadding="false"
+    android:elevation="4dp"
+    android:backgroundTintMode="src_over"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:layout_gravity="center"
+    android:dividerPadding="8dp"
+    android:backgroundTint="@color/dreadhead_blue">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/review_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reviews"
+        android:textColor="#E0E7FF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTintMode="src_over"
+        android:scrollbarSize="0dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/review_title_border" />
+
+    <!-- Review List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/review_list"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:layout_marginBottom="15dp" />
+
+    <!-- Review Form -->
+    <LinearLayout
+        android:id="@+id/review_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Your Review:"
+            android:textColor="#E0E7FF"
+            android:textSize="14sp"
+            android:layout_marginBottom="5dp" />
+
+        <!-- Star Selector -->
+        <LinearLayout
+            android:id="@+id/star_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_star"
+                app:tint="#4DFFFFFF"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_star"
+                app:tint="#4DFFFFFF"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_star"
+                app:tint="#4DFFFFFF"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_star"
+                app:tint="#4DFFFFFF"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_star"
+                app:tint="#4DFFFFFF"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <!-- Comment -->
+        <EditText
+            android:id="@+id/comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Write your comment..."
+            android:padding="8dp"
+            android:textColor="#E0E7FF"
+            android:textColorHint="#99FFFFFF"
+            android:inputType="textMultiLine"
+            android:gravity="top|start" />
+
+        <Button
+            android:id="@+id/submit_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Submit Review"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:textColor="@color/white"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:layout_gravity="end"
+            android:radius="8dp" />
+    </LinearLayout>
+</LinearLayout>

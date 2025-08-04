@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superior_white"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Advanced Service Filters"
+                android:textSize="20sp"
+                android:textColor="#212121"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <!-- Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name of the product/service"
+                android:textSize="16sp"
+                android:textColor="#212121"
+                android:paddingBottom="4dp" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter Name"
+                android:textColorHint="#408E91"
+                android:textColor="#1B1B1B"
+                android:backgroundTint="#BED2B9"
+                android:fontFamily="sans-serif" />
+        </LinearLayout>
+
+        <!-- Category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Category"
+                android:textSize="16sp"
+                android:textColor="#212121"
+                android:paddingBottom="4dp" />
+
+            <EditText
+                android:id="@+id/et_category"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Input Category"
+                android:textColorHint="#408E91"
+                android:textColor="#1B1B1B"
+                android:backgroundTint="#BED2B9"
+                android:fontFamily="sans-serif" />
+        </LinearLayout>
+
+        <!-- Price -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price Range"
+                android:textSize="16sp"
+                android:textColor="#212121"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tv_price_range"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lowest Price: 0 | Highest Price: 1000"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+            <SeekBar
+                android:id="@+id/seekbar_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="1000" />
+
+            <TextView
+                android:id="@+id/tv_selected_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selected Price: 500"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Availability -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Availability"
+                android:textSize="16sp"
+                android:textColor="#212121"
+                android:paddingBottom="4dp" />
+
+            <RadioGroup
+                android:id="@+id/rg_availability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="#212121" />
+
+                <RadioButton
+                    android:id="@+id/rb_unavailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not Available"
+                    android:textColor="#212121" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Event Type -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Type"
+                android:textSize="16sp"
+                android:textColor="#212121"
+                android:paddingBottom="4dp" />
+
+            <Spinner
+                android:id="@+id/spinner_event_type"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+        </LinearLayout>
+
+        <!-- Product/Service Checkboxes -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <CheckBox
+                android:id="@+id/cb_show_products"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Products"
+                android:textColor="#212121" />
+
+            <CheckBox
+                android:id="@+id/cb_show_services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Services"
+                android:textColor="#212121" />
+        </LinearLayout>
+
+        <!-- Confirm Button -->
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#A5B7A7"
+            android:text="Confirm"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+</ScrollView>

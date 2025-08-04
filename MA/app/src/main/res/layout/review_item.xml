@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1AFFFFFF"
+    android:padding="10dp"
+    android:layout_margin="4dp"
+    android:backgroundTintMode="src_over"
+    android:clipToPadding="false"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp"
+    android:backgroundTint="#1AFFFFFF"
+    android:layout_gravity="center_horizontal"
+    android:transitionName="review_item"
+    android:shape="rectangle">
+
+    <!-- Header -->
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp">
+
+    <!-- Author -->
+    <TextView
+        android:id="@+id/review_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:textColor="#93C5FD"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+
+        <LinearLayout
+            android:id="@+id/review_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/star1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_star"
+            android:tint="#4DFFFFFF" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/more_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_more_vert"
+        android:alpha="1"
+        android:contentDescription="More Options"
+        android:layout_marginTop="8dp" />
+
+    </RelativeLayout>
+
+        <!-- Review Comment -->
+    <TextView
+    android:id="@+id/review_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="This is the review comment text."
+    android:textColor="#E0E7FF"
+    android:textSize="14sp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp" />
+    </LinearLayout>

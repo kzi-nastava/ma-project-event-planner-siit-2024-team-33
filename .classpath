@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="MA/.gradle/8.9/dependencies-accessors/8840a58fd32d5991fb3d217d8ad268eb4e848ede/sources"/>
+	<classpathentry kind="src" path="MA/app/src/androidTest/java"/>
+	<classpathentry kind="src" path="MA/app/src/main/java"/>
+	<classpathentry kind="src" path="MA/app/src/test/java"/>
+	<classpathentry kind="lib" path="MA/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="MA/.gradle/8.9/dependencies-accessors/8840a58fd32d5991fb3d217d8ad268eb4e848ede/classes"/>
+</classpath>

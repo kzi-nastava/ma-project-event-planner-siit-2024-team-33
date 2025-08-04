@@ -40,17 +40,19 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/email_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/login_edit_username_text"
         android:height="48dp"
         android:fontFamily="@font/inter_18pt_medium"
         android:backgroundTint="@color/novi_sad_torquoise"
-        android:textColorHint="@color/novi_sad_torquoise"
+        android:textColor="#1B1B1B"
         android:layout_marginHorizontal="20dp"
         android:padding="8dp"
         android:textSize="18sp"
         android:layout_marginBottom="16dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,13 +64,14 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/password_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/login_edit_password_text"
         android:inputType="textPassword"
         android:textSize="18sp"
         android:backgroundTint="@color/novi_sad_torquoise"
-        android:textColorHint="@color/novi_sad_torquoise"
+        android:textColor="#1B1B1B"
         android:fontFamily="@font/inter_18pt_medium"
         android:layout_marginHorizontal="20dp"
         android:padding="8dp"

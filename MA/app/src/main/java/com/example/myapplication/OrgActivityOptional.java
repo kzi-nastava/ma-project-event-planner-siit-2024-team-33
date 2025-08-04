@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.button.MaterialButton;
+
+import com.example.myapplication.page.RegisterActivity;
 
 public class OrgActivityOptional extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class OrgActivityOptional extends AppCompatActivity {
         });
         Button nextButton = findViewById(R.id.confirm_button);
         nextButton.setOnClickListener(v ->{
-            Intent intent = new Intent(OrgActivityOptional.this,RegisterActivity.class);
+            Intent intent = new Intent(OrgActivityOptional.this, RegisterActivity.class);
             startActivity(intent);
         });
     }

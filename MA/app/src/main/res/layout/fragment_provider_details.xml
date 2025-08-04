@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superior_white"
+    android:padding="16dp"
+    style="@style/sigmaColorText"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:spacing="20dp">
+
+        <!-- Service Name -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Service Name"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Image Carousel Placeholder -->
+        <FrameLayout
+            android:id="@+id/carouselContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/white">
+            <!-- Replace with ViewPager2 or RecyclerView carousel in code -->
+        </FrameLayout>
+
+        <!-- Booking & Interaction Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btnChat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dreadhead_blue"
+                android:text="Chat"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnReport"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dreadhead_blue"
+                android:text="Report"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Service Details Info Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:divider="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:showDividers="middle">
+
+            <!-- Each row: label + value -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text=""
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Price and discount grouped -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surname:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSurname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text=""
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text=""
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Reservation, cancellation, duration -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text=""
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelCancellation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text=""
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/labelDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Residency:"
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvResidency"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/WhiteTransparent"
+                    android:gravity="end"
+                    android:paddingVertical="3dp"
+                    android:paddingRight="4dp"
+                    android:text=""
+                    android:textColor="@color/nonchalant_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Valid event categories horizontal list -->
+
+        </LinearLayout>
+
+        <!-- Provider-Only Section (visibility/edit/delete) -->
+
+        <!-- Description Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/labelDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/nonchalant_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Service description goes here."
+                android:textColor="@color/nonchalant_blue" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
