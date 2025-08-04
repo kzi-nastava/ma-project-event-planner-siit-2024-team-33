@@ -99,14 +99,15 @@
             android:text="→" />
     </LinearLayout>
 
-    <!-- Bottom Section -->
     <Button
         android:id="@+id/button_delete"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/nonchalant_blue"
+        android:fontFamily="@font/inter_28pt_bold"
+        android:textColor="@color/superior_white"
         android:text="Delete read notifications"
-        android:background="#B2C9AB"
-        android:textColor="#E8DDB5"
         android:padding="12dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center" />
 </LinearLayout>

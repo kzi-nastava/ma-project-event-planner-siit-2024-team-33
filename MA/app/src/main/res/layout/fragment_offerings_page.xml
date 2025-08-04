@@ -71,6 +71,9 @@
                     android:id="@+id/btn_previous"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/nonchalant_blue"
+                    android:fontFamily="@font/inter_28pt_bold"
+                    android:textColor="@color/superior_white"
                     android:text="Previous"
                     android:enabled="false"/>
 
@@ -87,6 +90,9 @@
                     android:id="@+id/btn_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/nonchalant_blue"
+                    android:fontFamily="@font/inter_28pt_bold"
+                    android:textColor="@color/superior_white"
                     android:text="Next" />
             </LinearLayout>
 

@@ -26,26 +26,23 @@
 
         <Button
             android:id="@+id/btnPrev"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/nonchalant_blue"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:textColor="@color/superior_white"
             android:text="← Previous"/>
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/nonchalant_blue"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:textColor="@color/superior_white"
             android:text="Next →"/>
 
-        <Button
-            android:id="@+id/btnDeleteHandled"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Delete handled invitations"
-            android:background="#788AA3"
-            android:textColor="#E8DDB5"/>
+
     </LinearLayout>
 
 </LinearLayout>

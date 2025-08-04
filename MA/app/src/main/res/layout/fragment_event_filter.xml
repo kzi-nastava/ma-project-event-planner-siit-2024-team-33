@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Name"
-                android:textColor="#008080"
+                android:textColor="#1B1B1B"
                 android:backgroundTint="#BED2B9" />
         </LinearLayout>
 
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Location"
-                android:textColor="#008080"
+                android:textColor="#1B1B1B"
                 android:backgroundTint="#BED2B9" />
         </LinearLayout>
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter Number"
                 android:inputType="number"
-                android:textColor="#008080"
+                android:textColor="#1B1B1B"
                 android:backgroundTint="#BED2B9" />
         </LinearLayout>
 

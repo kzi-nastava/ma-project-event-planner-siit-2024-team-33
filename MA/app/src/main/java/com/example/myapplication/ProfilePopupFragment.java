@@ -84,50 +84,45 @@ public class ProfilePopupFragment extends DialogFragment {
             favoritesButton.setVisibility(View.VISIBLE);
             scheduleButton.setVisibility(View.VISIBLE);
 
-            // Notifications visible for Organizer or Provider
             notificationsButton.setVisibility((isOrganizer || isProvider) ? View.VISIBLE : View.GONE);
 
-            // Create event only for Organizer
             createEventButton.setVisibility(isOrganizer ? View.VISIBLE : View.GONE);
             createEventButton.setOnClickListener(v -> openCreateEvents());
 
             budgetButton.setVisibility(isOrganizer ? View.VISIBLE: View.GONE);
             budgetButton.setOnClickListener(v -> openBudgetPage());
 
-            // Offer categories only for Admin
             offerCategoriesButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
             offerCategoriesButton.setOnClickListener(v -> OpenOfferCategories());
 
-            // Event types only for Admin
             eventTypesButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
 
-            // Event statistics for Admin or Organizer
             eventStatisticsButton.setVisibility((isAdmin || isOrganizer) ? View.VISIBLE : View.GONE);
 
-            // Your offers for Provider
             yourOffersButton.setVisibility(isProvider ? View.VISIBLE : View.GONE);
             yourOffersButton.setOnClickListener(v -> openProvidersOffers());
 
-            // Reports for Admin
             reportsButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
 
-            // Comments for Admin
             commentsButton.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
 
-            // Create Service for Provider
             createServiceButton.setVisibility(isProvider ? View.VISIBLE : View.GONE);
             createServiceButton.setOnClickListener(v -> openCreateService());
-            upgradeButton.setVisibility(isUser ? view.VISIBLE : View.GONE);
-            upgradeButton.setOnClickListener(v -> openUpgrade());
-            // Sign in / sign up hidden
+
+            if (user != null && user.getRole() != null && "AUSER_ROLE".equals(user.getRole().getName().trim())) {
+                upgradeButton.setVisibility(View.VISIBLE);
+                upgradeButton.setOnClickListener(v -> openUpgrade());
+                dismiss();
+            } else {
+                upgradeButton.setVisibility(View.GONE);
+            }
+
             signInButton.setVisibility(View.GONE);
             signUpButton.setVisibility(View.GONE);
 
             logOutButton.setVisibility(View.VISIBLE);
 
-            // Setup click listeners as needed for the new buttons...
         } else {
-            // No user logged in - hide all except sign in / sign up
             profileInfoButton.setVisibility(View.GONE);
             favoritesButton.setVisibility(View.GONE);
             scheduleButton.setVisibility(View.GONE);
@@ -183,7 +178,7 @@ public class ProfilePopupFragment extends DialogFragment {
 
             signUpButton.setOnClickListener(v -> {
                 dismiss();
-                startActivity(new Intent(getActivity(), RegisterActivity.class));
+//                startActivity(new Intent(getActivity(), RegisterActivity.class));
             });
         } else {
             String roleName = user.getRole() != null ? user.getRole().getName() : "";

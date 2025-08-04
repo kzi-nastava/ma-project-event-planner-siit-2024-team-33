@@ -48,7 +48,7 @@
                 android:layout_height="48dp"
                 android:hint="Enter Name"
                 android:textColorHint="#408E91"
-                android:textColor="#212121"
+                android:textColor="#1B1B1B"
                 android:backgroundTint="#BED2B9"
                 android:fontFamily="sans-serif" />
         </LinearLayout>
@@ -74,7 +74,7 @@
                 android:layout_height="48dp"
                 android:hint="Input Category"
                 android:textColorHint="#408E91"
-                android:textColor="#212121"
+                android:textColor="#1B1B1B"
                 android:backgroundTint="#BED2B9"
                 android:fontFamily="sans-serif" />
         </LinearLayout>
