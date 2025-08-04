@@ -21,22 +21,17 @@ public class JwtInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
 
-        if (original.url().encodedPath().equals("/api/auth/login")) {
-            return chain.proceed(original);
-        }
-
         SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
         String token = prefs.getString("jwt", null);
-        Log.d("JwtInterceptor", "Token found: " + token);
-        Log.d("JwtInterceptor", "Adding Authorization header: Bearer " + token);
 
         Request.Builder builder = original.newBuilder();
 
-        if (token != null) {
+        if (token != null && !token.isEmpty()) {
             builder.header("Authorization", "Bearer " + token);
+        } else {
+            Log.d("JwtInterceptor", "No token found, proceeding without Authorization header.");
         }
 
-        Request request = builder.build();
-        return chain.proceed(request);
+        return chain.proceed(builder.build());
     }
 }

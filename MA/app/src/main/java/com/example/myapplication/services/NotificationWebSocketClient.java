@@ -1,5 +1,6 @@
 package com.example.myapplication.services;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
@@ -30,8 +31,13 @@ public class NotificationWebSocketClient {
         this.context = context;
     }
 
-    public void connect(String jwtToken) {
+    @SuppressLint("CheckResult")
+    public void connect() {
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, baseUrl);
+
+        String jwtToken = AuthenticationService.getJwtToken();
+        if(jwtToken == null || jwtToken.isEmpty())
+            return;
 
         List<StompHeader> headers = new ArrayList<>();
         headers.add(new StompHeader("Authorization", "Bearer " + jwtToken));
@@ -41,14 +47,14 @@ public class NotificationWebSocketClient {
         stompClient.lifecycle().subscribe(lifecycleEvent -> {
             switch (lifecycleEvent.getType()) {
                 case OPENED:
-                    Log.d("WebSocket", "Connected");
+                    Log.d("WebSocketGAS", "Connected");
                     subscribeToNotifications();
                     break;
                 case ERROR:
-                    Log.e("WebSocket", "Error", lifecycleEvent.getException());
+                    Log.e("WebSocketGAS", "Error", lifecycleEvent.getException());
                     break;
                 case CLOSED:
-                    Log.d("WebSocket", "Closed");
+                    Log.d("WebSocketGAS", "Closed");
                     break;
             }
         });

@@ -61,11 +61,9 @@ public class EventsPage extends Fragment {
         // Required empty public constructor
     }
 
-    public static EventsPage newInstance(String param1, String param2) {
+    public static EventsPage newInstance() {
         EventsPage fragment = new EventsPage();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,8 +72,6 @@ public class EventsPage extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -111,16 +107,9 @@ public class EventsPage extends Fragment {
 
         authService = new AuthenticationService(requireContext());
 
-        SharedPreferences prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
-        String token = prefs.getString("jwt", null);
-
-        if (token != null) {
-            eventService = new EventService();
-            filter = new FilterEventDTO("", "", 0, "", "", Collections.emptyList());
-            loadAllEvents(view);
-        } else {
-            Log.w("EventsPage", "JWT token is not yet available, skipping API call.");
-        }
+        eventService = new EventService();
+        filter = new FilterEventDTO("", "", 0, "", "", Collections.emptyList());
+        loadAllEvents(view);
     }
 
 

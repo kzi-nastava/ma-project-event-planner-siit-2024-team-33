@@ -49,7 +49,6 @@ public class OfferingsPage extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private AuthenticationService authService;
     private int currentPage = 0;
     private final int pageSize = 5;
     private String mParam1;
@@ -63,11 +62,9 @@ public class OfferingsPage extends Fragment {
         // Required empty public constructor
     }
 
-    public static OfferingsPage newInstance(String param1, String param2) {
+    public static OfferingsPage newInstance() {
         OfferingsPage fragment = new OfferingsPage();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -112,18 +109,9 @@ public class OfferingsPage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        authService = new AuthenticationService(requireContext());
-
-        SharedPreferences prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
-        String token = prefs.getString("jwt", null);
-
-        if (token != null) {
-            offerService = new OfferService();
-            this.filter = new OfferFilterDTO(false, false, "", "", 0, Availability.AVAILABLE, Collections.emptyList());
-            loadAllOffers(view);
-        } else {
-            Log.w("OffersPage", "JWT token is not yet available, skipping API call.");
-        }
+        offerService = new OfferService();
+        this.filter = new OfferFilterDTO(false, false, "", "", 0, Availability.AVAILABLE, Collections.emptyList());
+        loadAllOffers(view);
     }
 
     private void loadAllOffers(View view) {

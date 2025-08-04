@@ -25,6 +25,7 @@ import com.example.myapplication.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.dto.invitationDTO.SimpleInvitation;
 import com.example.myapplication.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.services.ApiClient;
 import com.example.myapplication.services.AuthenticationService;
 import com.example.myapplication.services.EventService;
 import com.example.myapplication.services.InvitationService;
@@ -88,6 +89,8 @@ public class HomePage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ApiClient.getClient(getContext());
+
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         eventService = new EventService();
         offerService = new OfferService();
@@ -105,9 +108,8 @@ public class HomePage extends Fragment {
 
         NotificationUtils.createNotificationChannel(requireContext());
         gestureDetector = new GestureDetector(getContext(), new GestureListener());
-        String token = AuthenticationService.getJwtToken();
         notificationWebSocketClient = new NotificationWebSocketClient(requireContext());
-        notificationWebSocketClient.connect(token);
+        notificationWebSocketClient.connect();
 
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
