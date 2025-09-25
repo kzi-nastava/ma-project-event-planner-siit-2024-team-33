@@ -1,0 +1,361 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/superior_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvProfileTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile.Information"
+                android:textColor="@color/dreadhead_blue"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Top Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/button_information"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/button_color"
+                    android:textColor="@color/black"
+                    android:text="Information" />
+                <Button
+                    android:id="@+id/button_favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/novi_sad_torquoise"
+                    android:textColor="@color/black"
+                    android:text="Favorites" />
+                <Button
+                    android:id="@+id/button_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dreadhead_blue"
+                    android:textColor="@color/black"
+                    android:text="Schedule" />
+            </LinearLayout>
+
+            <!-- Profile Section -->
+            <LinearLayout
+                android:id="@+id/step_mandatory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/freaky_green"
+                android:padding="14dp">
+
+                <!-- Profile Image -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_icon"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/proficon"
+                    android:scaleType="centerCrop"
+                    android:contentDescription=""
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+                    <Button
+                        android:id="@+id/button_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/novi_sad_torquoise"
+                        android:textColor="@color/black"
+                        android:text="Update" />
+                    <Button
+                        android:id="@+id/button_cpassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/superior_white"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="Change pass" />
+                    <Button
+                        android:id="@+id/button_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/chopped_red"
+                        android:textColor="@color/superior_white"
+                        android:text="Delete acc" />
+                </LinearLayout>
+
+                <!-- Email -->
+                <TextView
+                    android:id="@+id/tvEmailLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="user@example.com"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="textEmailAddress"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Name -->
+                <TextView
+                    android:id="@+id/tvNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvNameDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Letters only, field cannot be empty."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+
+                <!-- Surname -->
+                <TextView
+                    android:id="@+id/tvSurnameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surname"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Surname"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputSurname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvSurnameDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Letters only, field cannot be empty."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+
+                <!-- Provider Name -->
+                <TextView
+                    android:id="@+id/tvProviderNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provider Name"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutProviderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Provider Name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputProviderName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvProviderNameDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Letters and numbers, it can include up to 20 characters."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+
+                <!-- Description -->
+                <TextView
+                    android:id="@+id/tvDescriptionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:overScrollMode="ifContentScrolls"
+                        android:lines="5"
+                        android:maxLines="10" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvDescriptionDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Must be at least 20 characters long."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+
+                <!-- Residency -->
+                <TextView
+                    android:id="@+id/tvResidencyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Residency"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutResidency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Residency (City, Country)"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputResidency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvResidencyDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="City, Country (exact format)."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+                <!-- Phone -->
+                <TextView
+                    android:id="@+id/tvPhoneLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvPhoneDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+1234567890 (digits, spaces, dashes, parentheses allowed)."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+
+                <!-- Upload Button -->
+                <Button
+                    android:id="@+id/button_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/novi_sad_torquoise"
+                    android:textColor="@color/black"
+                    android:text="Upload pictures"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- Provider Pictures Container -->
+                <FrameLayout
+                    android:id="@+id/providerPicturesContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rounded_corners"
+                    android:backgroundTint="@color/white">
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvPicturesDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Upload up to 8 pictures, use a file that is a picture and which has less than 2MB of storage."
+                    android:textColor="@color/dreadhead_blue"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

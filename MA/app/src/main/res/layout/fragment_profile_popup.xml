@@ -5,75 +5,196 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#788AA3"
-    android:padding="16dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="32dp"
+    android:paddingBottom="16dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/trumpshot"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/proficon"
         android:scaleType="centerCrop"
         android:contentDescription=""
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
         app:shapeAppearanceOverlay="@style/CircularImageView" />
-
-
 
     <TextView
         android:id="@+id/email_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GEORGY.HUBANI@GMAIL.COM"
+        android:text="MAKE AN ACCOUNT"
         android:textColor="#E8DDB5"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
         android:layout_gravity="center_horizontal" />
 
     <!-- Buttons -->
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_event_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Create Event"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/budget_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Budget"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/offer_categories_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Offer Categories"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/event_types_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Event Types"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/event_statistics_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Event Statistics"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/your_offers_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Your Offers"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/reports_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Reports"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/comments_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Comments"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_service_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Create Service"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/profile_info_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/ProfileSidebarButton"
         android:text="Profile Information"
-        android:backgroundTint="#666A86"
-        android:textColor="#E8DDB5"
-        android:layout_marginTop="8dp" />
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/favorites_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/ProfileSidebarButton"
         android:text="Favorites"
-        android:backgroundTint="#666A86"
-        android:textColor="#E8DDB5"
-        android:layout_marginTop="8dp" />
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/upgrade_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Upgrade Profile"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/schedule_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/ProfileSidebarButton"
         android:text="Schedule"
-        android:backgroundTint="#666A86"
-        android:textColor="#E8DDB5"
-        android:layout_marginTop="8dp" />
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/notifications_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/ProfileSidebarButton"
         android:text="Notifications"
-        android:backgroundTint="#666A86"
-        android:textColor="#E8DDB5"
-        android:layout_marginTop="8dp" />
-
-    <Button
-        android:id="@+id/sign_in_button"
+        app:cornerRadius="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="false" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_up_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Sign Up"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/log_out_button"
+        style="@style/ProfileSidebarButton"
+        android:text="Log Out"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_in_button"
+        style="@style/ProfileSidebarButton"
         android:text="Sign In"
-        android:backgroundTint="#666A86"
-        android:textColor="#E8DDB5"
-        android:layout_marginTop="8dp" />
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
 
 </LinearLayout>

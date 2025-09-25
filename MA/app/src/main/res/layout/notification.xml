@@ -9,56 +9,65 @@
     android:gravity="center_vertical">
 
     <LinearLayout
-        android:layout_width="0dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="#EFE7CB"
-        android:padding="8dp"
-        android:layout_marginEnd="8dp"
-        android:radius="8dp"
-        android:elevation="2dp">
-
-        <TextView
-            android:id="@+id/notification_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Notification Title"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:paddingBottom="4dp" />
+        android:orientation="horizontal"
+        android:background="#E8DDB5"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#EFE7CB"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="4dp"
+            android:backgroundTint="#EFE7CB">
 
             <TextView
-                android:id="@+id/notification_description"
-                android:layout_width="0dp"
+                android:id="@+id/notification_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="This is a notification description."
-                android:textSize="14sp"
-                android:textColor="#333333"
-                android:paddingEnd="8dp" />
+                android:text="Notification Title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingBottom="4dp" />
 
             <TextView
                 android:id="@+id/notification_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10:30 AM"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="#555555"
-                android:gravity="end" />
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/notification_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is a short preview..."
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:maxLines="2"
+                android:ellipsize="end" />
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/notification_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#B2C9AB"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/notification_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:buttonTint="#B2C9AB"
-        android:layout_gravity="center_vertical" />
 </LinearLayout>

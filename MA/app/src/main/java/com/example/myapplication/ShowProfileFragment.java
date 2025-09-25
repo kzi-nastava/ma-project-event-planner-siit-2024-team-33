@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.ui.view.dialog.NotificationsDialog;
+
 public class ShowProfileFragment extends Fragment {
 
     @Override

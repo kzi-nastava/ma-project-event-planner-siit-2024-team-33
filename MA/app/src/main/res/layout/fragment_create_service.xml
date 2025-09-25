@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/form_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_corners"
+        android:backgroundTint="@color/freaky_green"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Category -->
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <EditText
+            android:id="@+id/input_category_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="New Category Name" />
+
+        <EditText
+            android:id="@+id/input_category_description"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="New Category Description" />
+
+        <!-- Core Fields -->
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Service Name" />
+
+        <EditText
+            android:id="@+id/input_description"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Description" />
+
+        <EditText
+            android:id="@+id/input_price"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Price"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/input_discount"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Discount"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/input_reservation_hours"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Reservation in Hours"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/input_cancellation_hours"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Cancellation in Hours"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/input_min_duration"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Minimum Duration (mins)"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/input_max_duration"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Maximum Duration (mins)"
+            android:inputType="number" />
+
+        <!-- Booleans -->
+
+        <CheckBox
+            android:id="@+id/checkbox_visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is Visible?" />
+
+        <CheckBox
+            android:id="@+id/checkbox_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is Available?" />
+
+        <CheckBox
+            android:id="@+id/checkbox_automatic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automatic Approval?" />
+
+        <!-- Event Types -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valid event types:"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/layout_event_types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- Image Picker -->
+        <Button
+            android:id="@+id/button_select_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dreadhead_blue"
+            android:text="Select Images" />
+
+        <FrameLayout
+            android:id="@+id/carouselContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/white">
+        </FrameLayout>
+
+        <!-- Submit -->
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dreadhead_blue"
+            android:text="Create Service" />
+
+    </LinearLayout>
+</ScrollView>

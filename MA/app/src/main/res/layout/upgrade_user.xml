@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superior_white">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/upgradeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upgrade Your Account"
+            android:textSize="32sp"
+            android:textColor="@color/dreadhead_blue"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:id="@+id/coloredDiv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dreadhead_blue"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/dreadhead_blue"
+            android:elevation="4dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/upgradeMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose which profile type you want to upgrade to."
+                android:textColor="@color/superior_white"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
+
+            <RadioGroup
+                android:id="@+id/profileRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radio_ep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Event Planner"
+                    android:textColor="@color/superior_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upgrade to create and manage your own events, plus discover events organized by others."
+                    android:textColor="@color/superior_white"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="36dp" />
+
+                <RadioButton
+                    android:id="@+id/radio_op"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Offering Provider"
+                    android:textColor="@color/superior_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upgrade to promote and deliver your services or products for various events."
+                    android:textColor="@color/superior_white"
+                    android:textSize="14sp"
+                    android:layout_marginStart="36dp" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/errorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please choose a profile type to continue."
+                android:textColor="@color/novi_sad_torquoise"
+                android:visibility="gone"
+                android:layout_marginTop="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity=""
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/prev_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Previous"
+                android:backgroundTint="@color/freaky_green"
+                android:textColor="@color/stillwater_black" />
+
+            <Button
+                android:id="@+id/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:backgroundTint="@color/freaky_green"
+                android:textColor="@color/stillwater_black" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

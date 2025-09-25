@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollViewSecondStep"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superior_white">
+
+    <LinearLayout
+        android:id="@+id/centerWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:id="@+id/coloredDivSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/novi_sad_torquoise"
+            android:padding="24dp"
+            android:backgroundTint="@color/novi_sad_torquoise"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/mandatoryInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mandatory information (some already filled for you)."
+                android:textColor="@color/superior_white"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Name."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Your name"
+                    android:textColorHint="@android:drawable/edit_text"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/nameError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Letters only, field cannot be empty."
+                    android:textSize="12sp"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Surname -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Surname."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Your surname"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/surnameError"
+                    android:text="Letters only, field cannot be empty."
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Password -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Password."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/passwordError"
+                    android:text="Must include numbers and letters, 8-16 characters long."
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Confirm Password -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Confirm Password."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Re-enter password"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/confirmPasswordError"
+                    android:text="Must match the previous password field."
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Residency -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Residency."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputResidency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="City, Country"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/residencyError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City, Country (exact format)."
+                    android:textSize="12sp"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Phone -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="Phone number."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:hint="+1234567890"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/phoneError"
+                    android:text="+1234567890 (digits, spaces, dashes, and parentheses allowed)."
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+            <!-- Provider Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Provider Name."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputProviderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="e.g. John's Events"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/providerNameError"
+                    android:text="Letters and numbers, up to 20 characters."
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Description -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Description."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/superior_white" />
+                <EditText
+                    android:id="@+id/inputDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:hint="Tell us about your services..."
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/stillwater_black"
+                    android:background="@drawable/input_background" />
+                <TextView
+                    android:id="@+id/descriptionError"
+                    android:text="Must be at least 20 characters long."
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/chopped_red"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Navigation Buttons -->
+        <LinearLayout
+            android:id="@+id/buttonContainerSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="10dp">
+
+            <Button
+                android:id="@+id/prev_button_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Previous"
+                android:backgroundTint="@color/freaky_green"
+                android:textColor="@color/stillwater_black" />
+
+            <Button
+                android:id="@+id/confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm Upgrade"
+                android:backgroundTint="@color/freaky_green"
+                android:textColor="@color/stillwater_black"
+                android:enabled="false" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

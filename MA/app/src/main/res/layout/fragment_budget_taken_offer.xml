@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/offer_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@color/transparent"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="0"
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/x_icon" />
+
+    <TextView
+        android:id="@+id/tv_offer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Offer Name"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_offer_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" €123.00"
+        android:textSize="20sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Details"
+        android:textSize="16sp" />
+</LinearLayout>

@@ -10,5 +10,7 @@
     <color name="low_opacity">#25FFFFFF</color>
     <color name="novi_sad_torquoise">#92B6B1</color>
     <color name="confirm_button">#8f7d4a</color>
+    <color name="WhiteTransparent">#2FFFFFFF</color>
+    <color name="chopped_red">#D32F2F</color>
     <color name="transparent">#00000000</color>
 </resources>

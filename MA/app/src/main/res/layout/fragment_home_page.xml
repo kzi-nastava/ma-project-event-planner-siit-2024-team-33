@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/superior_white"
-    tools:context=".HomePage">
+    tools:context=".ui.view.page.HomePage">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,25 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:background="#BED2B9"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="16dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:elevation="4dp">-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="+99 Events"-->
-<!--                    android:textSize="16sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textColor="#000" />-->
-<!--            </LinearLayout>-->
-            <!-- here -->
+
             <LinearLayout
                 android:id="@+id/products_layout"
                 android:layout_width="match_parent"
@@ -96,19 +79,19 @@
                     android:textColor="@color/stillwater_black"
                     android:textSize="40sp" />
 
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginHorizontal="12dp"-->
-<!--                    android:layout_margin="7dp"-->
-<!--                    android:fontFamily="@font/inter_28pt_bold"-->
-<!--                    android:gravity="end"-->
-<!--                    android:text="@string/topEventsDesc"-->
-<!--                    android:textAlignment="gravity"-->
-<!--                    android:textColor="@color/dreadhead_blue"-->
-<!--                    android:layout_marginStart="25dp"-->
-<!--                    android:textSize="20sp" />-->
-<!--                -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_margin="7dp"
+                    android:fontFamily="@font/inter_28pt_bold"
+                    android:gravity="end"
+                    android:text="@string/topEventsDesc"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/dreadhead_blue"
+                    android:layout_marginStart="25dp"
+                    android:textSize="20sp" />
+
 
 
 
@@ -119,9 +102,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp">
-
-                    <include
-                        layout="@layout/offering_card" />
                 </LinearLayout>
 
             </LinearLayout>

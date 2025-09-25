@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corners"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/edit_full_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full Price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/edit_discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Discount"
+        android:inputType="numberDecimal" />
+</LinearLayout>
