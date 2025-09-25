@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.dto.reportDTO.GetReportDTO;
-import com.example.myapplication.services.ReportService;
+import com.example.myapplication.data.dto.reportDTO.GetReportDTO;
+import com.example.myapplication.data.services.ReportService;
 
 import java.util.List;
 

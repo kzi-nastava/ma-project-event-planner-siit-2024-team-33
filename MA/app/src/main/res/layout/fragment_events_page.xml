@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/superior_white"
-    tools:context=".page.EventsPage">
+    tools:context=".ui.view.page.EventsPage">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package com.example.myapplication.reviews;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
+import com.example.myapplication.data.dto.ratingDTO.GetRatingDTO;
 
 import java.util.List;
 

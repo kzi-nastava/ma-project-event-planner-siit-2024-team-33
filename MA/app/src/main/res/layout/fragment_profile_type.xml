@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/superior_white">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/signup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:textSize="28sp"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:textColor="@color/dreadhead_blue"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Colored card-like container -->
+    <LinearLayout
+        android:id="@+id/colored_div"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/dreadhead_blue"
+        >
+
+        <TextView
+            android:id="@+id/signup_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decide which type of profile you want to make."
+            android:textSize="16sp"
+            android:textColor="@color/superior_white"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <!-- Radio Group -->
+        <RadioGroup
+            android:id="@+id/profile_type_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="@null">
+
+            <RadioButton
+                android:id="@+id/radio_event_planner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Event Planner"
+                android:textColor="@color/superior_white"
+                android:padding="12dp" />
+
+            <TextView
+                android:id="@+id/desc_event_planner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create and manage your own events while also discovering and joining events organized by others."
+                android:textSize="14sp"
+                android:textColor="@color/superior_white"
+                android:layout_marginBottom="16dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="8dp" />
+
+            <RadioButton
+                android:id="@+id/radio_product_seller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Offering Provider"
+                android:textColor="@color/superior_white"
+                android:padding="12dp" />
+
+            <TextView
+                android:id="@+id/desc_product_seller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Promote and deliver your services or products to help bring events to life — from small gatherings to large-scale celebrations."
+                android:textSize="14sp"
+                android:textColor="@color/superior_white"
+                android:paddingStart="40dp"
+                android:paddingEnd="8dp" />
+        </RadioGroup>
+
+        <!-- Error Message -->
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please choose a profile type to continue."
+            android:textSize="14sp"
+            android:textColor="@color/novi_sad_torquoise"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/button_previous"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Previous"
+            android:backgroundTint="@color/freaky_green"
+            android:textColor="@color/stillwater_black"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next"
+            android:backgroundTint="@color/freaky_green"
+            android:textColor="@color/stillwater_black"
+            android:layout_marginStart="8dp"
+            android:padding="12dp" />
+    </LinearLayout>
+
+</LinearLayout>

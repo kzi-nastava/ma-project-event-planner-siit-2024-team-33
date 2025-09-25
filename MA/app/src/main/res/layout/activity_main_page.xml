@@ -7,9 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/superior_white"
     android:fitsSystemWindows="true"
-    tools:context=".page.MainPageActivity">
+    tools:context=".ui.view.page.navigation.MainPageActivity">
 
-    <!-- This is where we view home, events, offering and profile -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,20 +18,26 @@
             android:id="@+id/nav_host_fragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1">
-
         </FrameLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
+            app:labelVisibilityMode="labeled"
             android:background="@drawable/rounded_bottom_nav_background"
-            app:itemIconTint="@color/stillwater_black"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/superior_white"
             app:itemTextColor="@color/superior_white"
-            app:menu="@menu/bottom_nav_menu" />
+            app:itemActiveIndicatorStyle="@android:color/transparent"
+            app:itemRippleColor="@color/transparent"
+            android:elevation="5dp"
+            />
     </LinearLayout>
 
     <FrameLayout
@@ -41,4 +46,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/right_drawer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@drawable/rounded_left_corners"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"/>
 </androidx.drawerlayout.widget.DrawerLayout>
