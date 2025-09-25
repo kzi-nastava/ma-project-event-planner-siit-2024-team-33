@@ -63,13 +63,13 @@ public class MyInvitationsActivity extends AppCompatActivity implements Invitati
             }
         });
 
-        btnDeleteHandled.setOnClickListener(v -> {
+        /*btnDeleteHandled.setOnClickListener(v -> {
             // Remove all except PENDING
             invitations.removeIf(inv -> !"PENDING".equalsIgnoreCase(inv.getStatus()));
             currentPage = 0;
             updatePagination();
             Toast.makeText(this, "Handled invitations deleted", Toast.LENGTH_SHORT).show();
-        });
+        });*/
 
         loadInvitations();
     }
