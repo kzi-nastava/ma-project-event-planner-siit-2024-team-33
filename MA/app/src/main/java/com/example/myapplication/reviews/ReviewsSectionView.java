@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.dto.PageResponse;
-import com.example.myapplication.dto.ratingDTO.EventRatingDTO;
-import com.example.myapplication.dto.ratingDTO.GetRatingDTO;
-import com.example.myapplication.dto.ratingDTO.PostRatingDTO;
+import com.example.myapplication.data.dto.ratingDTO.EventRatingDTO;
+import com.example.myapplication.data.dto.ratingDTO.GetRatingDTO;
+import com.example.myapplication.data.dto.ratingDTO.PostRatingDTO;
 import com.example.myapplication.reports.ReportDialog;
-import com.example.myapplication.services.RatingService;
-import com.example.myapplication.services.ReportService;
+import com.example.myapplication.data.services.RatingService;
+import com.example.myapplication.data.services.ReportService;
 
 import java.util.ArrayList;
 import java.util.List;
