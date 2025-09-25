@@ -16,15 +16,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/item_image"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:src="@drawable/trumpshot"
-            android:scaleType="fitCenter"
-            android:clipToOutline="true"
-            android:background="@drawable/rounded_corners" />
-
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"

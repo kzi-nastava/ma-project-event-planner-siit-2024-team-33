@@ -8,7 +8,7 @@
     android:background="@color/superior_white"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".page.activity_service_create">
+    tools:context=".ui.view.page.activity_service_create">
 
     <ScrollView
         android:layout_width="match_parent"
