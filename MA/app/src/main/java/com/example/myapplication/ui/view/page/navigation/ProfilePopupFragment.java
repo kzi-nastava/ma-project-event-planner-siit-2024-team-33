@@ -17,13 +17,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
+import com.example.myapplication.reports.ReportsActivity;
 import com.example.myapplication.ui.view.dialog.NotificationsDialog;
 import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.ui.view.page.BudgetPage;
+import com.example.myapplication.ui.view.page.CommentsActivity;
 import com.example.myapplication.ui.view.page.CreateServiceFragment;
 import com.example.myapplication.ui.view.page.EventCreation;
 import com.example.myapplication.ui.view.page.ProfilePage;
 import com.example.myapplication.ui.view.page.OfferCategoriesFragment;
+import com.example.myapplication.ui.view.page.ProvidersOffersFragment;
 import com.example.myapplication.ui.view.page.UpgradeSelectionActivity;
 import com.example.myapplication.ui.view.page.authentication.LoginFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileFavoritesFragment;
@@ -177,6 +180,22 @@ public class ProfilePopupFragment extends Fragment {
             openFragment(ProfileScheduleFragment.newInstance());
         });
 
+        reportsButton.setOnClickListener(v -> {
+            closeDrawer();
+            startActivity(new Intent(getContext(), ReportsActivity.class));
+        });
+
+        commentsButton.setOnClickListener(v -> {
+            closeDrawer();
+            startActivity(new Intent(getContext(), CommentsActivity.class));
+        });
+
+        yourOffersButton.setOnClickListener(v -> {
+            closeDrawer();
+            openFragment(ProvidersOffersFragment.newInstance());
+        });
+
+
         createEventButton.setOnClickListener(v -> openFragment(EventCreation.newInstance()));
 
         budgetButton.setOnClickListener(v -> openFragment(BudgetPage.newInstance()));
@@ -199,7 +218,7 @@ public class ProfilePopupFragment extends Fragment {
     private void openFragment(Fragment fragment) {
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_fragment, fragment);
-        transaction.addToBackStack(null);   //back navigation
+        transaction.addToBackStack(null);
         transaction.commit();
         closeDrawer();
     }
