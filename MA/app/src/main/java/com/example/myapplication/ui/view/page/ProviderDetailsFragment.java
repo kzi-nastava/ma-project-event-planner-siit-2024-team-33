@@ -15,7 +15,7 @@ import com.example.myapplication.ui.view.component.ImageCarouselFragment;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.dto.providerDTO.ProviderDetailsDTO;
 import com.example.myapplication.data.services.ChatWebsocketService;
-import com.example.myapplication.data.services.ProviderService;
+import com.example.myapplication.data.services.user.ProviderService;
 
 import java.util.ArrayList;
 

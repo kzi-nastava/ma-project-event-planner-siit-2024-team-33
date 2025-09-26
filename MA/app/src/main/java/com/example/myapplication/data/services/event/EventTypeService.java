@@ -1,7 +1,8 @@
-package com.example.myapplication.data.services;
+package com.example.myapplication.data.services.event;
 
 import com.example.myapplication.data.api.event.EventTypesApi;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
 import java.util.List;

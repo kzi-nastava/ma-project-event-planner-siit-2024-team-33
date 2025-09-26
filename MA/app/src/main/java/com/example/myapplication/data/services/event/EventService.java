@@ -1,4 +1,4 @@
-package com.example.myapplication.data.services;
+package com.example.myapplication.data.services.event;
 
 import com.example.myapplication.data.api.event.EventApi;
 import com.example.myapplication.data.dto.PageResponse;
@@ -7,14 +7,15 @@ import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;
 import com.example.myapplication.data.dto.eventDTO.FilterEventDTO;
 import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 public class EventService {
-//    private static final String BASE_URL = "http://10.0.2.2:8080/api/events/";
     private static final String BASE_URL = Settings.BASE_URL + "/";
     private final EventApi eventApi;
 
@@ -30,6 +31,10 @@ public class EventService {
     }
     public Call<List<MinimalEventDTO>> getEventsByService(int serviceId) {
         return eventApi.getEventsByService(serviceId);
+    }
+
+    public Call<ResponseBody> getEventDetailsPdf(int eventId) {
+        return eventApi.getEventDetailsPdf(eventId);
     }
 
     public Call<List<MinimalEventDTO>> GetTop5Events() {

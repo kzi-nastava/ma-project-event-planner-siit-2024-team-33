@@ -20,7 +20,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.data.dto.serviceReservationDTO.CreatedServiceReservationDTO;
 import com.example.myapplication.data.dto.serviceReservationDTO.PostServiceReservationDTO;
-import com.example.myapplication.data.services.EventService;
+import com.example.myapplication.data.services.event.EventService;
 import com.example.myapplication.data.services.ServiceReservationService;
 
 import java.util.ArrayList;

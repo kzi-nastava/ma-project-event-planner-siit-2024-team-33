@@ -1,4 +1,4 @@
-package com.example.myapplication.data.api;
+package com.example.myapplication.data.api.user;
 
 import com.example.myapplication.data.dto.providerDTO.ProviderDetailsDTO;
 

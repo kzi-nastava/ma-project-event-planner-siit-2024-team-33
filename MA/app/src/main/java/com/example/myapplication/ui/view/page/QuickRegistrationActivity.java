@@ -20,7 +20,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.data.dto.userDTO.RegisterUser;
 import com.example.myapplication.data.dto.userDTO.RegisteredUser;
 import com.example.myapplication.ui.view.page.authentication.LoginFragment;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.user.UsersService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;

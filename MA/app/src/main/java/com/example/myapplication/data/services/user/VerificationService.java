@@ -1,6 +1,7 @@
-package com.example.myapplication.data.services;
+package com.example.myapplication.data.services.user;
 
 import com.example.myapplication.data.api.user.VerificationAPI;
+import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;

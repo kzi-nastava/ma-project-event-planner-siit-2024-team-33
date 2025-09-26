@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.myapplication.data.dto.notificationDTO.GetNotificationDTO;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.utils.NotificationUtils;
 import com.example.myapplication.utils.Settings;
 import com.google.gson.Gson;

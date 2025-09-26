@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.data.models.AuthentifiedUser;
-import com.example.myapplication.data.services.AuthenticationService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.google.gson.Gson;
 
 public class ProfilePopupViewModel extends ViewModel {

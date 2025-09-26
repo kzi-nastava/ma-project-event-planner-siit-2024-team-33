@@ -1,4 +1,4 @@
-package com.example.myapplication.data.api;
+package com.example.myapplication.data.api.user;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

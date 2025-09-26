@@ -1,4 +1,4 @@
-package com.example.myapplication.data.services;
+package com.example.myapplication.data.services.authentication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import com.example.myapplication.data.dto.LoginDTO.LoginRequest;
 import com.example.myapplication.data.dto.userDTO.GetUserDTO;
 import com.example.myapplication.data.dto.userDTO.UpdatePassword;
 import com.example.myapplication.data.models.AuthentifiedUser;
+import com.example.myapplication.data.services.ApiClient;
+import com.example.myapplication.data.services.ChatWebsocketService;
 import com.google.gson.Gson;
 
 import retrofit2.Call;

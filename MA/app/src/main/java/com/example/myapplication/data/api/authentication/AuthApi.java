@@ -1,8 +1,7 @@
-package com.example.myapplication.data.api;
+package com.example.myapplication.data.api.authentication;
 
 import com.example.myapplication.data.dto.LoginDTO.AuthResponse;
 import com.example.myapplication.data.dto.LoginDTO.LoginRequest;
-import com.example.myapplication.data.models.EmailRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

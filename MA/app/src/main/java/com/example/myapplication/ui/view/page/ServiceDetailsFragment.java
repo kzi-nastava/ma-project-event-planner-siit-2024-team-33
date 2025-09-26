@@ -22,7 +22,7 @@ import com.example.myapplication.data.dto.serviceDTO.ServiceDetailsDTO;
 import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.data.services.FavoritesService;
 import com.example.myapplication.data.services.ServiceService;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.user.UsersService;
 
 import java.util.ArrayList;
 

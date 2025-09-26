@@ -1,4 +1,4 @@
-package com.example.myapplication.data.api;
+package com.example.myapplication.data.api.event;
 
 import com.example.myapplication.data.dto.PageResponse;
 import com.example.myapplication.data.dto.eventDTO.CreateEventDTO;
@@ -8,12 +8,14 @@ import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
 
 public interface EventApi {
     @GET("api/events/organizer/{id}")
@@ -24,6 +26,10 @@ public interface EventApi {
 
     @GET("api/events/top5")
     Call<List<MinimalEventDTO>> getTop5Events();
+
+    @Streaming
+    @GET("api/events/{eventId}/reports/details")
+    Call<ResponseBody> getEventDetailsPdf(@Path("eventId") int eventId);
 
     @GET("api/events/{id}")
     Call<GetEventDetails> getEventDetails(@Path("id") int eventId);

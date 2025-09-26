@@ -34,6 +34,16 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".ui.view.page.ProviderUpgradeActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.UpgradeSelectionActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.UpgradeActivity" android:exported="false"/>
@@ -45,7 +55,7 @@
         <activity android:name=".ui.view.page.navigation.MainPageActivity" android:exported="false"/>
         <activity android:name=".reports.ReportsActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.CommentsActivity" android:exported="false"/>
-        <activity android:name=".ui.view.page.EventDetailsActivity" android:exported="true"/>
+        <activity android:name=".ui.view.page.events.EventDetailsActivity" android:exported="true"/>
 
         <activity android:name=".ui.view.page.QuickRegistrationActivity" android:exported="true">
             <intent-filter>

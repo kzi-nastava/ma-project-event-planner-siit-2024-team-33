@@ -23,7 +23,7 @@ import com.example.myapplication.data.models.Availability;
 import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.data.services.FavoritesService;
 import com.example.myapplication.data.services.ProductService;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.user.UsersService;
 
 import java.util.ArrayList;
 
