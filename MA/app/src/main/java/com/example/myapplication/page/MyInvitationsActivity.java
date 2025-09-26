@@ -42,7 +42,6 @@ public class MyInvitationsActivity extends AppCompatActivity implements Invitati
         recyclerView = findViewById(R.id.recyclerInvitations);
         btnPrev = findViewById(R.id.btnPrev);
         btnNext = findViewById(R.id.btnNext);
-        btnDeleteHandled = findViewById(R.id.btnDeleteHandled);
 
         invitationService = new InvitationService();
 
