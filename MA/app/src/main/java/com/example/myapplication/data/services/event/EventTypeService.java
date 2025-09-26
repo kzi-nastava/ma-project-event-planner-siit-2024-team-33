@@ -1,6 +1,6 @@
 package com.example.myapplication.data.services;
 
-import com.example.myapplication.data.api.EventTypesApi;
+import com.example.myapplication.data.api.event.EventTypesApi;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.utils.Settings;
 

@@ -1,6 +1,6 @@
 package com.example.myapplication.data.services;
 
-import com.example.myapplication.data.api.EventApi;
+import com.example.myapplication.data.api.event.EventApi;
 import com.example.myapplication.data.dto.PageResponse;
 import com.example.myapplication.data.dto.eventDTO.CreateEventDTO;
 import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;

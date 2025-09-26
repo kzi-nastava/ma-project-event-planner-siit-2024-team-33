@@ -1,6 +1,6 @@
 package com.example.myapplication.data.services;
 
-import com.example.myapplication.data.api.ProviderApi;
+import com.example.myapplication.data.api.user.ProviderApi;
 import com.example.myapplication.data.dto.providerDTO.ProviderDetailsDTO;
 import com.example.myapplication.utils.Settings;
 

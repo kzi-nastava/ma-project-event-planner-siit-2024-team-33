@@ -1,6 +1,6 @@
 package com.example.myapplication.data.services;
 
-import com.example.myapplication.data.api.VerificationAPI;
+import com.example.myapplication.data.api.user.VerificationAPI;
 import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;
