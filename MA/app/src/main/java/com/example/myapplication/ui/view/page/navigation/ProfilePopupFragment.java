@@ -26,6 +26,7 @@ import com.example.myapplication.ui.view.page.ProfilePage;
 import com.example.myapplication.ui.view.page.OfferCategoriesFragment;
 import com.example.myapplication.ui.view.page.UpgradeSelectionActivity;
 import com.example.myapplication.ui.view.page.authentication.LoginFragment;
+import com.example.myapplication.ui.view.page.event.EventCreationFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileFavoritesFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileInformationFragment;
 import com.example.myapplication.ui.view.page.authentication.ProfileTypeFragment;
@@ -177,7 +178,10 @@ public class ProfilePopupFragment extends Fragment {
             openFragment(ProfileScheduleFragment.newInstance());
         });
 
-        createEventButton.setOnClickListener(v -> openFragment(EventCreation.newInstance()));
+        createEventButton.setOnClickListener(v -> {
+            closeDrawer();
+            openFragment(EventCreationFragment.newInstance());
+        });
 
         budgetButton.setOnClickListener(v -> openFragment(BudgetPage.newInstance()));
 

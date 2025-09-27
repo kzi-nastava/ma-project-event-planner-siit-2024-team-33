@@ -191,7 +191,7 @@ public class ProductDetailsFragment extends Fragment {
 
         for (MinimalEventTypeDTO event : product.validEvents) {
             TextView chip = new TextView(getContext());
-            chip.setText(event.name);
+            chip.setText(event.getName());
             chip.setPadding(24, 12, 24, 12);
             chip.setTextColor(getResources().getColor(R.color.nonchalant_blue));
             chip.setBackgroundResource(R.drawable.rounded_corners); // Use drawable with rounded bg
