@@ -157,11 +157,11 @@ public class EventCreationFragment extends Fragment {
         mapView.getOverlays().add(scaleBarOverlay);
 
         mapView.setTileSource(new XYTileSource(
-                "CartoDB Voyager",  // Name
-                0, 19,              // min/max zoom
-                256,                // tile size
-                ".png",             // extension
-                new String[]{"https://a.basemaps.cartocdn.com/rastertiles/voyager/"}  // URLs
+                "CartoDB Voyager",  
+                0, 19,
+                256,
+                ".png",
+                new String[]{"https://a.basemaps.cartocdn.com/rastertiles/voyager/"}
         ));
         inputLocation.setOnClickListener(v -> {
             if (mapView.getVisibility() == View.GONE) {
