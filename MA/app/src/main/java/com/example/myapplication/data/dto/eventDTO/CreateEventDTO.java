@@ -2,6 +2,7 @@ package com.example.myapplication.data.dto.eventDTO;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CreateEventDTO {
@@ -18,7 +19,7 @@ public class CreateEventDTO {
     private Double longitude;
 
     private Set<CreateEventActivityDTO> eventActivities = new HashSet<>();
-    private Set<String> privateInvitations;
+    private List<String> privateInvitations;
 
     public CreateEventDTO() {}
 
@@ -45,6 +46,6 @@ public class CreateEventDTO {
     public void setLongitude(Double longitude) { this.longitude = longitude; }
     public Set<CreateEventActivityDTO> getEventActivities() { return eventActivities; }
     public void setEventActivities(Set<CreateEventActivityDTO> eventActivities) { this.eventActivities = eventActivities; }
-    public Set<String> getPrivateInvitations() { return privateInvitations; }
-    public void setPrivateInvitations(Set<String> privateInvitations) { this.privateInvitations = privateInvitations; }
+    public List<String> getPrivateInvitations() { return privateInvitations; }
+    public void setPrivateInvitations(List<String> privateInvitations) { this.privateInvitations = privateInvitations; }
 }

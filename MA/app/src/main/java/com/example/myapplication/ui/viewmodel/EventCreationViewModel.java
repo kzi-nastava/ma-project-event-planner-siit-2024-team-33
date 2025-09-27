@@ -74,7 +74,7 @@ public class EventCreationViewModel extends ViewModel {
 
     public void createEvent(String name, String description, int capacity, String location,
                             Calendar start, Calendar end, MinimalEventTypeDTO type,
-                            boolean isPrivate, List<String> activities, Set<String> invites) {
+                            boolean isPrivate, List<String> activities, List<String> invites, double longitude, double latitude) {
         CreateEventDTO dto = new CreateEventDTO();
         dto.setName(name);
         dto.setDescription(description);
@@ -86,8 +86,8 @@ public class EventCreationViewModel extends ViewModel {
         dto.setIsPrivate(isPrivate);
         dto.setPrivateInvitations(invites);
         //fake
-        dto.setLongitude(22.0);
-        dto.setLatitude(22.0);
+        dto.setLongitude(longitude);
+        dto.setLatitude(latitude);
 
         //converting activity names to DTOs
         Set<CreateEventActivityDTO> activitySet = new HashSet<>();

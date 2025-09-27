@@ -1,7 +1,13 @@
 package com.example.myapplication.ui.view.page.event;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
+import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,6 +39,13 @@ import com.example.myapplication.ui.viewmodel.EventCreationViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.osmdroid.api.IGeoPoint;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.compass.CompassOverlay;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -66,6 +80,9 @@ public class EventCreationFragment extends Fragment {
     private Spinner spinnerEventType;
     private RadioGroup radioGroupPrivacy;
 
+    private LinearLayout emailContainer;
+    private Button btnAddEmail;
+    private List<EditText> emailInputs = new ArrayList<>();
 
 
     //event activities fields
@@ -74,7 +91,8 @@ public class EventCreationFragment extends Fragment {
     private TimePicker timePickerStartEa, timePickerEndEa;
     private Button btnAddActivity;
     private LinearLayout activitiesContainer;
-
+    double lat = 0;
+    double lon =0;
 
 
     private Button btnConfirm;
@@ -95,6 +113,7 @@ public class EventCreationFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_creation2, container, false);
 
+
         //mandatory data
         inputEventName = view.findViewById(R.id.inputName);
         inputDescription = view.findViewById(R.id.inputDescription);
@@ -113,6 +132,97 @@ public class EventCreationFragment extends Fragment {
         dateEndError = view.findViewById(R.id.dateEndError);
         radioGroupPrivacy = view.findViewById(R.id.radioGroupPrivacy);
         privateFormSection = view.findViewById(R.id.privateFormSection);
+
+        //MAP STUFF
+        MapView mapView = view.findViewById(R.id.osmMap);
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+        mapView.setMultiTouchControls(true);
+        mapView.setBuiltInZoomControls(true);
+        mapView.setScrollableAreaLimitLatitude(MapView.getTileSystem().getMaxLatitude(),
+                MapView.getTileSystem().getMinLatitude(),
+                0);
+
+        mapView.setMinZoomLevel(2.0);
+        mapView.setMaxZoomLevel(20.0);
+
+        mapView.getController().setZoom(2.0);
+        mapView.getController().setCenter(new org.osmdroid.util.GeoPoint(20.0, 0.0));
+        mapView.setTileSource(TileSourceFactory.USGS_TOPO);
+
+        CompassOverlay compassOverlay = new CompassOverlay(requireContext(), mapView);
+        compassOverlay.enableCompass();
+        mapView.getOverlays().add(compassOverlay);
+
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mapView);
+        mapView.getOverlays().add(scaleBarOverlay);
+
+        mapView.setTileSource(new XYTileSource(
+                "CartoDB Voyager",  // Name
+                0, 19,              // min/max zoom
+                256,                // tile size
+                ".png",             // extension
+                new String[]{"https://a.basemaps.cartocdn.com/rastertiles/voyager/"}  // URLs
+        ));
+        inputLocation.setOnClickListener(v -> {
+            if (mapView.getVisibility() == View.GONE) {
+                mapView.setVisibility(View.VISIBLE);
+            } else {
+                mapView.setVisibility(View.GONE);
+            }
+        });
+
+        MapEventsReceiver receiver = new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                lat = p.getLatitude();
+                lon = p.getLongitude();
+
+                Geocoder geocoder = new Geocoder(requireContext());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(lat, lon, 1);
+                    if (!addresses.isEmpty()) {
+                        Address address = addresses.get(0);
+
+                        String city = address.getLocality();
+                        String country = address.getCountryName();
+
+                        if (city == null) {
+                            city = address.getSubAdminArea();
+                        }
+                        if (city == null) {
+                            city = "Unknown city";
+                        }
+
+                        inputLocation.setText(city + ", " + country);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                mapView.setVisibility(View.GONE);
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        };
+
+        MapEventsOverlay overlay = new MapEventsOverlay(receiver);
+        mapView.getOverlays().add(overlay);
+
+
+        mapView.setOnClickListener(View::performClick);
+
+
+        //EMAIL STUFF
+        privateFormSection = view.findViewById(R.id.privateFormSection);
+        emailContainer = view.findViewById(R.id.emailContainer);
+        btnAddEmail = view.findViewById(R.id.btnAddEmail);
+        addEmailField();
+        btnAddEmail.setOnClickListener(v -> addEmailField());
+
 
         //event activities
         activitiesContainer = view.findViewById(R.id.activitiesContainer);
@@ -265,8 +375,19 @@ public class EventCreationFragment extends Fragment {
 
             boolean isPrivate = radioGroupPrivacy.getCheckedRadioButtonId() == R.id.radioPrivate;
 
+            List<String> invites = new ArrayList<String>();
+            for(EditText et: emailInputs){
+                String email = et.getText().toString().trim();
+                if(invites.contains(email))
+                    continue;
+                if(!email.isEmpty()){
+                    invites.add(email);
+                }
+            }
+
+
             viewModel.createEvent(name, description, capacity, location,
-                    start, end, selectedEventType, isPrivate, activities, null);
+                    start, end, selectedEventType, isPrivate, activities, invites,lon,lat);
         });
         //checking if creation was successful
         viewModel.getCreationSuccess().observe(getViewLifecycleOwner(), success -> {
@@ -319,6 +440,23 @@ public class EventCreationFragment extends Fragment {
         }
         return names;
     }
+
+    private void addEmailField() {
+        EditText emailInput = new EditText(requireContext());
+        emailInput.setHint("Enter email for invitation");
+        emailInput.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 8, 0, 8);
+        emailInput.setLayoutParams(params);
+
+        emailContainer.addView(emailInput);
+        emailInputs.add(emailInput);
+    }
+
 
     public MinimalEventTypeDTO getSelectedEventType() {
         return selectedEventType;
