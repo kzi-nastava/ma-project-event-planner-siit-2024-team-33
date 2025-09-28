@@ -29,7 +29,7 @@ import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.data.dto.offerDTO.OfferFilterDTO;
 import com.example.myapplication.data.models.Availability;
 import com.example.myapplication.data.models.OfferType;
-import com.example.myapplication.data.services.EventTypeService;
+import com.example.myapplication.data.services.event.EventTypeService;
 import com.example.myapplication.data.services.OfferService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;

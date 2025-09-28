@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.services.VerificationService;
+import com.example.myapplication.data.services.user.VerificationService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

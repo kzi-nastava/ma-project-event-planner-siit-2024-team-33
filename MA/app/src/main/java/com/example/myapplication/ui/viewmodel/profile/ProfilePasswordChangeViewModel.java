@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.data.models.AuthentifiedUser;
-import com.example.myapplication.data.services.AuthenticationService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
 
 public class ProfilePasswordChangeViewModel extends ViewModel {
 

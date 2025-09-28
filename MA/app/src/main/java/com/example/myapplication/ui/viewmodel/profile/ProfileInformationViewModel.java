@@ -10,8 +10,8 @@ import com.example.myapplication.data.dto.userDTO.GetUserDTO;
 import com.example.myapplication.data.dto.userDTO.UpdateUser;
 import com.example.myapplication.data.dto.userDTO.UpdatedUser;
 import com.example.myapplication.data.models.AuthentifiedUser;
-import com.example.myapplication.data.services.AuthenticationService;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
+import com.example.myapplication.data.services.user.UsersService;
 
 import java.util.Arrays;
 import java.util.List;

@@ -29,7 +29,7 @@ import com.example.myapplication.data.dto.budgetDTO.MinimalBudgetItemDTO;
 import com.example.myapplication.data.dto.budgetDTO.PostBudgetItemDTO;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.data.services.BudgetService;
-import com.example.myapplication.data.services.EventService;
+import com.example.myapplication.data.services.event.EventService;
 
 import java.util.List;
 import java.util.stream.Collectors;

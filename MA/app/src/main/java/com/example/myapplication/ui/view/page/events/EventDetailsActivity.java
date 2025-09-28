@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.events;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.reviews.ReviewsSectionView;
-import com.example.myapplication.data.services.EventService;
+import com.example.myapplication.data.services.event.EventService;
 import com.example.myapplication.data.services.NotificationService;
 import com.example.myapplication.data.services.RatingService;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.user.UsersService;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;

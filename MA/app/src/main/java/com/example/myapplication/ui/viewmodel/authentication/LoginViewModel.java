@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.models.AuthentifiedUser;
-import com.example.myapplication.data.services.AuthenticationService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
 
 public class LoginViewModel extends AndroidViewModel implements AuthenticationService.LoginCallback {
     private final AuthenticationService authService;

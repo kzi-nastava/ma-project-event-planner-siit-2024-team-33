@@ -26,11 +26,12 @@ import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.data.dto.invitationDTO.SimpleInvitation;
 import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.data.services.ApiClient;
-import com.example.myapplication.data.services.AuthenticationService;
-import com.example.myapplication.data.services.EventService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
+import com.example.myapplication.data.services.event.EventService;
 import com.example.myapplication.data.services.InvitationService;
 import com.example.myapplication.data.services.NotificationWebSocketClient;
 import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
 import com.example.myapplication.utils.NotificationUtils;
 
 import java.util.List;
@@ -226,9 +227,16 @@ public class HomePage extends Fragment {
                 itemText.setText(event.getDescription());
 
                 cardView.setOnClickListener(v -> {
-                    Intent intent = new Intent(requireContext(), EventDetailsActivity.class);
-                    intent.putExtra("eventId", event.getId());
-                    startActivity(intent);
+                    EventDetailsFragment fragment = new EventDetailsFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("eventId", event.getId());
+                    fragment.setArguments(args);
+
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.nav_host_fragment, fragment, "EventDetailsFragment")
+                            .addToBackStack(null)
+                            .commit();
                 });
 
                 parentLayout.addView(cardView);

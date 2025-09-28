@@ -14,8 +14,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.dto.userDTO.RegisterUser;
 import com.example.myapplication.data.dto.userDTO.RegisteredUser;
-import com.example.myapplication.data.services.AuthenticationService;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
+import com.example.myapplication.data.services.user.UsersService;
 
 import java.io.ByteArrayOutputStream;
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.data.services;
+package com.example.myapplication.data.services.authentication;
 
 import java.io.IOException;
 

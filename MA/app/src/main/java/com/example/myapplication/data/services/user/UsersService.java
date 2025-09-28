@@ -1,15 +1,14 @@
-package com.example.myapplication.data.services;
+package com.example.myapplication.data.services.user;
 
-import com.example.myapplication.data.api.UserApi;
+import com.example.myapplication.data.api.user.UserApi;
 import com.example.myapplication.data.dto.userDTO.GetUserDTO;
 import com.example.myapplication.data.dto.userDTO.RegisterUser;
 import com.example.myapplication.data.dto.userDTO.RegisteredUser;
-import com.example.myapplication.data.dto.userDTO.UpdatePassword;
 import com.example.myapplication.data.dto.userDTO.UpdateUser;
 import com.example.myapplication.data.dto.userDTO.UpdatedUser;
-import com.example.myapplication.data.models.AuthResponse;
 import com.example.myapplication.data.models.UpgradeRequest;
 import com.example.myapplication.data.models.UpgradeUser;
+import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;

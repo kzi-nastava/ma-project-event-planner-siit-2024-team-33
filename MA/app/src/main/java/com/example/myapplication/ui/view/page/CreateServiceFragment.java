@@ -36,7 +36,7 @@ import com.example.myapplication.data.dto.serviceDTO.PostServiceDTO;
 import com.example.myapplication.data.dto.serviceDTO.PutServiceDTO;
 import com.example.myapplication.data.dto.serviceDTO.ServiceDetailsDTO;
 import com.example.myapplication.data.models.Availability;
-import com.example.myapplication.data.services.EventTypeService;
+import com.example.myapplication.data.services.event.EventTypeService;
 import com.example.myapplication.data.services.OfferCategoryService;
 import com.example.myapplication.data.services.ServiceService;
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.IOUtils;

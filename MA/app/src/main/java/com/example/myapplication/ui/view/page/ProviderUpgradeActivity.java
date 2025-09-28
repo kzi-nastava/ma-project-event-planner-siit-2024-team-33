@@ -12,8 +12,8 @@ import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.data.models.UpgradeRequest;
 import com.example.myapplication.data.models.UpgradeUser;
 import com.example.myapplication.ui.view.page.navigation.MainPageActivity;
-import com.example.myapplication.data.services.AuthenticationService;
-import com.example.myapplication.data.services.UsersService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
+import com.example.myapplication.data.services.user.UsersService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

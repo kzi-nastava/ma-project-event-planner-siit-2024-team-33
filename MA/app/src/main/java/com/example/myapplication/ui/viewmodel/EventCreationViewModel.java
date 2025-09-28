@@ -8,8 +8,8 @@ import com.example.myapplication.data.dto.eventDTO.CreateEventActivityDTO;
 import com.example.myapplication.data.dto.eventDTO.CreateEventDTO;
 import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.data.services.EventService;
-import com.example.myapplication.data.services.EventTypeService;
+import com.example.myapplication.data.services.event.EventService;
+import com.example.myapplication.data.services.event.EventTypeService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -12,9 +12,10 @@ import com.example.myapplication.data.dto.PageResponse;
 import com.example.myapplication.data.dto.eventDTO.FilterEventDTO;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.data.services.AuthenticationService;
-import com.example.myapplication.data.services.EventService;
-import com.example.myapplication.data.services.EventTypeService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
+import com.example.myapplication.data.services.event.EventService;
+import com.example.myapplication.data.services.event.EventTypeService;
+import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -166,9 +167,17 @@ public class EventsPage extends Fragment {
                 itemText.setText(event.getDescription());
 
                 eventView.setOnClickListener(v -> {
-                    Intent intent = new Intent(requireContext(), EventDetailsActivity.class);
-                    intent.putExtra("eventId", event.getId());
-                    startActivity(intent);
+                    EventDetailsFragment fragment = new EventDetailsFragment();
+
+                    Bundle args = new Bundle();
+                    args.putInt("eventId", event.getId());
+                    fragment.setArguments(args);
+
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.nav_host_fragment, fragment, "EventDetailsFragment")
+                            .addToBackStack(null)
+                            .commit();
                 });
 
                 parentLayout.addView(eventView);

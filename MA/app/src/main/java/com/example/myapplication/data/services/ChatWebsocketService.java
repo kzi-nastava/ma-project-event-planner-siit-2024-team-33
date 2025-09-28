@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.dto.chatDTO.MessageDTO;
 import com.example.myapplication.data.dto.chatDTO.PostMessageDTO;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.utils.Settings;
 import com.google.gson.Gson;
 

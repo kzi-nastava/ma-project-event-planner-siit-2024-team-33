@@ -1,4 +1,4 @@
-package com.example.myapplication.data.api;
+package com.example.myapplication.data.api.event;
 
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 

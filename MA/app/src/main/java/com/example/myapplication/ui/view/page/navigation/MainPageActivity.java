@@ -21,7 +21,7 @@ import com.example.myapplication.ui.view.page.OfferingsPage;
 import com.example.myapplication.R;
 import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.data.services.ApiClient;
-import com.example.myapplication.data.services.AuthenticationService;
+import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.data.services.ChatWebsocketService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
