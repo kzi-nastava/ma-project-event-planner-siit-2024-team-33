@@ -32,6 +32,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.data.dto.eventDTO.CreateEventActivityDTO;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.ui.view.page.EventsPage;
 import com.example.myapplication.ui.view.page.authentication.RegistrationCompletedFragment;
@@ -89,6 +90,7 @@ public class EventCreationFragment extends Fragment {
     private TextInputEditText inputNameEa, inputDescriptionEa, inputLocationEa;
     private DatePicker datePickerStartEa, datePickerEndEa;
     private TimePicker timePickerStartEa, timePickerEndEa;
+    private TextView tvActivityError;
     private Button btnAddActivity;
     private LinearLayout activitiesContainer;
     double lat = 0;
@@ -100,7 +102,7 @@ public class EventCreationFragment extends Fragment {
     //event creation viewModel
     private EventCreationViewModel viewModel;
     private MinimalEventTypeDTO selectedEventType;
-    private List<String> activities = new ArrayList<>();
+    private List<CreateEventActivityDTO> activities = new ArrayList<>();
 
     public static EventCreationFragment newInstance() {
         return new EventCreationFragment();
@@ -112,7 +114,7 @@ public class EventCreationFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_creation2, container, false);
-
+        viewModel = new ViewModelProvider(this).get(EventCreationViewModel.class);
 
         //mandatory data
         inputEventName = view.findViewById(R.id.inputName);
@@ -132,8 +134,8 @@ public class EventCreationFragment extends Fragment {
         dateEndError = view.findViewById(R.id.dateEndError);
         radioGroupPrivacy = view.findViewById(R.id.radioGroupPrivacy);
         privateFormSection = view.findViewById(R.id.privateFormSection);
+        tvActivityError = view.findViewById(R.id.tvActivityError);
 
-        //MAP STUFF
         MapView mapView = view.findViewById(R.id.osmMap);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
@@ -215,8 +217,7 @@ public class EventCreationFragment extends Fragment {
 
         mapView.setOnClickListener(View::performClick);
 
-
-        //EMAIL STUFF
+        //email stuff
         privateFormSection = view.findViewById(R.id.privateFormSection);
         emailContainer = view.findViewById(R.id.emailContainer);
         btnAddEmail = view.findViewById(R.id.btnAddEmail);
@@ -240,27 +241,49 @@ public class EventCreationFragment extends Fragment {
 
         btnAddActivity.setOnClickListener(v -> {
             String name = inputNameEa.getText() != null ? inputNameEa.getText().toString().trim() : "";
-            if (name.isEmpty()) {
-                Toast.makeText(requireContext(), "Please enter activity name", Toast.LENGTH_SHORT).show();
-                return;
+            String desc = inputDescriptionEa.getText() != null ? inputDescriptionEa.getText().toString().trim() : "";
+            String loc = inputLocationEa.getText() != null ? inputLocationEa.getText().toString().trim() : "";
+
+            Calendar start = Calendar.getInstance();
+            start.set(datePickerStartEa.getYear(), datePickerStartEa.getMonth(), datePickerStartEa.getDayOfMonth(),
+                    timePickerStartEa.getHour(), timePickerStartEa.getMinute());
+
+            Calendar end = Calendar.getInstance();
+            end.set(datePickerEndEa.getYear(), datePickerEndEa.getMonth(), datePickerEndEa.getDayOfMonth(),
+                    timePickerEndEa.getHour(), timePickerEndEa.getMinute());
+
+            int beforeCount = activities.size();
+            viewModel.addActivity(name, desc, loc, start, end, activities);
+
+            if (activities.size() > beforeCount) {
+                CreateEventActivityDTO dto = activities.get(activities.size() - 1);
+
+                View row = LayoutInflater.from(requireContext())
+                        .inflate(R.layout.item_event_activity, activitiesContainer, false);
+                TextView tvName = row.findViewById(R.id.tvActivityName);
+                tvName.setText(dto.getName());
+
+                Button btnRemove = row.findViewById(R.id.btnRemoveActivity);
+                btnRemove.setOnClickListener(x -> {
+                    activitiesContainer.removeView(row);
+                    activities.remove(dto);
+                });
+
+                activitiesContainer.addView(row);
+
+                inputNameEa.setText("");
+                inputDescriptionEa.setText("");
+                inputLocationEa.setText("");
             }
-            activities.add(name);
-
-            View row = LayoutInflater.from(requireContext())
-                    .inflate(R.layout.item_event_activity, activitiesContainer, false);
-            TextView tvName = row.findViewById(R.id.tvActivityName);
-            tvName.setText(name);
-            Button btnRemove = row.findViewById(R.id.btnRemoveActivity);
-            btnRemove.setOnClickListener(x -> {
-                activitiesContainer.removeView(row);
-                activities.remove(name);
-            });
-            activitiesContainer.addView(row);
-
-            //clearing fields
-            inputNameEa.setText("");
-            inputDescriptionEa.setText("");
-            inputLocationEa.setText("");
+        });
+        viewModel.getActivityValidationError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null) {
+                tvActivityError.setText(error);
+                tvActivityError.setVisibility(View.VISIBLE);
+            } else {
+                tvActivityError.setText("");
+                tvActivityError.setVisibility(View.GONE);
+            }
         });
 
         //toggling privacy
@@ -271,8 +294,6 @@ public class EventCreationFragment extends Fragment {
                 privateFormSection.setVisibility(View.GONE);
             }
         });
-
-        viewModel = new ViewModelProvider(this).get(EventCreationViewModel.class);
 
         //setting up event types dropdown
         viewModel.getEventTypes().observe(getViewLifecycleOwner(), this::setupSpinner);
@@ -325,6 +346,10 @@ public class EventCreationFragment extends Fragment {
             endCalendar.set(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth(),
                     timePickerEnd.getHour(), timePickerEnd.getMinute());
             viewModel.validateDates(picked, endCalendar);
+            viewModel.setEventBounds(
+                    viewModel.calendarToLocalDateTime(picked),
+                    viewModel.calendarToLocalDateTime(endCalendar)
+            );
         });
         timePickerStart.setOnTimeChangedListener((viewTime, hourOfDay, minute) -> {
             Calendar picked = Calendar.getInstance();
@@ -334,6 +359,10 @@ public class EventCreationFragment extends Fragment {
             endCalendar.set(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth(),
                     timePickerEnd.getHour(), timePickerEnd.getMinute());
             viewModel.validateDates(picked, endCalendar);
+            viewModel.setEventBounds(
+                    viewModel.calendarToLocalDateTime(picked),
+                    viewModel.calendarToLocalDateTime(endCalendar)
+            );
         });
         datePickerEnd.setOnDateChangedListener((viewDate, year, monthOfYear, dayOfMonth) -> {
             Calendar picked = Calendar.getInstance();
@@ -343,6 +372,10 @@ public class EventCreationFragment extends Fragment {
             startCalendar.set(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth(),
                     timePickerStart.getHour(), timePickerStart.getMinute());
             viewModel.validateDates(startCalendar, picked);
+            viewModel.setEventBounds(
+                    viewModel.calendarToLocalDateTime(startCalendar),
+                    viewModel.calendarToLocalDateTime(picked)
+            );
         });
         timePickerEnd.setOnTimeChangedListener((viewTime, hourOfDay, minute) -> {
             Calendar picked = Calendar.getInstance();
@@ -352,8 +385,11 @@ public class EventCreationFragment extends Fragment {
             startCalendar.set(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth(),
                     timePickerStart.getHour(), timePickerStart.getMinute());
             viewModel.validateDates(startCalendar, picked);
+            viewModel.setEventBounds(
+                    viewModel.calendarToLocalDateTime(startCalendar),
+                    viewModel.calendarToLocalDateTime(picked)
+            );
         });
-
 
         //on confirmation of event creation
         btnConfirm.setOnClickListener(v -> {
@@ -440,7 +476,6 @@ public class EventCreationFragment extends Fragment {
         }
         return names;
     }
-
     private void addEmailField() {
         EditText emailInput = new EditText(requireContext());
         emailInput.setHint("Enter email for invitation");
@@ -455,10 +490,5 @@ public class EventCreationFragment extends Fragment {
 
         emailContainer.addView(emailInput);
         emailInputs.add(emailInput);
-    }
-
-
-    public MinimalEventTypeDTO getSelectedEventType() {
-        return selectedEventType;
     }
 }

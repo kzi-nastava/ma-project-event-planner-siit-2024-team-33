@@ -405,6 +405,15 @@
                     android:scaleX="0.7"
                     android:scaleY="0.7"/>
             </LinearLayout>
+                
+            <TextView
+                android:id="@+id/tvActivityError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="gone"
+                android:text=""
+                android:paddingTop="4dp"/>
 
             <Button
                 android:id="@+id/btnAddActivity"

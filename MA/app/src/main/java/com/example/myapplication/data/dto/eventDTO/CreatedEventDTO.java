@@ -10,13 +10,13 @@ public class CreatedEventDTO {
     private int numOfAttendees;
     private Boolean isPrivate;
     private String place;
-
-    // Use String instead of LocalDateTime
     private String dateOfEvent;
     private String endOfEvent;
 
     private Integer eventTypeId;
     private Double latitude;
+    private Double longitude;
+    private Set<CreatedEventActivityDTO> eventActivities;
 
     public Integer getId() {
         return id;
@@ -113,9 +113,4 @@ public class CreatedEventDTO {
     public void setEventActivities(Set<CreatedEventActivityDTO> eventActivities) {
         this.eventActivities = eventActivities;
     }
-
-    private Double longitude;
-    private Set<CreatedEventActivityDTO> eventActivities;
-
-    // getters & setters...
 }
