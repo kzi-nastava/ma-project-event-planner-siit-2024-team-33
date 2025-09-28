@@ -33,9 +33,8 @@ public class CommentsActivity extends Activity {
 
     private final int itemsPerPage = 10;
 
-    private int combinedCurrentPage = 1; // current combined page index, 1-based
+    private int combinedCurrentPage = 1;
 
-    // Track which API pages have been fetched (0-based)
     private int normalRatingsPage = 0;
     private int eventRatingsPage = 0;
 
@@ -84,7 +83,6 @@ public class CommentsActivity extends Activity {
                         checkAndDisplayCombined();
                     } else {
                         Toast.makeText(CommentsActivity.this, "Failed to load comments", Toast.LENGTH_SHORT).show();
-                        // On failure, rollback page increment to retry
                         if (normalRatingsPage > 0) normalRatingsPage--;
                     }
                 }
@@ -121,30 +119,25 @@ public class CommentsActivity extends Activity {
             });
         }
 
-        // If we already have enough items, display immediately
         if (!needMoreNormal && !needMoreEvent) {
             checkAndDisplayCombined();
         }
     }
 
     private void checkAndDisplayCombined() {
-        // Merge both lists
         List<Object> combinedList = new ArrayList<>();
         combinedList.addAll(allNormalRatings);
         combinedList.addAll(allEventRatings);
 
-        // Sort descending by id (adjust if you want different criteria)
         combinedList.sort((a, b) -> {
             int idA = a instanceof GetRatingDTO ? ((GetRatingDTO) a).getId() : ((EventRatingDTO) a).getId();
             int idB = b instanceof GetRatingDTO ? ((GetRatingDTO) b).getId() : ((EventRatingDTO) b).getId();
             return Integer.compare(idB, idA);
         });
 
-        // Pagination indices
         int startIndex = (combinedCurrentPage - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, combinedList.size());
 
-        // If requested page is out of range, fix combinedCurrentPage
         if (startIndex >= combinedList.size() && combinedCurrentPage > 1) {
             combinedCurrentPage--;
             checkAndDisplayCombined();
@@ -188,13 +181,11 @@ public class CommentsActivity extends Activity {
             commentsList.addView(commentView);
         }
 
-        // Enable/disable pagination buttons
         previousPageButton.setEnabled(combinedCurrentPage > 1);
         nextPageButton.setEnabled(endIndex < combinedList.size());
     }
 
     private void approveComment(int commentId) {
-        // Find out if the commentId belongs to EventRating or normal Rating by checking lists
         boolean isEventRating = allEventRatings.stream().anyMatch(r -> r.getId() == commentId);
 
         Call<Void> call;
