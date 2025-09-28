@@ -1,21 +1,51 @@
 package com.example.myapplication.data.dto.eventDTO;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CreateEventDTO {
-    public String name;
-    public String description;
-    public int numOfAttendees;
-    public Boolean isPrivate;
-    public String place;
-    public String dateOfEvent;
-    public String endOfEvent;
-    public Integer eventTypeId;
+    private String name;
+    private String description;
+    private int numOfAttendees;
+    private Boolean isPrivate;
+    private String place;
+    private String dateOfEvent;
+    private String endOfEvent;
+    private Integer eventTypeId;
 
-    public Double latitude;
-    public Double longitude;
+    private Double latitude;
+    private Double longitude;
 
-    public Set<CreateEventActivityDTO> eventActivities = new HashSet<>();
-    public Set<String> privateInvitations;
+    private Set<CreateEventActivityDTO> eventActivities = new HashSet<>();
+    private List<String> privateInvitations;
+
+    public CreateEventDTO() {}
+
+    // getters and setters
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public int getNumOfAttendees() { return numOfAttendees; }
+    public void setNumOfAttendees(int numOfAttendees) { this.numOfAttendees = numOfAttendees; }
+    public Boolean getIsPrivate() { return isPrivate; }
+    public void setIsPrivate(Boolean isPrivate) { this.isPrivate = isPrivate; }
+    public String getPlace() { return place; }
+    public void setPlace(String place) { this.place = place; }
+    public String getDateOfEvent() { return dateOfEvent; }
+    public void setDateOfEvent(String dateOfEvent) { this.dateOfEvent = dateOfEvent; }
+    public String getEndOfEvent() { return endOfEvent; }
+    public void setEndOfEvent(String endOfEvent) { this.endOfEvent = endOfEvent; }
+    public Integer getEventTypeId() { return eventTypeId; }
+    public void setEventTypeId(Integer eventTypeId) { this.eventTypeId = eventTypeId; }
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
+    public Set<CreateEventActivityDTO> getEventActivities() { return eventActivities; }
+    public void setEventActivities(Set<CreateEventActivityDTO> eventActivities) { this.eventActivities = eventActivities; }
+    public List<String> getPrivateInvitations() { return privateInvitations; }
+    public void setPrivateInvitations(List<String> privateInvitations) { this.privateInvitations = privateInvitations; }
 }

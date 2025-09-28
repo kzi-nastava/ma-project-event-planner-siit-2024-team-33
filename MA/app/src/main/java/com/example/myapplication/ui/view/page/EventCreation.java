@@ -65,7 +65,7 @@ public class EventCreation extends Fragment {
     }
 
     public void onCreateClicked(){
-        CreateEventActivityDTO activityDTO = new CreateEventActivityDTO();
+        /*CreateEventActivityDTO activityDTO = new CreateEventActivityDTO();
         activityDTO.name = "Becej aktiviti";
         activityDTO.location = "Becej, Srbija";
         activityDTO.startingTime = LocalDateTime.of(2025, 9, 2, 0, 0).toString();
@@ -99,6 +99,6 @@ public class EventCreation extends Fragment {
             public void onFailure(Call<CreatedEventDTO> call, Throwable t) {
                 Toast.makeText(getContext(), "SUCCESS!", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }
