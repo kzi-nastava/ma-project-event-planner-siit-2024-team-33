@@ -5,6 +5,7 @@ import com.example.myapplication.data.dto.eventDTO.CreateEventDTO;
 import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;
 import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.JoinedEventDTO;
 
 import java.util.List;
 
@@ -31,6 +32,10 @@ public interface EventApi {
     @GET("api/events/{eventId}/reports/details")
     Call<ResponseBody> getEventDetailsPdf(@Path("eventId") int eventId);
 
+    @Streaming
+    @GET("api/events/{eventId}/reports/statistics")
+    Call<ResponseBody> getEventStatisticsPdf(@Path("eventId") int eventId);
+
     @GET("api/events/{id}")
     Call<GetEventDetails> getEventDetails(@Path("id") int eventId);
     @GET("api/events/rest")
@@ -53,4 +58,7 @@ public interface EventApi {
 
     @POST("api/events")
     Call<CreatedEventDTO> createEvent(@Body CreateEventDTO data);
+
+    @POST("api/events/{eventId}/join")
+    Call<JoinedEventDTO> joinEvent(@Path("eventId") int eventId, @Body Object emptyBody);
 }

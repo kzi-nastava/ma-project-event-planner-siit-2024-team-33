@@ -16,8 +16,6 @@ public class GetEventDetails {
     private MinimalOrganizerDTO minimalOrganizer;
     private MinimalEventTypeDTO minimalEventType;
 
-    // Getters and setters
-
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -54,7 +52,6 @@ public class GetEventDetails {
     public MinimalEventTypeDTO getMinimalEventType() { return minimalEventType; }
     public void setMinimalEventType(MinimalEventTypeDTO minimalEventType) { this.minimalEventType = minimalEventType; }
 
-    // Nested DTO classes:
 
     public static class MinimalOrganizerDTO {
         private String email;

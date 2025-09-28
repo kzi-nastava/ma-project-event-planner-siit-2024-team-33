@@ -7,6 +7,7 @@ import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;
 import com.example.myapplication.data.dto.eventDTO.FilterEventDTO;
 import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.JoinedEventDTO;
 import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
@@ -64,5 +65,13 @@ public class EventService {
 
     public Call<CreatedEventDTO> createEvent(CreateEventDTO data){
         return eventApi.createEvent(data);
+    }
+
+    public Call<JoinedEventDTO> joinEvent(int eventId) {
+        return eventApi.joinEvent(eventId, new Object());
+    }
+
+    public Call<ResponseBody> getEventStatisticsPdf(int eventId) {
+        return eventApi.getEventStatisticsPdf(eventId);
     }
 }

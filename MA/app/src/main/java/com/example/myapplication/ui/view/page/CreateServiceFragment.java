@@ -311,10 +311,10 @@ public class CreateServiceFragment extends Fragment {
 
         for (MinimalEventTypeDTO eventType : eventTypes) {
             CheckBox checkBox = new CheckBox(requireContext());
-            checkBox.setText(eventType.name);
-            checkBox.setTag(eventType.id);
+            checkBox.setText(eventType.getName());
+            checkBox.setTag(eventType.getId());
             if(checkedTypes != null)
-                checkBox.setChecked(checkedTypes.stream().anyMatch(o -> o.name.equals(eventType.name)));
+                checkBox.setChecked(checkedTypes.stream().anyMatch(o -> o.getName().equals(eventType.getName())));
 
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Integer id = (Integer) buttonView.getTag();

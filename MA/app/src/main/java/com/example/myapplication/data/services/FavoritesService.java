@@ -1,6 +1,7 @@
 package com.example.myapplication.data.services;
 
 import com.example.myapplication.data.api.FavoriteApi;
+import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.utils.Settings;
 
 import retrofit2.Call;
@@ -23,5 +24,17 @@ public class FavoritesService {
 
     public Call<Void> removeOfferFromFavorites(Integer offerId){
         return favoritesApi.removeOfferFromFavorites(offerId);
+    }
+
+    public Call<Boolean> isEventFavorite(Integer eventId) {
+        return favoritesApi.isEventFavorite(eventId);
+    }
+
+    public Call<MinimalEventDTO> addEventToFavorites(Integer eventId) {
+        return favoritesApi.addEventToFavorites(eventId);
+    }
+
+    public Call<MinimalEventDTO> removeEventFromFavorites(Integer eventId) {
+        return favoritesApi.removeEventFromFavorites(eventId);
     }
 }

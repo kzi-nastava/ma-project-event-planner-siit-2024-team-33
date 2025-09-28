@@ -47,7 +47,7 @@ public class EventDetailsFragment extends Fragment {
     private MapView osmMap;
 
     private TextView tvEventTitle, tvEventDescription, tvOrganizer, tvLocation, tvStartTime, tvEndTime, tvAttendees, tvEventType;
-    private Button btnFavorite, btnPdf;
+    private Button btnJoin, btnAddFavorite, btnRemoveFavorite, btnPdf, btnPdfStats;
     private LinearLayout starContainer;
     private ReviewsSectionView reviewsSection;
     private EventDetailsViewModel viewModel;
@@ -70,7 +70,9 @@ public class EventDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(EventDetailsViewModel.class);
 
+        //initialization
         tvEventTitle = view.findViewById(R.id.tvEventTitle);
         tvEventDescription = view.findViewById(R.id.valueDescription);
         tvOrganizer = view.findViewById(R.id.tvOrganizer);
@@ -84,7 +86,11 @@ public class EventDetailsFragment extends Fragment {
         reviewsSection = view.findViewById(R.id.reviewsSection);
         osmMap = view.findViewById(R.id.osmMap);
 
+        btnJoin = view.findViewById(R.id.btnJoin);
+        btnAddFavorite = view.findViewById(R.id.btnAddFav);
+        btnRemoveFavorite = view.findViewById(R.id.btnRemoveFav);
         btnPdf = view.findViewById(R.id.btnPdf);
+        btnPdfStats = view.findViewById(R.id.btnPdfStats);
 
         if (getArguments() != null) {
             eventId = getArguments().getInt("eventId", -1);
@@ -94,10 +100,11 @@ public class EventDetailsFragment extends Fragment {
             return;
         }
 
-        viewModel = new ViewModelProvider(this).get(EventDetailsViewModel.class);
-
-        //obeserving fetching data
-        viewModel.getEventDetailsLiveData().observe(getViewLifecycleOwner(), this::populateEventDetails);
+        //observing fetching data
+        viewModel.getEventDetailsLiveData().observe(getViewLifecycleOwner(), eventDetails -> {
+            populateEventDetails(eventDetails);
+            setupButtons(eventDetails);
+        });
         viewModel.getErrorLiveData().observe(getViewLifecycleOwner(), msg ->
                 Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show()
         );
@@ -105,49 +112,54 @@ public class EventDetailsFragment extends Fragment {
         viewModel.fetchEventDetails(eventId);
         fetchReviews();
 
-        btnPdf.setOnClickListener(v -> {
-            EventService eventService = new EventService();
-            eventService.getEventDetailsPdf(eventId).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        try {
-                            // Save to cache
-                            File pdfFile = new File(requireContext().getCacheDir(), "event-details.pdf");
-                            FileOutputStream fos = new FileOutputStream(pdfFile);
-                            fos.write(response.body().bytes());
-                            fos.close();
-
-                            // Open with external PDF viewer
-                            Uri pdfUri = FileProvider.getUriForFile(
-                                    requireContext(),
-                                    requireContext().getPackageName() + ".fileprovider",
-                                    pdfFile
-                            );
-
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setDataAndType(pdfUri, "application/pdf");
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-                            startActivity(intent);
-
-                        } catch (Exception e) {
-                            Toast.makeText(requireContext(), "Error opening PDF", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast.makeText(requireContext(), "Failed to download PDF", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(requireContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+        //joining event
+        viewModel.getJoinResult().observe(getViewLifecycleOwner(), joinedEventDTO -> {
+            Toast.makeText(getContext(), "Successfully joined the event", Toast.LENGTH_SHORT).show();
+            tvAttendees.setText(joinedEventDTO.getNumOfCurrentlyApplied() + " / " + joinedEventDTO.getNumOfAttendees());
+            btnJoin.setEnabled(false);
         });
-    }
+        viewModel.getJoinError().observe(getViewLifecycleOwner(), errorMsg -> {
+            Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+            btnJoin.setEnabled(false);
+        });
+        btnJoin.setOnClickListener(v -> viewModel.joinEvent(eventId));
 
+        //observing favorites
+        viewModel.getIsFavoriteLiveData().observe(getViewLifecycleOwner(), isFav -> {
+            if (isFav != null && isFav) {
+                btnAddFavorite.setVisibility(View.GONE);
+                btnRemoveFavorite.setVisibility(View.VISIBLE);
+            } else {
+                btnAddFavorite.setVisibility(View.VISIBLE);
+                btnRemoveFavorite.setVisibility(View.GONE);
+            }
+        });
+        btnAddFavorite.setOnClickListener(v -> viewModel.addToFavorites(eventId));
+        btnRemoveFavorite.setOnClickListener(v -> viewModel.removeFromFavorites(eventId));
+        viewModel.checkIfFavorite(eventId);
+
+        //handling working with pdfs
+        btnPdf.setOnClickListener(v -> viewModel.downloadEventPdf(eventId, "details", new EventDetailsViewModel.PdfDownloadCallback() {
+            @Override
+            public void onSuccess(File pdfFile) {
+                openPdfFile(pdfFile);
+            }
+            @Override
+            public void onError(String message) {
+                Toast.makeText(requireContext(), "Download failed: " + message, Toast.LENGTH_SHORT).show();
+            }
+        }));
+        btnPdfStats.setOnClickListener(v -> viewModel.downloadEventPdf(eventId, "statistics", new EventDetailsViewModel.PdfDownloadCallback() {
+            @Override
+            public void onSuccess(File pdfFile) {
+                openPdfFile(pdfFile);
+            }
+            @Override
+            public void onError(String message) {
+                Toast.makeText(requireContext(), "Download failed: " + message, Toast.LENGTH_SHORT).show();
+            }
+        }));
+    }
 
     private void populateEventDetails(GetEventDetails res) {
         if (res == null) return;
@@ -165,7 +177,6 @@ public class EventDetailsFragment extends Fragment {
         tvEventType.setText("Event Type: " + (res.getMinimalEventType() != null ? res.getMinimalEventType().getName() : "N/A"));
         tvEventDescription.setText(res.getDescription() != null ? res.getDescription() : "No description available.");
 
-        // Format times
         DateTimeFormatter isoFormatter = DateTimeFormatter.ISO_DATE_TIME;
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
@@ -181,7 +192,6 @@ public class EventDetailsFragment extends Fragment {
             e.printStackTrace();
         }
 
-        // Setup map
         double latitude = res.getLatitude();
         double longitude = res.getLongitude();
 
@@ -198,6 +208,18 @@ public class EventDetailsFragment extends Fragment {
         osmMap.getOverlays().add(marker);
     }
 
+    private void setupButtons(GetEventDetails eventDetails) {
+        boolean isOrganizer = viewModel.isOrganizerOfEvent(eventDetails);
+        boolean isAdmin = viewModel.isAdmin();
+
+        btnPdfStats = getView().findViewById(R.id.btnPdfStats);
+        btnPdfStats.setVisibility(isAdmin || isOrganizer ? View.VISIBLE : View.GONE);
+
+        Button btnJoin = getView().findViewById(R.id.btnJoin);
+        Button btnChat = getView().findViewById(R.id.btnChat);
+        btnJoin.setVisibility(!isOrganizer ? View.VISIBLE : View.GONE);
+        btnChat.setVisibility(!isOrganizer ? View.VISIBLE : View.GONE);
+    }
 
     private void fetchReviews() {
         reviewsSection.clearReviews();
@@ -210,5 +232,37 @@ public class EventDetailsFragment extends Fragment {
             osmMap.onDetach();
         }
         super.onDestroyView();
+    }
+
+    private void openPdfFile(File pdfFile) {
+        if (pdfFile == null || !pdfFile.exists()) {
+            Toast.makeText(requireContext(), "PDF file not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            Uri pdfUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    requireContext().getPackageName() + ".fileprovider",
+                    pdfFile
+            );
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(pdfUri, "application/pdf");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            //using a chooser to handle cases where no default app exists
+            Intent chooser = Intent.createChooser(intent, "Open PDF with");
+
+            if (intent.resolveActivity(requireContext().getPackageManager()) != null) {
+                startActivity(chooser);
+            } else {
+                Toast.makeText(requireContext(), "No PDF viewer found on this device", Toast.LENGTH_LONG).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(requireContext(), "Error opening PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

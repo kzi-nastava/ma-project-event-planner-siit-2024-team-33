@@ -299,7 +299,7 @@ public class OfferingsPage extends Fragment {
         MinimalEventTypeDTO selectedType = (MinimalEventTypeDTO) spinner.getSelectedItem();
         List<Integer> selectedTypes = new ArrayList<>();
         if (selectedType != null) {
-            selectedTypes.add(selectedType.id);
+            selectedTypes.add(selectedType.getId());
         }
         return selectedTypes;
     }
@@ -325,7 +325,7 @@ public class OfferingsPage extends Fragment {
                 List<MinimalEventTypeDTO> offerTypes = offer.getValidEvents();
                 if (offerTypes != null) {
                     for (MinimalEventTypeDTO eventType : offerTypes) {
-                        if (eventType.id.equals(type.id)) {
+                        if (eventType.getId().equals(type.getId())) {
                             typeUsed = true;
                             break;
                         }

@@ -217,8 +217,8 @@ public class EventsPage extends Fragment {
                     List<MinimalEventTypeDTO> filteredTypes = filterEventTypesByEvents(allTypes);
 
                     MinimalEventTypeDTO allOption = new MinimalEventTypeDTO();
-                    allOption.id= -1;
-                    allOption.name = "All";
+                    allOption.setId(-1);
+                    allOption.setName("All");
                     filteredTypes.add(0, allOption);
 
                     ArrayAdapter<MinimalEventTypeDTO> adapter = new ArrayAdapter<>(
@@ -306,8 +306,8 @@ public class EventsPage extends Fragment {
     private List<Integer> getSelectedEventTypeIds(Spinner spinner) {
         List<Integer> selectedTypeIds = new ArrayList<>();
         MinimalEventTypeDTO selectedType = (MinimalEventTypeDTO) spinner.getSelectedItem();
-        if (selectedType != null && selectedType.id != -1) {
-            selectedTypeIds.add(selectedType.id);
+        if (selectedType != null && selectedType.getId() != -1) {
+            selectedTypeIds.add(selectedType.getId());
         }
         return selectedTypeIds;
     }
@@ -338,7 +338,7 @@ public class EventsPage extends Fragment {
             for (MinimalEventDTO event : events) {
                 MinimalEventTypeDTO eventTypes = event.getValidEvent();
                 if (eventTypes != null) {
-                    if (eventTypes.id.equals(type.id)) {
+                    if (eventTypes.getId().equals(type.getId())) {
                         typeUsed = true;
                         break;
                     }
