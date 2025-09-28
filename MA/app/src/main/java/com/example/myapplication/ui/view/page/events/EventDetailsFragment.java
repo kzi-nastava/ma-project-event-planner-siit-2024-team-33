@@ -235,12 +235,12 @@ public class EventDetailsFragment extends Fragment {
     }
 
     private void openPdfFile(File pdfFile) {
-        if (pdfFile == null || !pdfFile.exists()) {
-            Toast.makeText(requireContext(), "PDF file not found", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         try {
+            if (!pdfFile.exists()) {
+                Toast.makeText(requireContext(), "PDF file not found", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Uri pdfUri = FileProvider.getUriForFile(
                     requireContext(),
                     requireContext().getPackageName() + ".fileprovider",
@@ -249,20 +249,13 @@ public class EventDetailsFragment extends Fragment {
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(pdfUri, "application/pdf");
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
-            //using a chooser to handle cases where no default app exists
-            Intent chooser = Intent.createChooser(intent, "Open PDF with");
-
-            if (intent.resolveActivity(requireContext().getPackageManager()) != null) {
-                startActivity(chooser);
-            } else {
-                Toast.makeText(requireContext(), "No PDF viewer found on this device", Toast.LENGTH_LONG).show();
-            }
+            startActivity(Intent.createChooser(intent, "Open PDF"));
 
         } catch (Exception e) {
+            Toast.makeText(requireContext(), "Error opening PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-            Toast.makeText(requireContext(), "Error opening PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

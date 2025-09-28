@@ -7,6 +7,11 @@ public class MinimalEventTypeDTO implements Serializable {
     private String name;
     private String description;
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -29,10 +34,5 @@ public class MinimalEventTypeDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
