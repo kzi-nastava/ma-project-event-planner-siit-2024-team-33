@@ -23,6 +23,7 @@ import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.ui.view.page.BudgetPage;
 import com.example.myapplication.ui.view.page.CommentsActivity;
 import com.example.myapplication.ui.view.page.CreateServiceFragment;
+import com.example.myapplication.ui.view.page.event.EventTypeCRUDFragment;
 import com.example.myapplication.ui.view.page.events.EventCreation;
 import com.example.myapplication.ui.view.page.OfferCategoriesFragment;
 import com.example.myapplication.ui.view.page.ProvidersOffersFragment;
@@ -197,6 +198,11 @@ public class ProfilePopupFragment extends Fragment {
         yourOffersButton.setOnClickListener(v -> {
             closeDrawer();
             openFragment(ProvidersOffersFragment.newInstance());
+        });
+
+        eventTypesButton.setOnClickListener(v -> {
+            closeDrawer();
+            openFragment(EventTypeCRUDFragment.newInstance());
         });
 
         budgetButton.setOnClickListener(v -> openFragment(BudgetPage.newInstance()));
