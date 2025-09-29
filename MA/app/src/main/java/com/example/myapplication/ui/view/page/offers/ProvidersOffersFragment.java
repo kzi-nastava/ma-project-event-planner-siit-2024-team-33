@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.offers;
 
 import android.os.Bundle;
 
@@ -17,6 +17,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.data.models.OfferType;
 import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.ui.view.page.provider.ProvidersPrices;
+import com.example.myapplication.ui.view.page.services.ServiceDetailsFragment;
 
 import java.util.List;
 

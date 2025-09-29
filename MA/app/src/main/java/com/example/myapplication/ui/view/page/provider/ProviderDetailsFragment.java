@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.provider;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.dto.providerDTO.ProviderDetailsDTO;
 import com.example.myapplication.data.services.ChatWebsocketService;

@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.component.BudgetItemFragment;
+import com.example.myapplication.ui.view.page.home.component.BudgetItemFragment;
 import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
 import com.example.myapplication.data.dto.budgetDTO.BudgetItemDTO;
 import com.example.myapplication.data.dto.budgetDTO.BudgetItemWrapperDTO;

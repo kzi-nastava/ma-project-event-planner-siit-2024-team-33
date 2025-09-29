@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.ui.view.page.ChatFragment;
 import com.example.myapplication.ui.view.page.EventsPage;
-import com.example.myapplication.ui.view.page.HomePage;
-import com.example.myapplication.ui.view.page.OfferingsPage;
+import com.example.myapplication.ui.view.page.home.HomePage;
+import com.example.myapplication.ui.view.page.services.OfferingsPage;
 import com.example.myapplication.R;
 import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.data.services.ApiClient;

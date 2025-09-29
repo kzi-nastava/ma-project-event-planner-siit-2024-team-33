@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.services;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +31,7 @@ import com.example.myapplication.data.models.Availability;
 import com.example.myapplication.data.models.OfferType;
 import com.example.myapplication.data.services.event.EventTypeService;
 import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.ui.view.page.offers.ProductDetailsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 

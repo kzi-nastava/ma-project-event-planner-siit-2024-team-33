@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.ui.viewmodel.authentication.ProviderSignupViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
