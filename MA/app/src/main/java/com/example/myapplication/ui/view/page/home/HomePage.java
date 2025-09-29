@@ -266,7 +266,6 @@ public class HomePage extends Fragment {
 
                 itemTitle.setText(offer.getName());
                 itemText.setText(offer.getDescription());
-                itemImage.setImageResource(R.drawable.trumpshot);
                 itemButton.setVisibility(View.GONE);
 
                 parentLayout.addView(cardView);

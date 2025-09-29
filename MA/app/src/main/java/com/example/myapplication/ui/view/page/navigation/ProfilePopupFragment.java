@@ -22,7 +22,6 @@ import com.example.myapplication.ui.view.dialog.NotificationsDialog;
 import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.ui.view.page.BudgetPage;
 import com.example.myapplication.ui.view.page.CommentsActivity;
-import com.example.myapplication.ui.view.page.CreateServiceFragment;
 import com.example.myapplication.ui.view.page.event.EventTypeCRUDFragment;
 import com.example.myapplication.ui.view.page.events.EventCreation;
 import com.example.myapplication.ui.view.page.OfferCategoriesFragment;
@@ -35,6 +34,7 @@ import com.example.myapplication.ui.view.page.profile.ProfileFavoritesFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileInformationFragment;
 import com.example.myapplication.ui.view.page.authentication.ProfileTypeFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileScheduleFragment;
+import com.example.myapplication.ui.view.page.services.CreateServiceFragment;
 import com.example.myapplication.ui.viewmodel.navigation.ProfilePopupViewModel;
 import com.google.android.material.imageview.ShapeableImageView;
 

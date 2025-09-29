@@ -11,24 +11,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:gravity="center"
-        android:paddingBottom="8dp"
-        android:text="Chat"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-    <Button
-        android:id="@+id/blockButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="Block"
-        android:visibility="gone"
-        android:backgroundTint="@color/dreadhead_blue"
-        android:textColor="@android:color/white"/>
-=======
         android:orientation="horizontal">
-
+        <Button
+            android:id="@+id/blockButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Block"
+            android:visibility="gone"
+            android:backgroundTint="@color/dreadhead_blue"
+            android:textColor="@android:color/white"/>
         <Button
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
@@ -48,7 +40,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
->>>>>>> 7a89c37898281a8bae7a22f98e74876d365697f5
 
     <!-- Contact List -->
     <ListView
