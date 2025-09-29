@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.data.services.user.UsersService;
 import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.dto.providerDTO.ProviderDetailsDTO;
@@ -29,6 +30,7 @@ public class ProviderDetailsFragment extends Fragment {
 
     private Integer providerId;
     private ProviderDetailsDTO provider;
+    UsersService userService = new UsersService();
 
 
     TextView tvTitle;
@@ -39,7 +41,9 @@ public class ProviderDetailsFragment extends Fragment {
     TextView tvDescription;
     TextView tvCity;
     TextView tvPhone;
+    Button blockBtn;
 
+    boolean isBlocked = false;
     Button chatBtn;
 
 
@@ -83,6 +87,50 @@ public class ProviderDetailsFragment extends Fragment {
             chatWebsocketService.openChatWith(dto);
         });
         loadData();
+        blockBtn = view.findViewById(R.id.btnBlock);
+
+        blockBtn.setOnClickListener(v -> {
+            if (provider == null) return;
+
+            if (!isBlocked) {
+                // Call block
+                userService.blockUser(provider.email).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.isSuccessful()) {
+                            isBlocked = true;
+                            blockBtn.setText("Unblock");
+                            Toast.makeText(getContext(), "User blocked", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to block", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else{
+                userService.unblockUser(provider.email).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.isSuccessful()) {
+                            isBlocked = false;
+                            blockBtn.setText("Block");
+                            Toast.makeText(getContext(), "User unblocked", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to unblock", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
 
         return view;
     }
@@ -116,6 +164,7 @@ public class ProviderDetailsFragment extends Fragment {
         tvCity.setText(provider.residency);
         tvResidency.setText(provider.residency);
         tvEmail.setText(provider.email);
+        blockBtn.setText(isBlocked ? "Unblock" : "Block");
 
         ImageCarouselFragment carouselFrag = ImageCarouselFragment.newInstance(new ArrayList<>(provider.picturesDataURI));
 

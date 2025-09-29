@@ -11,6 +11,8 @@ import com.example.myapplication.data.models.UpgradeUser;
 import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Path;
 
@@ -47,4 +49,8 @@ public class UsersService {
     public Call<UpgradeRequest> upgradeUser(UpgradeUser upgradeUser) {
         return usersApi.upgradeUser(upgradeUser);
     }
+    public Call<List<GetUserDTO>> getBlockedUsers() {
+        return usersApi.getBlockedUsers();
+    }
+
 }

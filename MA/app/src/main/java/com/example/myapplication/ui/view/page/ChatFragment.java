@@ -26,8 +26,10 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.dto.chatDTO.MessageDTO;
+import com.example.myapplication.data.dto.userDTO.GetUserDTO;
 import com.example.myapplication.data.services.ChatService;
 import com.example.myapplication.data.services.ChatWebsocketService;
+import com.example.myapplication.data.services.user.UsersService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +121,10 @@ public class ChatFragment extends Fragment {
 
     private List<MessageDTO> messages = new ArrayList<>();
     MessageAdapter msgAdapter;
+    private Button blockButton;
+    private boolean isBlocked = false;
+    private UsersService userService = new UsersService();
+
 
     private boolean messagesAreOpen = false;
 
@@ -138,6 +144,7 @@ public class ChatFragment extends Fragment {
 
         adapter = new ChatContactAdapter(getContext(), contacts);
         contactListView.setAdapter(adapter);
+        blockButton = view.findViewById(R.id.blockButton);
 
         contactListView.setOnItemClickListener((parent, view1, position, id) -> {
             selectedContact = contacts.get(position);
@@ -204,11 +211,43 @@ public class ChatFragment extends Fragment {
     private void OpenMessages(){
         messagesAreOpen = true;
         chatHeader.setText("Chat with " + selectedContact.username);
+
         contactListView.setVisibility(View.GONE);
         messageInputLayout.setVisibility(View.VISIBLE);
         messageContainer.setVisibility(View.VISIBLE);
+
+        blockButton.setVisibility(View.VISIBLE);
+
+        userService.getBlockedUsers().enqueue(new Callback<List<GetUserDTO>>() {
+            @Override
+            public void onResponse(Call<List<GetUserDTO>> call, Response<List<GetUserDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    boolean found = false;
+                    for (GetUserDTO u : response.body()) {
+                        if (u.getEmail().equals(selectedContact.email)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    isBlocked = found;
+                    blockButton.setText(isBlocked ? "Unblock" : "Block");
+                } else {
+                    isBlocked = false;
+                    blockButton.setText("Block");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GetUserDTO>> call, Throwable t) {
+                isBlocked = false;
+                blockButton.setText("Block");
+            }
+        });
+
+        blockButton.setOnClickListener(v -> toggleBlock());
         FetchMessages();
     }
+
 
     private void CloseMessages(){
         messagesAreOpen = false;
@@ -216,6 +255,7 @@ public class ChatFragment extends Fragment {
         contactListView.setVisibility(View.VISIBLE);
         messageInputLayout.setVisibility(View.GONE);
         messageContainer.setVisibility(View.GONE);
+        blockButton.setVisibility(View.GONE);
         this.selectedContact = null;
         FetchContacts();
     }
@@ -248,6 +288,47 @@ public class ChatFragment extends Fragment {
             messages.add(messageDTO);
             msgAdapter.notifyDataSetChanged();
             messageContainer.post(() -> messageContainer.smoothScrollToPosition(messageContainer.getCount()-1));
+        }
+    }
+    private void toggleBlock() {
+        if (selectedContact == null) return;
+
+        if (!isBlocked) {
+            userService.blockUser(selectedContact.email).enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful()) {
+                        isBlocked = true;
+                        blockButton.setText("Unblock");
+                        Toast.makeText(getContext(), "User blocked", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to block", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            userService.unblockUser(selectedContact.email).enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful()) {
+                        isBlocked = false;
+                        blockButton.setText("Block");
+                        Toast.makeText(getContext(), "User unblocked", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to unblock", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

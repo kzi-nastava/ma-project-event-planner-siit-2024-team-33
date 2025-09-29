@@ -10,6 +10,8 @@ import com.example.myapplication.data.dto.userDTO.UpdatedUser;
 import com.example.myapplication.data.models.UpgradeRequest;
 import com.example.myapplication.data.models.UpgradeUser;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -38,10 +40,14 @@ public interface UserApi {
     Call<String> blockUser(@Path("blockedEmail") String blockedEmail);
 
     @DELETE("/api/users/block/{blockedEmail}")
-    Call<String> unblockUser(@Path("blockedId") String blockedEmail);
+    Call<String> unblockUser(@Path("blockedEmail") String blockedEmail);
 
     @POST("/api/users/me/upgrade")
     Call<UpgradeRequest> upgradeUser(@Body UpgradeUser upgradeUser);
+
+    @GET("/api/users/blocked")
+    Call<List<GetUserDTO>> getBlockedUsers();
+
 }
 
 
