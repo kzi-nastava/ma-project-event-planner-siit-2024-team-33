@@ -1,15 +1,25 @@
 package com.example.myapplication.data.api;
 
+import com.example.myapplication.data.dto.PageResponse;
 import com.example.myapplication.data.dto.productDTO.GetProductDTO;
 import com.example.myapplication.data.dto.productDTO.MinimalProductDTO;
 import com.example.myapplication.data.dto.productDTO.PostProductReservationDTO;
+import com.example.myapplication.data.models.CreateProductDTO;
+import com.example.myapplication.data.models.CreatedProductDTO;
+import com.example.myapplication.data.models.ProviderProductDTO;
+import com.example.myapplication.data.models.UpdateProductDTO;
+import com.example.myapplication.data.models.UpdatedProductDTO;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ProductApi {
     @GET("api/products/{id}")
@@ -23,4 +33,24 @@ public interface ProductApi {
             @Path("id") Integer productId,
             @Path("eventId") Integer eventId
     );
+
+    @GET("api/products/me")
+    Call<PageResponse<ProviderProductDTO>> getProviderProducts(
+            @Query("page") int page,
+            @Query("size") int size,
+            @Query("query") String query,
+            @Query("offerCategoryId") List<Integer> offerCategoryId,
+            @Query("eventTypeId") List<Integer> eventTypeId,
+            @Query("maxPrice") Double maxPrice,
+            @Query("availability") List<String> availability
+    );
+
+    @POST("api/products")
+    Call<CreatedProductDTO> createProduct(@Body CreateProductDTO product);
+
+    @PUT("api/products/{id}")
+    Call<UpdatedProductDTO> updateProduct(@Path("id") int id, @Body UpdateProductDTO product);
+
+    @DELETE("api/products/{id}")
+    Call<Void> deleteProduct(@Path("id") int id);
 }

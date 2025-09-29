@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.page.provider.ProviderDetailsFragment;
-import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
+import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
+import com.example.myapplication.data.services.ChatWebsocketService;
 import com.example.myapplication.ui.view.dialog.CancelReservationDialog;
 import com.example.myapplication.ui.view.dialog.ServiceBookingDialog;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
@@ -25,6 +25,9 @@ import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.data.services.FavoritesService;
 import com.example.myapplication.data.services.ServiceService;
 import com.example.myapplication.data.services.user.UsersService;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.provider.ProviderDetailsFragment;
+import com.example.myapplication.ui.view.page.services.CreateServiceFragment;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,7 @@ public class ServiceDetailsFragment extends Fragment {
     private final ServiceService serviceService = new ServiceService();
     private final UsersService usersService = new UsersService();
     private final FavoritesService favoritesService = new FavoritesService();
+    private final ChatWebsocketService chatWebsocketService = ChatWebsocketService.getInstance();
 
     private Integer serviceId;
     private ServiceDetailsDTO service;
@@ -56,6 +60,7 @@ public class ServiceDetailsFragment extends Fragment {
     Button deleteBtn;
     Button bookBtn;
     Button cancelationBtn;
+    Button chatBtn;
     ImageButton favoriteButton;
 
     public ServiceDetailsFragment() {
@@ -105,6 +110,7 @@ public class ServiceDetailsFragment extends Fragment {
         bookBtn = view.findViewById(R.id.btnBook);
         bookBtn.setOnClickListener(v -> showBookingDialog());
         bookBtn.setEnabled(false);
+        chatBtn = view.findViewById(R.id.btnChat);
 
         cancelationBtn = view.findViewById(R.id.btn_cancel_reservation);
         cancelationBtn.setVisibility(View.VISIBLE);
@@ -165,6 +171,13 @@ public class ServiceDetailsFragment extends Fragment {
                         transaction.replace(R.id.nav_host_fragment, f);
                         transaction.addToBackStack(null);
                         transaction.commit();
+                    });
+
+                    chatBtn.setOnClickListener(v -> {
+                        ChatContactDTO dto = new ChatContactDTO();
+                        dto.email = service.providerEmail;
+                        dto.username = service.providerName;
+                        chatWebsocketService.openChatWith(dto);
                     });
                 } else
                     Toast.makeText(getContext(), "Error loading Service :(", Toast.LENGTH_SHORT).show();

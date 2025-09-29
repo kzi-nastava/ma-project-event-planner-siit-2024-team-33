@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
+import com.example.myapplication.data.services.ChatWebsocketService;
 import com.example.myapplication.data.services.event.EventService;
 import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.ui.viewmodel.events.EventDetailsViewModel;
@@ -42,6 +44,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EventDetailsFragment extends Fragment {
+
+    private final ChatWebsocketService chatWebsocketService = ChatWebsocketService.getInstance();
 
     private int eventId;
     private MapView osmMap;
@@ -217,6 +221,12 @@ public class EventDetailsFragment extends Fragment {
 
         Button btnJoin = getView().findViewById(R.id.btnJoin);
         Button btnChat = getView().findViewById(R.id.btnChat);
+        btnChat.setOnClickListener(v -> {
+            ChatContactDTO dto = new ChatContactDTO();
+            dto.email = eventDetails.getMinimalOrganizer().getEmail();
+            dto.username = eventDetails.getMinimalOrganizer().getName();
+            chatWebsocketService.openChatWith(dto);
+        });
         btnJoin.setVisibility(!isOrganizer ? View.VISIBLE : View.GONE);
         btnChat.setVisibility(!isOrganizer ? View.VISIBLE : View.GONE);
     }

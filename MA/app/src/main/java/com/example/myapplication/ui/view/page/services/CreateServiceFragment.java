@@ -384,7 +384,19 @@ public class CreateServiceFragment extends Fragment {
             hasError = true;
         }
 
-        double price = Double.parseDouble(priceStr);
+        double price = 0.0;
+        if (TextUtils.isEmpty(priceStr)){
+            priceInput.setError("Price is required");
+            hasError = true;
+        }
+        else{
+            price = Double.parseDouble(priceStr);
+            if (price <= 0) {
+                priceInput.setError("The price must be positive");
+                hasError = true;
+            }
+        }
+
         double discount = TextUtils.isEmpty(discountStr) ? 0.0 : Double.parseDouble(discountStr);
         if (price <= 0) {
             priceInput.setError("The price must be positive");
@@ -479,12 +491,21 @@ public class CreateServiceFragment extends Fragment {
             hasError = true;
         }
 
-        double price = Double.parseDouble(priceStr);
-        double discount = TextUtils.isEmpty(discountStr) ? 0.0 : Double.parseDouble(discountStr);
-        if (price <= 0) {
-            priceInput.setError("The price must be positive");
+        double price = 0.0;
+        if (TextUtils.isEmpty(priceStr)){
+            priceInput.setError("Price is required");
             hasError = true;
         }
+        else{
+            price = Double.parseDouble(priceStr);
+            if (price <= 0) {
+                priceInput.setError("The price must be positive");
+                hasError = true;
+            }
+        }
+
+        double discount = TextUtils.isEmpty(discountStr) ? 0.0 : Double.parseDouble(discountStr);
+
         if (discount > price) {
             discountInput.setError("The discount is too big");
             hasError = true;
