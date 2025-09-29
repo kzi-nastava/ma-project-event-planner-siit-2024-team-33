@@ -7,17 +7,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.data.dto.userDTO.GetUserDTO;
 import com.example.myapplication.data.dto.userDTO.UpdateUser;
+import com.example.myapplication.data.models.OfferType;
+import com.example.myapplication.data.services.FavoritesService;
+import com.example.myapplication.ui.view.page.ProductDetailsFragment;
+import com.example.myapplication.ui.view.page.ServiceDetailsFragment;
+import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
+import com.example.myapplication.ui.viewmodel.profile.FavoritesViewModel;
 import com.example.myapplication.ui.viewmodel.profile.ProfileInformationViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -28,6 +38,20 @@ import java.util.List;
 public class ProfileFavoritesFragment extends Fragment {
 
     private Button buttonInfo, buttonFavo, buttonSchedule;
+
+    private RecyclerView favoritesRecycler;
+    private FavoriteEventsAdapter eventsAdapter;
+    private FavoriteOffersAdapter offersAdapter;
+    private Button buttonEvents, buttonOffers;
+    private ProgressBar progressBar;
+
+    private boolean showingEvents = true;
+    private int currentPage = 0;
+    private boolean isLoadingPage = false;
+    private final int pageSize = 10;
+
+
+    private FavoritesViewModel viewModel;
 
     public ProfileFavoritesFragment() {}
 
@@ -68,6 +92,98 @@ public class ProfileFavoritesFragment extends Fragment {
                     .commit();
         });
 
+        //initializing favorites part
+        favoritesRecycler = view.findViewById(R.id.favorites_recycler);
+        buttonEvents = view.findViewById(R.id.events_favorites_button);
+        buttonOffers = view.findViewById(R.id.offers_favorites_button);
+        progressBar = view.findViewById(R.id.progressBarFavorites);
+
+        eventsAdapter = new FavoriteEventsAdapter(event -> {
+            Bundle args = new Bundle();
+            args.putInt("eventId", event.getId());
+            EventDetailsFragment fragment = EventDetailsFragment.newInstance();
+            fragment.setArguments(args);
+
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+        offersAdapter = new FavoriteOffersAdapter(offer -> {
+            Fragment f = null;
+            if (offer.getType() == OfferType.SERVICE)
+                f = ServiceDetailsFragment.newInstance(offer.offerId);
+            else
+                f = ProductDetailsFragment.newInstance(offer.offerId);
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, f)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        favoritesRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
+        favoritesRecycler.setAdapter(eventsAdapter);
+
+        viewModel = new ViewModelProvider(this).get(FavoritesViewModel.class);
+
+        buttonEvents.setOnClickListener(v -> switchToEvents());
+        buttonOffers.setOnClickListener(v -> switchToOffers());
+
+        favoritesRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (lm != null && !isLoadingPage && lm.findLastVisibleItemPosition() >= getCurrentAdapter().getItemCount() - 1) {
+                    loadNextPage();
+                }
+            }
+        });
+        switchToEvents();
+
+        viewModel.isLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if (isLoading != null) {
+                progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+            }
+        });
+
         return view;
+    }
+
+    private void switchToEvents() {
+        showingEvents = true;
+        currentPage = 0;
+        eventsAdapter.clearItems();
+        favoritesRecycler.setAdapter(eventsAdapter);
+        loadNextPage();
+    }
+
+    private void switchToOffers() {
+        showingEvents = false;
+        currentPage = 0;
+        offersAdapter.clearItems();
+        favoritesRecycler.setAdapter(offersAdapter);
+        loadNextPage();
+    }
+
+    private void loadNextPage() {
+        isLoadingPage = true;
+        if (showingEvents) {
+            viewModel.loadFavoriteEventsPage(currentPage, pageSize, events -> {
+                eventsAdapter.addItems(events);
+                currentPage++;
+                isLoadingPage = false;
+            });
+        } else {
+            viewModel.loadFavoriteOffersPage(currentPage, pageSize, offers -> {
+                offersAdapter.addItems(offers);
+                currentPage++;
+                isLoadingPage = false;
+            });
+        }
+    }
+
+    private RecyclerView.Adapter<?> getCurrentAdapter() {
+        return showingEvents ? eventsAdapter : offersAdapter;
     }
 }

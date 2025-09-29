@@ -90,7 +90,26 @@
                         android:textColor="@color/black"
                         android:text="Favorite Offers" />
                 </LinearLayout>
-
+                <ProgressBar
+                    android:id="@+id/progressBarFavorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/errorTextFavorites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:padding="8dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/favorites_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"/>
 
             </LinearLayout>
 
