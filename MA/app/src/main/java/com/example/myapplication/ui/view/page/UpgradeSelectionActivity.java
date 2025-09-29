@@ -8,6 +8,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.view.page.provider.ProviderUpgradeActivity;
 
 public class UpgradeSelectionActivity extends AppCompatActivity {
 

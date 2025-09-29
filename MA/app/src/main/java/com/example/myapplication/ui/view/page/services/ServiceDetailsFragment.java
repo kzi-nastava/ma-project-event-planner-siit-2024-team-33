@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.services;
 
 import android.os.Bundle;
 
@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.services.ChatWebsocketService;
-import com.example.myapplication.ui.view.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.dialog.CancelReservationDialog;
 import com.example.myapplication.ui.view.dialog.ServiceBookingDialog;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.data.dto.serviceDTO.ServiceDetailsDTO;
@@ -25,6 +25,9 @@ import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.data.services.FavoritesService;
 import com.example.myapplication.data.services.ServiceService;
 import com.example.myapplication.data.services.user.UsersService;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.provider.ProviderDetailsFragment;
+import com.example.myapplication.ui.view.page.services.CreateServiceFragment;
 
 import java.util.ArrayList;
 
@@ -107,6 +110,7 @@ public class ServiceDetailsFragment extends Fragment {
         bookBtn = view.findViewById(R.id.btnBook);
         bookBtn.setOnClickListener(v -> showBookingDialog());
         bookBtn.setEnabled(false);
+        chatBtn = view.findViewById(R.id.btnChat);
 
         cancelationBtn = view.findViewById(R.id.btn_cancel_reservation);
         cancelationBtn.setVisibility(View.VISIBLE);
@@ -116,7 +120,6 @@ public class ServiceDetailsFragment extends Fragment {
             dialog.show(getParentFragmentManager(), "cancelReservationDialog");
         });
 
-        chatBtn = view.findViewById(R.id.btnChat);
         loadData();
 
         return view;
@@ -169,6 +172,7 @@ public class ServiceDetailsFragment extends Fragment {
                         transaction.addToBackStack(null);
                         transaction.commit();
                     });
+
                     chatBtn.setOnClickListener(v -> {
                         ChatContactDTO dto = new ChatContactDTO();
                         dto.email = service.providerEmail;

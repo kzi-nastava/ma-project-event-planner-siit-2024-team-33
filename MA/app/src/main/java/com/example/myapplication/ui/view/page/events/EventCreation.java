@@ -8,21 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.component.MultipleStringInput;
-import com.example.myapplication.data.dto.eventDTO.CreateEventActivityDTO;
-import com.example.myapplication.data.dto.eventDTO.CreateEventDTO;
-import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;
+import com.example.myapplication.ui.view.page.home.component.MultipleStringInput;
 import com.example.myapplication.data.services.event.EventService;
-
-import java.time.LocalDateTime;
-import java.util.HashSet;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EventCreation extends Fragment {
     private final EventService eventService = new EventService();

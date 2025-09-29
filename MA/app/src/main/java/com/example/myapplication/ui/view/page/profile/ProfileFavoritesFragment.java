@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.view.page.profile;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,30 +9,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.userDTO.GetUserDTO;
-import com.example.myapplication.data.dto.userDTO.UpdateUser;
 import com.example.myapplication.data.models.OfferType;
-import com.example.myapplication.data.services.FavoritesService;
-import com.example.myapplication.ui.view.page.ProductDetailsFragment;
-import com.example.myapplication.ui.view.page.ServiceDetailsFragment;
+import com.example.myapplication.ui.view.page.offers.ProductDetailsFragment;
+import com.example.myapplication.ui.view.page.services.ServiceDetailsFragment;
 import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
 import com.example.myapplication.ui.viewmodel.profile.FavoritesViewModel;
-import com.example.myapplication.ui.viewmodel.profile.ProfileInformationViewModel;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileFavoritesFragment extends Fragment {
 

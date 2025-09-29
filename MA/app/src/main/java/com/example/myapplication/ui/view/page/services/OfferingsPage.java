@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.services;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +31,7 @@ import com.example.myapplication.data.models.Availability;
 import com.example.myapplication.data.models.OfferType;
 import com.example.myapplication.data.services.event.EventTypeService;
 import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.ui.view.page.offers.ProductDetailsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -128,7 +129,7 @@ public class OfferingsPage extends Fragment {
                     } else {
                         offers = Collections.emptyList();
                         displayAllOffers(view);
-                        Toast.makeText(requireContext(), "No events found for this filter.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "No offers found for this filter.", Toast.LENGTH_SHORT).show();
                     }
 
                     boolean isLastPage = page.getNumber() + 1 >= page.getTotalPages();
@@ -235,10 +236,6 @@ public class OfferingsPage extends Fragment {
         });
 
         Button confirmButton = dialogView.findViewById(R.id.btn_confirm);
-        confirmButton.setOnClickListener(v -> {
-            handleFilterDialogConfirmation(dialogView);
-            dialog.dismiss();
-        });
         if (confirmButton != null) {
             confirmButton.setOnClickListener(v -> {
                 handleFilterDialogConfirmation(dialogView);
@@ -247,6 +244,7 @@ public class OfferingsPage extends Fragment {
         } else {
             Log.e("OfferingsPage", "Confirm button not found in filter dialog layout");
         }
+
 
         dialog.show();
     }

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.component;
+package com.example.myapplication.ui.view.page.home.component;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

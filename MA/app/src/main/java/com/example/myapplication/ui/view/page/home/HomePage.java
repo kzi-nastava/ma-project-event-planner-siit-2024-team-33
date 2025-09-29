@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.home;
 
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -31,6 +31,7 @@ import com.example.myapplication.data.services.event.EventService;
 import com.example.myapplication.data.services.InvitationService;
 import com.example.myapplication.data.services.NotificationWebSocketClient;
 import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.ui.view.page.invitations.MyInvitationsActivity;
 import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
 import com.example.myapplication.utils.NotificationUtils;
 

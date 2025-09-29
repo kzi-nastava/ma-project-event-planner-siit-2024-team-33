@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.component;
+package com.example.myapplication.ui.view.page.home.component;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -22,8 +22,8 @@ import com.example.myapplication.data.dto.budgetDTO.BudgetOfferDTO;
 import com.example.myapplication.data.dto.budgetDTO.MinimalBudgetItemDTO;
 import com.example.myapplication.data.dto.budgetDTO.PutBudgetItemDTO;
 import com.example.myapplication.data.models.OfferType;
-import com.example.myapplication.ui.view.page.ProductDetailsFragment;
-import com.example.myapplication.ui.view.page.ServiceDetailsFragment;
+import com.example.myapplication.ui.view.page.offers.ProductDetailsFragment;
+import com.example.myapplication.ui.view.page.services.ServiceDetailsFragment;
 import com.example.myapplication.data.services.BudgetService;
 import com.example.myapplication.data.services.ProductService;
 import com.example.myapplication.utils.OnBudgetSetListener;

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.services;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.data.dto.serviceDTO.PostServiceDTO;

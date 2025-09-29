@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.offers;
 
 import android.os.Bundle;
 
@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
 import com.example.myapplication.data.services.ChatWebsocketService;
-import com.example.myapplication.ui.view.component.ImageCarouselFragment;
 import com.example.myapplication.ui.view.dialog.ProductBookingDialog;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.data.dto.productDTO.GetProductDTO;
@@ -26,6 +25,8 @@ import com.example.myapplication.reviews.ReviewsSectionView;
 import com.example.myapplication.data.services.FavoritesService;
 import com.example.myapplication.data.services.ProductService;
 import com.example.myapplication.data.services.user.UsersService;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.provider.ProviderDetailsFragment;
 
 import java.util.ArrayList;
 
