@@ -6,6 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import android.content.Context;
 
+import com.example.myapplication.data.services.authentication.JwtInterceptor;
 import com.example.myapplication.utils.Settings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

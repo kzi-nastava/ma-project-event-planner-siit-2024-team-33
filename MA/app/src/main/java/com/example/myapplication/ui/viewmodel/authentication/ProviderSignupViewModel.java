@@ -12,8 +12,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.myapplication.data.dto.userDTO.RegisterUser;
-import com.example.myapplication.data.dto.userDTO.RegisteredUser;
+import com.example.myapplication.data.models.dto.userDTO.RegisterUser;
+import com.example.myapplication.data.models.dto.userDTO.RegisteredUser;
 import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.data.services.user.UsersService;
 

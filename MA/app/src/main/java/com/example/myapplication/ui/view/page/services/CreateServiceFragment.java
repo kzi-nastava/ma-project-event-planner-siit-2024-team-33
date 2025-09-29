@@ -30,15 +30,15 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
-import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
-import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.data.dto.serviceDTO.PostServiceDTO;
-import com.example.myapplication.data.dto.serviceDTO.PutServiceDTO;
-import com.example.myapplication.data.dto.serviceDTO.ServiceDetailsDTO;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
+import com.example.myapplication.data.models.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.models.dto.serviceDTO.PostServiceDTO;
+import com.example.myapplication.data.models.dto.serviceDTO.PutServiceDTO;
+import com.example.myapplication.data.models.dto.serviceDTO.ServiceDetailsDTO;
 import com.example.myapplication.data.models.Availability;
 import com.example.myapplication.data.services.event.EventTypeService;
-import com.example.myapplication.data.services.OfferCategoryService;
-import com.example.myapplication.data.services.ServiceService;
+import com.example.myapplication.data.services.offer.OfferCategoryService;
+import com.example.myapplication.data.services.offer.ServiceService;
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

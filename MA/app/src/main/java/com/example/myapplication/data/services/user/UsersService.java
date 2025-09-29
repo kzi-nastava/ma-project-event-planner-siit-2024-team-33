@@ -1,11 +1,11 @@
 package com.example.myapplication.data.services.user;
 
 import com.example.myapplication.data.api.user.UserApi;
-import com.example.myapplication.data.dto.userDTO.GetUserDTO;
-import com.example.myapplication.data.dto.userDTO.RegisterUser;
-import com.example.myapplication.data.dto.userDTO.RegisteredUser;
-import com.example.myapplication.data.dto.userDTO.UpdateUser;
-import com.example.myapplication.data.dto.userDTO.UpdatedUser;
+import com.example.myapplication.data.models.dto.userDTO.GetUserDTO;
+import com.example.myapplication.data.models.dto.userDTO.RegisterUser;
+import com.example.myapplication.data.models.dto.userDTO.RegisteredUser;
+import com.example.myapplication.data.models.dto.userDTO.UpdateUser;
+import com.example.myapplication.data.models.dto.userDTO.UpdatedUser;
 import com.example.myapplication.data.models.UpgradeRequest;
 import com.example.myapplication.data.models.UpgradeUser;
 import com.example.myapplication.data.services.ApiClient;

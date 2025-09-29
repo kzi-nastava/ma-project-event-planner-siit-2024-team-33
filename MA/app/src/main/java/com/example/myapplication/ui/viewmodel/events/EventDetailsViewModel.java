@@ -1,18 +1,16 @@
 package com.example.myapplication.ui.viewmodel.events;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
-import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.dto.eventDTO.GetEventDetails;
+import com.example.myapplication.data.models.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.data.models.AuthentifiedUser;
-import com.example.myapplication.data.models.JoinedEventDTO;
-import com.example.myapplication.data.services.FavoritesService;
+import com.example.myapplication.data.models.dto.JoinedEventDTO;
+import com.example.myapplication.data.services.profile.FavoritesService;
 import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.data.services.event.EventService;
 

@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.myapplication.data.dto.PageResponse;
-import com.example.myapplication.data.models.GetEventTypeDTO;
-import com.example.myapplication.data.models.UpdatedEventTypeDTO;
+import com.example.myapplication.data.models.dto.PageResponse;
+import com.example.myapplication.data.models.dto.GetEventTypeDTO;
+import com.example.myapplication.data.models.dto.UpdatedEventTypeDTO;
 import com.example.myapplication.data.services.event.EventTypeService;
 
 import java.util.ArrayList;

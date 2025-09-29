@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.data.dto.PageResponse;
-import com.example.myapplication.data.models.ProviderProductDTO;
-import com.example.myapplication.data.services.ProductService;
+import com.example.myapplication.data.models.dto.PageResponse;
+import com.example.myapplication.data.models.dto.ProviderProductDTO;
+import com.example.myapplication.data.services.offer.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;

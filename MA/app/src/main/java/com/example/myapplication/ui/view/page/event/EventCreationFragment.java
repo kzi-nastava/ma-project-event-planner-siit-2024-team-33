@@ -16,11 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,15 +30,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.eventDTO.CreateEventActivityDTO;
-import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.ui.view.page.EventsPage;
-import com.example.myapplication.ui.view.page.authentication.RegistrationCompletedFragment;
-import com.example.myapplication.ui.viewmodel.EventCreationViewModel;
+import com.example.myapplication.data.models.dto.eventDTO.CreateEventActivityDTO;
+import com.example.myapplication.data.models.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.ui.viewmodel.events.EventCreationViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
@@ -49,10 +44,8 @@ import org.osmdroid.views.overlay.compass.CompassOverlay;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class EventCreationFragment extends Fragment {
 

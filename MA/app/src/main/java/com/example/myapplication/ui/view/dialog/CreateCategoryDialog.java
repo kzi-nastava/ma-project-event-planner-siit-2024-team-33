@@ -18,10 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
-import com.example.myapplication.data.dto.OfferCategoryDTO.PostOfferCategoryDTO;
-import com.example.myapplication.data.dto.OfferCategoryDTO.PutOfferCategoryDTO;
-import com.example.myapplication.data.services.OfferCategoryService;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.PostOfferCategoryDTO;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.PutOfferCategoryDTO;
+import com.example.myapplication.data.services.offer.OfferCategoryService;
 import com.example.myapplication.utils.OnDialogDismissListener;
 
 import retrofit2.Call;

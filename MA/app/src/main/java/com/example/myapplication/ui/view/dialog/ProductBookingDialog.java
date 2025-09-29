@@ -19,10 +19,10 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.data.dto.productDTO.MinimalProductDTO;
+import com.example.myapplication.data.models.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.dto.productDTO.MinimalProductDTO;
 import com.example.myapplication.data.services.event.EventService;
-import com.example.myapplication.data.services.ProductService;
+import com.example.myapplication.data.services.offer.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;

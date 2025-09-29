@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.models.GetEventTypeDTO;
 import com.example.myapplication.ui.viewmodel.events.EventTypeViewModel;
 
 import java.util.ArrayList;

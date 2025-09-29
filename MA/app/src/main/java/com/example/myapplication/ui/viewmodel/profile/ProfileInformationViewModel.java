@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.data.dto.userDTO.GetUserDTO;
-import com.example.myapplication.data.dto.userDTO.UpdateUser;
-import com.example.myapplication.data.dto.userDTO.UpdatedUser;
+import com.example.myapplication.data.models.dto.userDTO.GetUserDTO;
+import com.example.myapplication.data.models.dto.userDTO.UpdateUser;
+import com.example.myapplication.data.models.dto.userDTO.UpdatedUser;
 import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.data.services.user.UsersService;

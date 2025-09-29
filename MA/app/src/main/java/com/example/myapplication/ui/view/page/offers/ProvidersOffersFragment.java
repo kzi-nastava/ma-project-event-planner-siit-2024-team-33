@@ -14,9 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.data.models.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.data.models.OfferType;
-import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.data.services.offer.OfferService;
 import com.example.myapplication.ui.view.page.provider.ProvidersPrices;
 import com.example.myapplication.ui.view.page.services.ServiceDetailsFragment;
 

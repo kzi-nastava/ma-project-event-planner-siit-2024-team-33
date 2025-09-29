@@ -19,9 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.OfferCategoryDTO.HandleSuggestionDTO;
-import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
-import com.example.myapplication.data.services.OfferCategoryService;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.HandleSuggestionDTO;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
+import com.example.myapplication.data.services.offer.OfferCategoryService;
 import com.example.myapplication.utils.OnDialogDismissListener;
 
 import java.util.ArrayList;

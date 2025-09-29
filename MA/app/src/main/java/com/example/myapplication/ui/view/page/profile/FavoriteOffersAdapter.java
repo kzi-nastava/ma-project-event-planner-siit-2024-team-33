@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.data.models.dto.offerDTO.MinimalOfferDTO;
 
 import java.util.ArrayList;
 import java.util.List;

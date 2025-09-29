@@ -17,11 +17,11 @@ import android.widget.*;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.data.dto.serviceReservationDTO.CreatedServiceReservationDTO;
-import com.example.myapplication.data.dto.serviceReservationDTO.PostServiceReservationDTO;
+import com.example.myapplication.data.models.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.dto.serviceReservationDTO.CreatedServiceReservationDTO;
+import com.example.myapplication.data.models.dto.serviceReservationDTO.PostServiceReservationDTO;
 import com.example.myapplication.data.services.event.EventService;
-import com.example.myapplication.data.services.ServiceReservationService;
+import com.example.myapplication.data.services.offer.ServiceReservationService;
 
 import org.json.JSONObject;
 

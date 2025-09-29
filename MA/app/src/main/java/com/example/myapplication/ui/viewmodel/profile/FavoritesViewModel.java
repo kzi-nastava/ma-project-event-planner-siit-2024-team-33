@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.data.dto.PageResponse;
-import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
-import com.example.myapplication.data.services.FavoritesService;
+import com.example.myapplication.data.models.dto.PageResponse;
+import com.example.myapplication.data.models.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.data.services.profile.FavoritesService;
 
 import java.util.List;
 import java.util.function.Consumer;

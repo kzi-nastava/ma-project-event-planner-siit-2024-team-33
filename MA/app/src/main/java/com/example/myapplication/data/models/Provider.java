@@ -1,6 +1,6 @@
 package com.example.myapplication.data.models;
 
-import com.example.myapplication.data.dto.userDTO.GetUserDTO;
+import com.example.myapplication.data.models.dto.userDTO.GetUserDTO;
 
 import java.util.List;
 

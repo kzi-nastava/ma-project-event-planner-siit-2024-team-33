@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
+import com.example.myapplication.ui.view.page.event.EventDetailsFragment;
 import com.example.myapplication.ui.viewmodel.profile.ScheduleViewModel;
 
 import java.time.LocalDate;

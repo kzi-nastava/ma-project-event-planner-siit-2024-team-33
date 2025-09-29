@@ -15,19 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
-import com.example.myapplication.data.services.ChatWebsocketService;
+import com.example.myapplication.data.models.dto.chatDTO.ChatContactDTO;
+import com.example.myapplication.data.services.communication.ChatWebsocketService;
 import com.example.myapplication.ui.view.dialog.CancelReservationDialog;
 import com.example.myapplication.ui.view.dialog.ServiceBookingDialog;
-import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.data.dto.serviceDTO.ServiceDetailsDTO;
-import com.example.myapplication.reviews.ReviewsSectionView;
-import com.example.myapplication.data.services.FavoritesService;
-import com.example.myapplication.data.services.ServiceService;
+import com.example.myapplication.data.models.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.models.dto.serviceDTO.ServiceDetailsDTO;
+import com.example.myapplication.ui.view.page.communication.ReviewsSectionView;
+import com.example.myapplication.data.services.profile.FavoritesService;
+import com.example.myapplication.data.services.offer.ServiceService;
 import com.example.myapplication.data.services.user.UsersService;
 import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.ui.view.page.provider.ProviderDetailsFragment;
-import com.example.myapplication.ui.view.page.services.CreateServiceFragment;
 
 import java.util.ArrayList;
 

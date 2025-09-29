@@ -341,7 +341,7 @@
                 android:textColor="@color/nonchalant_blue" />
         </LinearLayout>
 
-        <com.example.myapplication.reviews.ReviewsSectionView
+        <com.example.myapplication.ui.view.page.communication.ReviewsSectionView
             android:id="@+id/reviewsSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

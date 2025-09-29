@@ -11,8 +11,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.notificationDTO.GetNotificationDTO;
-import com.example.myapplication.data.services.NotificationService;
+import com.example.myapplication.data.models.dto.notificationDTO.GetNotificationDTO;
+import com.example.myapplication.data.services.communication.NotificationService;
 
 import java.util.HashSet;
 import java.util.List;

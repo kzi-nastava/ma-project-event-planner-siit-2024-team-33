@@ -1,11 +1,11 @@
 package com.example.myapplication.data.api.event;
 
-import com.example.myapplication.data.dto.PageResponse;
-import com.example.myapplication.data.dto.eventDTO.CreateEventDTO;
-import com.example.myapplication.data.dto.eventDTO.CreatedEventDTO;
-import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
-import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.data.models.JoinedEventDTO;
+import com.example.myapplication.data.models.dto.PageResponse;
+import com.example.myapplication.data.models.dto.eventDTO.CreateEventDTO;
+import com.example.myapplication.data.models.dto.eventDTO.CreatedEventDTO;
+import com.example.myapplication.data.models.dto.eventDTO.GetEventDetails;
+import com.example.myapplication.data.models.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.dto.JoinedEventDTO;
 
 import java.time.LocalDate;
 import java.util.List;

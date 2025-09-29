@@ -19,7 +19,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.data.models.OfferType;
 import com.example.myapplication.ui.view.page.offers.ProductDetailsFragment;
 import com.example.myapplication.ui.view.page.services.ServiceDetailsFragment;
-import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
+import com.example.myapplication.ui.view.page.event.EventDetailsFragment;
 import com.example.myapplication.ui.viewmodel.profile.FavoritesViewModel;
 
 public class ProfileFavoritesFragment extends Fragment {

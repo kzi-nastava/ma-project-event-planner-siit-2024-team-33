@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
 
 import java.util.HashSet;
 import java.util.List;

@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.pricesDTO.PriceItemDTO;
-import com.example.myapplication.data.dto.pricesDTO.PutPriceDTO;
-import com.example.myapplication.data.services.PriceService;
+import com.example.myapplication.data.models.dto.pricesDTO.PriceItemDTO;
+import com.example.myapplication.data.models.dto.pricesDTO.PutPriceDTO;
+import com.example.myapplication.data.services.offer.PriceService;
 
 import java.io.File;
 import java.io.FileOutputStream;

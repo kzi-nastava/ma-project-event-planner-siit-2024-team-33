@@ -20,19 +20,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ShowProfileFragment;
-import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
-import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.data.dto.invitationDTO.SimpleInvitation;
-import com.example.myapplication.data.dto.offerDTO.MinimalOfferDTO;
+import com.example.myapplication.ui.view.page.navigation.ShowProfileFragment;
+import com.example.myapplication.data.models.dto.eventDTO.MinimalEventDTO;
+import com.example.myapplication.data.models.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.models.dto.invitationDTO.SimpleInvitation;
+import com.example.myapplication.data.models.dto.offerDTO.MinimalOfferDTO;
 import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.data.services.authentication.AuthenticationService;
 import com.example.myapplication.data.services.event.EventService;
-import com.example.myapplication.data.services.InvitationService;
-import com.example.myapplication.data.services.NotificationWebSocketClient;
-import com.example.myapplication.data.services.OfferService;
+import com.example.myapplication.data.services.communication.InvitationService;
+import com.example.myapplication.data.services.communication.NotificationWebSocketClient;
+import com.example.myapplication.data.services.offer.OfferService;
 import com.example.myapplication.ui.view.page.invitations.MyInvitationsActivity;
-import com.example.myapplication.ui.view.page.events.EventDetailsFragment;
+import com.example.myapplication.ui.view.page.event.EventDetailsFragment;
 import com.example.myapplication.utils.NotificationUtils;
 
 import java.util.List;

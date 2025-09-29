@@ -17,15 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.budgetDTO.BudgetItemWrapperDTO;
-import com.example.myapplication.data.dto.budgetDTO.BudgetOfferDTO;
-import com.example.myapplication.data.dto.budgetDTO.MinimalBudgetItemDTO;
-import com.example.myapplication.data.dto.budgetDTO.PutBudgetItemDTO;
+import com.example.myapplication.data.models.dto.budgetDTO.BudgetItemWrapperDTO;
+import com.example.myapplication.data.models.dto.budgetDTO.BudgetOfferDTO;
+import com.example.myapplication.data.models.dto.budgetDTO.MinimalBudgetItemDTO;
+import com.example.myapplication.data.models.dto.budgetDTO.PutBudgetItemDTO;
 import com.example.myapplication.data.models.OfferType;
 import com.example.myapplication.ui.view.page.offers.ProductDetailsFragment;
 import com.example.myapplication.ui.view.page.services.ServiceDetailsFragment;
-import com.example.myapplication.data.services.BudgetService;
-import com.example.myapplication.data.services.ProductService;
+import com.example.myapplication.data.services.offer.BudgetService;
+import com.example.myapplication.data.services.offer.ProductService;
 import com.example.myapplication.utils.OnBudgetSetListener;
 import com.example.myapplication.utils.OnReloadRequestListener;
 

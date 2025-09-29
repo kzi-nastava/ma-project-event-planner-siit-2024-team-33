@@ -45,19 +45,19 @@
         </provider>
 
         <activity android:name=".ui.view.page.provider.ProviderUpgradeActivity" android:exported="false"/>
-        <activity android:name=".ui.view.page.UpgradeSelectionActivity" android:exported="false"/>
-        <activity android:name=".ui.view.page.UpgradeActivity" android:exported="false"/>
-        <activity android:name=".ui.view.page.activity_service_create" android:exported="false"
+        <activity android:name=".ui.view.page.profile.UpgradeSelectionActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.profile.UpgradeActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.services.activity_service_create" android:exported="false"
             android:label="@string/title_activity_service_create"
             android:theme="@style/Theme.MyApplication" />
 
         <activity android:name=".ui.view.page.invitations.MyInvitationsActivity" />
         <activity android:name=".ui.view.page.navigation.MainPageActivity" android:exported="false"/>
-        <activity android:name=".reports.ReportsActivity" android:exported="false"/>
-        <activity android:name=".ui.view.page.CommentsActivity" android:exported="false"/>
-        <activity android:name=".ui.view.page.events.EventDetailsActivity" android:exported="true"/>
+        <activity android:name=".ui.view.page.communication.ReportsActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.communication.CommentsActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.event.EventDetailsActivity" android:exported="true"/>
 
-        <activity android:name=".ui.view.page.QuickRegistrationActivity" android:exported="true">
+        <activity android:name=".ui.view.page.profile.QuickRegistrationActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

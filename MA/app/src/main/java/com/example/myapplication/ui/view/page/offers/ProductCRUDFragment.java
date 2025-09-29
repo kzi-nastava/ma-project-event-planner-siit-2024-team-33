@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.models.ProviderProductDTO;
+import com.example.myapplication.data.models.dto.ProviderProductDTO;
 import com.example.myapplication.ui.viewmodel.offer.ProductCRUDViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 

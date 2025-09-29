@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.invitationDTO.SimpleInvitation;
+import com.example.myapplication.data.models.dto.invitationDTO.SimpleInvitation;
 
 import java.util.List;
 

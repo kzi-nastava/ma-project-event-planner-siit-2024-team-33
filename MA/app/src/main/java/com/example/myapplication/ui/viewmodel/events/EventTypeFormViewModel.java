@@ -5,14 +5,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.data.models.CreateEventTypeDTO;
-import com.example.myapplication.data.models.CreatedEventTypeDTO;
-import com.example.myapplication.data.models.GetEventTypeDTO;
-import com.example.myapplication.data.models.UpdateEventTypeDTO;
-import com.example.myapplication.data.models.UpdatedEventTypeDTO;
-import com.example.myapplication.data.services.OfferCategoryService;
+import com.example.myapplication.data.models.dto.CreateEventTypeDTO;
+import com.example.myapplication.data.models.dto.CreatedEventTypeDTO;
+import com.example.myapplication.data.models.dto.GetEventTypeDTO;
+import com.example.myapplication.data.models.dto.UpdateEventTypeDTO;
+import com.example.myapplication.data.models.dto.UpdatedEventTypeDTO;
+import com.example.myapplication.data.services.offer.OfferCategoryService;
 import com.example.myapplication.data.services.event.EventTypeService;
-import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
+import com.example.myapplication.data.models.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
 
 import java.util.List;
 import java.util.Set;

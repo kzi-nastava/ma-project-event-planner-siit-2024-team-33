@@ -5,13 +5,13 @@ import android.content.SharedPreferences;
 
 import com.example.myapplication.data.api.authentication.AuthApi;
 import com.example.myapplication.data.api.user.UserApi;
-import com.example.myapplication.data.dto.LoginDTO.AuthResponse;
-import com.example.myapplication.data.dto.LoginDTO.LoginRequest;
-import com.example.myapplication.data.dto.userDTO.GetUserDTO;
-import com.example.myapplication.data.dto.userDTO.UpdatePassword;
+import com.example.myapplication.data.models.dto.LoginDTO.AuthResponse;
+import com.example.myapplication.data.models.dto.LoginDTO.LoginRequest;
+import com.example.myapplication.data.models.dto.userDTO.GetUserDTO;
+import com.example.myapplication.data.models.dto.userDTO.UpdatePassword;
 import com.example.myapplication.data.models.AuthentifiedUser;
 import com.example.myapplication.data.services.ApiClient;
-import com.example.myapplication.data.services.ChatWebsocketService;
+import com.example.myapplication.data.services.communication.ChatWebsocketService;
 import com.google.gson.Gson;
 
 import retrofit2.Call;

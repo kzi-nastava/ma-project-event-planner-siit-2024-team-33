@@ -1,11 +1,12 @@
 package com.example.myapplication.data.api.event;
 
-import com.example.myapplication.data.dto.PageResponse;
-import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
-import com.example.myapplication.data.models.CreatedEventTypeDTO;
-import com.example.myapplication.data.models.GetEventTypeDTO;
-import com.example.myapplication.data.models.UpdateEventTypeDTO;
-import com.example.myapplication.data.models.UpdatedEventTypeDTO;
+import com.example.myapplication.data.models.dto.CreateEventTypeDTO;
+import com.example.myapplication.data.models.dto.PageResponse;
+import com.example.myapplication.data.models.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.models.dto.CreatedEventTypeDTO;
+import com.example.myapplication.data.models.dto.GetEventTypeDTO;
+import com.example.myapplication.data.models.dto.UpdateEventTypeDTO;
+import com.example.myapplication.data.models.dto.UpdatedEventTypeDTO;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface EventTypesApi {
     );
 
     @POST("/api/eventTypes")
-    Call<CreatedEventTypeDTO> createEventType(@Body com.example.myapplication.data.models.CreateEventTypeDTO dto);
+    Call<CreatedEventTypeDTO> createEventType(@Body CreateEventTypeDTO dto);
 
     @PUT("/api/eventTypes/{id}")
     Call<UpdatedEventTypeDTO> updateEventType(@Path("id") Integer id, @Body UpdateEventTypeDTO dto);

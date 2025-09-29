@@ -11,8 +11,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.serviceReservationDTO.GetServiceReservationDTO;
-import com.example.myapplication.data.services.ServiceReservationService;
+import com.example.myapplication.data.models.dto.serviceReservationDTO.GetServiceReservationDTO;
+import com.example.myapplication.data.services.offer.ServiceReservationService;
 
 import java.util.List;
 

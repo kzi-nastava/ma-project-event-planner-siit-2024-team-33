@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.models.dto.eventTypeDTO.MinimalEventTypeDTO;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.invitationDTO.SimpleInvitation;
-import com.example.myapplication.data.services.InvitationService;
+import com.example.myapplication.data.models.dto.invitationDTO.SimpleInvitation;
+import com.example.myapplication.data.services.communication.InvitationService;
 
 import java.util.ArrayList;
 import java.util.List;

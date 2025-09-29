@@ -23,8 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
-import com.example.myapplication.data.dto.userDTO.GetUserDTO;
-import com.example.myapplication.data.dto.userDTO.UpdateUser;
+import com.example.myapplication.data.models.dto.userDTO.GetUserDTO;
+import com.example.myapplication.data.models.dto.userDTO.UpdateUser;
 import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.ui.view.page.authentication.LoginFragment;
 import com.example.myapplication.ui.viewmodel.profile.ProfileInformationViewModel;
