@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.data.dto.chatDTO.ChatContactDTO;
+import com.example.myapplication.data.services.ChatWebsocketService;
 import com.example.myapplication.ui.view.component.ImageCarouselFragment;
 import com.example.myapplication.ui.view.dialog.ProductBookingDialog;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
@@ -36,6 +38,7 @@ public class ProductDetailsFragment extends Fragment {
     private final ProductService productService = new ProductService();
     private final UsersService usersService = new UsersService();
     private final FavoritesService favoritesService = new FavoritesService();
+    private final ChatWebsocketService chatWebsocketService = ChatWebsocketService.getInstance();
 
     private Integer productId;
     private GetProductDTO product;
@@ -55,6 +58,7 @@ public class ProductDetailsFragment extends Fragment {
     Button editBtn;
     Button deleteBtn;
     Button bookBtn;
+    Button chatBtn;
 
     ImageButton favoriteButton;
 
@@ -98,6 +102,8 @@ public class ProductDetailsFragment extends Fragment {
         bookBtn = view.findViewById(R.id.btnBook);
         bookBtn.setOnClickListener(v -> showBookingDialog());
         bookBtn.setEnabled(false);
+        chatBtn = view.findViewById(R.id.btnChat);
+
         reviewsSection = view.findViewById(R.id.reviewsSection);
 
         loadData();
@@ -122,6 +128,12 @@ public class ProductDetailsFragment extends Fragment {
                         transaction.replace(R.id.nav_host_fragment, f);
                         transaction.addToBackStack(null);
                         transaction.commit();
+                    });
+                    chatBtn.setOnClickListener(v -> {
+                        ChatContactDTO dto = new ChatContactDTO();
+                        dto.email = product.providerEmail;
+                        dto.username = product.providerName;
+                        chatWebsocketService.openChatWith(dto);
                     });
                 }
                 else
