@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.invitations;
 
 import android.view.LayoutInflater;
 import android.view.View;

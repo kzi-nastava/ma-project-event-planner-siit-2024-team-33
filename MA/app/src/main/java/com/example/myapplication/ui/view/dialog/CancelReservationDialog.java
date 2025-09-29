@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;

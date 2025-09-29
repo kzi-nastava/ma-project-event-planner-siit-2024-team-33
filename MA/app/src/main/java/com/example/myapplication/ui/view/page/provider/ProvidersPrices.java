@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.provider;
 
 import android.app.AlertDialog;
 import android.os.Bundle;

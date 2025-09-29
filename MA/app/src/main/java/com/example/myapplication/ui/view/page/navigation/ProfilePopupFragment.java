@@ -26,7 +26,7 @@ import com.example.myapplication.ui.view.page.CreateServiceFragment;
 import com.example.myapplication.ui.view.page.event.EventTypeCRUDFragment;
 import com.example.myapplication.ui.view.page.events.EventCreation;
 import com.example.myapplication.ui.view.page.OfferCategoriesFragment;
-import com.example.myapplication.ui.view.page.ProvidersOffersFragment;
+import com.example.myapplication.ui.view.page.offers.ProvidersOffersFragment;
 import com.example.myapplication.ui.view.page.UpgradeSelectionActivity;
 import com.example.myapplication.ui.view.page.authentication.LoginFragment;
 import com.example.myapplication.ui.view.page.event.EventCreationFragment;

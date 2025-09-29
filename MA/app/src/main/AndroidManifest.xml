@@ -44,14 +44,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.view.page.ProviderUpgradeActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.provider.ProviderUpgradeActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.UpgradeSelectionActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.UpgradeActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.activity_service_create" android:exported="false"
             android:label="@string/title_activity_service_create"
             android:theme="@style/Theme.MyApplication" />
 
-        <activity android:name=".ui.view.page.MyInvitationsActivity" />
+        <activity android:name=".ui.view.page.invitations.MyInvitationsActivity" />
         <activity android:name=".ui.view.page.navigation.MainPageActivity" android:exported="false"/>
         <activity android:name=".reports.ReportsActivity" android:exported="false"/>
         <activity android:name=".ui.view.page.CommentsActivity" android:exported="false"/>
@@ -66,26 +66,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.view.page.VerificationActivity" android:exported="true">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:scheme="https"
-                    android:host="myapp.example.com"
-                    android:pathPrefix="/invitation"/>
-            </intent-filter>
-
+        <activity android:name=".ui.view.page.invitations.VerificationActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:scheme="http"
-                    android:host="localhost"
-                    android:port="8080"
-                    android:pathPrefix="/api/verify"/>
+                <data android:scheme="myapp" android:host="verification" />
             </intent-filter>
         </activity>
         <meta-data

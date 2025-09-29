@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view.page;
+package com.example.myapplication.ui.view.page.services;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.view.component.ImageCarouselFragment;
+import com.example.myapplication.ui.view.page.home.component.ImageCarouselFragment;
 import com.example.myapplication.data.dto.OfferCategoryDTO.MinimalOfferCategoryDTO;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
 import com.example.myapplication.data.dto.serviceDTO.PostServiceDTO;
@@ -384,7 +384,19 @@ public class CreateServiceFragment extends Fragment {
             hasError = true;
         }
 
-        double price = Double.parseDouble(priceStr);
+        double price = 0.0;
+        if (TextUtils.isEmpty(priceStr)){
+            priceInput.setError("Price is required");
+            hasError = true;
+        }
+        else{
+            price = Double.parseDouble(priceStr);
+            if (price <= 0) {
+                priceInput.setError("The price must be positive");
+                hasError = true;
+            }
+        }
+
         double discount = TextUtils.isEmpty(discountStr) ? 0.0 : Double.parseDouble(discountStr);
         if (price <= 0) {
             priceInput.setError("The price must be positive");
@@ -479,12 +491,21 @@ public class CreateServiceFragment extends Fragment {
             hasError = true;
         }
 
-        double price = Double.parseDouble(priceStr);
-        double discount = TextUtils.isEmpty(discountStr) ? 0.0 : Double.parseDouble(discountStr);
-        if (price <= 0) {
-            priceInput.setError("The price must be positive");
+        double price = 0.0;
+        if (TextUtils.isEmpty(priceStr)){
+            priceInput.setError("Price is required");
             hasError = true;
         }
+        else{
+            price = Double.parseDouble(priceStr);
+            if (price <= 0) {
+                priceInput.setError("The price must be positive");
+                hasError = true;
+            }
+        }
+
+        double discount = TextUtils.isEmpty(discountStr) ? 0.0 : Double.parseDouble(discountStr);
+
         if (discount > price) {
             discountInput.setError("The discount is too big");
             hasError = true;

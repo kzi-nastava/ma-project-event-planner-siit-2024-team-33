@@ -112,6 +112,7 @@ public class ChatFragment extends Fragment {
     private Button sendButton;
     private LinearLayout messageInputLayout;
     private TextView chatHeader;
+    private Button backButton;
 
     private List<ChatContactDTO> contacts = new ArrayList<>();
     ChatContactAdapter adapter;
@@ -133,6 +134,7 @@ public class ChatFragment extends Fragment {
         messageContainer = view.findViewById(R.id.messageContainer);
         messageEditText = view.findViewById(R.id.messageEditText);
         sendButton = view.findViewById(R.id.sendButton);
+        backButton = view.findViewById(R.id.backBtn);
         messageInputLayout = view.findViewById(R.id.messageInputLayout);
         chatHeader = view.findViewById(R.id.chatHeader);
 
@@ -158,6 +160,8 @@ public class ChatFragment extends Fragment {
                 messageEditText.setText("");
             }
         });
+
+        backButton.setOnClickListener(view1 -> CloseMessages());
 
         FetchContacts();
 
@@ -205,6 +209,7 @@ public class ChatFragment extends Fragment {
         messagesAreOpen = true;
         chatHeader.setText("Chat with " + selectedContact.username);
         contactListView.setVisibility(View.GONE);
+        backButton.setVisibility(View.VISIBLE);
         messageInputLayout.setVisibility(View.VISIBLE);
         messageContainer.setVisibility(View.VISIBLE);
         FetchMessages();
@@ -214,6 +219,7 @@ public class ChatFragment extends Fragment {
         messagesAreOpen = false;
         chatHeader.setText("Chat");
         contactListView.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.GONE);
         messageInputLayout.setVisibility(View.GONE);
         messageContainer.setVisibility(View.GONE);
         this.selectedContact = null;
