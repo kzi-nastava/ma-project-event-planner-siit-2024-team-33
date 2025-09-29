@@ -7,6 +7,7 @@ import com.example.myapplication.data.dto.eventDTO.GetEventDetails;
 import com.example.myapplication.data.dto.eventDTO.MinimalEventDTO;
 import com.example.myapplication.data.models.JoinedEventDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -61,4 +62,9 @@ public interface EventApi {
 
     @POST("api/events/{eventId}/join")
     Call<JoinedEventDTO> joinEvent(@Path("eventId") int eventId, @Body Object emptyBody);
+
+    @GET("api/events/me")
+    Call<List<MinimalEventDTO>> getUserEventsByDate(
+            @Query("date") LocalDate date
+    );
 }

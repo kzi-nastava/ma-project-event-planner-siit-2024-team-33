@@ -11,6 +11,7 @@ import com.example.myapplication.data.models.JoinedEventDTO;
 import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -73,5 +74,9 @@ public class EventService {
 
     public Call<ResponseBody> getEventStatisticsPdf(int eventId) {
         return eventApi.getEventStatisticsPdf(eventId);
+    }
+
+    public Call<List<MinimalEventDTO>> getUserEventsByDate(LocalDate date) {
+        return eventApi.getUserEventsByDate(date);
     }
 }
