@@ -30,6 +30,7 @@ import com.example.myapplication.ui.view.page.ProvidersOffersFragment;
 import com.example.myapplication.ui.view.page.UpgradeSelectionActivity;
 import com.example.myapplication.ui.view.page.authentication.LoginFragment;
 import com.example.myapplication.ui.view.page.event.EventCreationFragment;
+import com.example.myapplication.ui.view.page.offers.ProductCRUDFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileFavoritesFragment;
 import com.example.myapplication.ui.view.page.profile.ProfileInformationFragment;
 import com.example.myapplication.ui.view.page.authentication.ProfileTypeFragment;
@@ -45,7 +46,7 @@ public class ProfilePopupFragment extends Fragment {
     private Button signInButton, signUpButton, logOutButton;
     private Button upgradeButton, createEventButton, budgetButton, offerCategoriesButton;
     private Button eventTypesButton, eventStatisticsButton, yourOffersButton, reportsButton;
-    private Button commentsButton, createServiceButton;
+    private Button commentsButton, createServiceButton, myProductsButton;
 
     private TextView emailText;
     private ShapeableImageView profileIcon;
@@ -89,6 +90,7 @@ public class ProfilePopupFragment extends Fragment {
         commentsButton = view.findViewById(R.id.comments_button);
         createServiceButton = view.findViewById(R.id.create_service_button);
         upgradeButton = view.findViewById(R.id.upgrade_button);
+        myProductsButton = view.findViewById(R.id.my_products_button);
 
         emailText = view.findViewById(R.id.email_text);
         profileIcon = view.findViewById(R.id.profile_icon);
@@ -117,6 +119,7 @@ public class ProfilePopupFragment extends Fragment {
             reportsButton.setVisibility(viewModel.isAdmin() ? View.VISIBLE : View.GONE);
             commentsButton.setVisibility(viewModel.isAdmin() ? View.VISIBLE : View.GONE);
             createServiceButton.setVisibility(viewModel.isProvider() ? View.VISIBLE : View.GONE);
+            myProductsButton.setVisibility(viewModel.isProvider() ? View.VISIBLE : View.GONE);
 
             upgradeButton.setVisibility(viewModel.isRegularUser() ? View.VISIBLE : View.GONE);
 
@@ -203,6 +206,11 @@ public class ProfilePopupFragment extends Fragment {
         eventTypesButton.setOnClickListener(v -> {
             closeDrawer();
             openFragment(EventTypeCRUDFragment.newInstance());
+        });
+
+        myProductsButton.setOnClickListener(v -> {
+            closeDrawer();
+            openFragment(ProductCRUDFragment.newInstance());
         });
 
         budgetButton.setOnClickListener(v -> openFragment(BudgetPage.newInstance()));

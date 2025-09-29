@@ -124,6 +124,16 @@
         android:visibility="gone" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/my_products_button"
+        style="@style/ProfileSidebarButton"
+        android:text="My Products"
+        app:cornerRadius="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/profile_info_button"
         style="@style/ProfileSidebarButton"
         android:text="Profile Information"
