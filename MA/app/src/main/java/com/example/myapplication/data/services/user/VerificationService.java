@@ -1,6 +1,7 @@
 package com.example.myapplication.data.services.user;
 
 import com.example.myapplication.data.api.user.VerificationAPI;
+import com.example.myapplication.data.models.VerificationResponse;
 import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
@@ -13,7 +14,7 @@ public class VerificationService {
 
     public VerificationService() {verificationApi = ApiClient.getRetrofit(BASE_URL).create(VerificationAPI.class);}
 
-    public Call<String> verifyToken(String token) {
+    public Call<VerificationResponse> verifyToken(String token) {
         return verificationApi.verifyToken(token);
     }
 

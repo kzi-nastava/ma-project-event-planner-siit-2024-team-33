@@ -128,7 +128,7 @@ public class OfferingsPage extends Fragment {
                     } else {
                         offers = Collections.emptyList();
                         displayAllOffers(view);
-                        Toast.makeText(requireContext(), "No events found for this filter.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "No offers found for this filter.", Toast.LENGTH_SHORT).show();
                     }
 
                     boolean isLastPage = page.getNumber() + 1 >= page.getTotalPages();
@@ -235,10 +235,6 @@ public class OfferingsPage extends Fragment {
         });
 
         Button confirmButton = dialogView.findViewById(R.id.btn_confirm);
-        confirmButton.setOnClickListener(v -> {
-            handleFilterDialogConfirmation(dialogView);
-            dialog.dismiss();
-        });
         if (confirmButton != null) {
             confirmButton.setOnClickListener(v -> {
                 handleFilterDialogConfirmation(dialogView);
@@ -247,6 +243,7 @@ public class OfferingsPage extends Fragment {
         } else {
             Log.e("OfferingsPage", "Confirm button not found in filter dialog layout");
         }
+
 
         dialog.show();
     }

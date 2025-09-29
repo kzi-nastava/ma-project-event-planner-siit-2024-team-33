@@ -23,6 +23,8 @@ import com.example.myapplication.data.dto.serviceReservationDTO.PostServiceReser
 import com.example.myapplication.data.services.event.EventService;
 import com.example.myapplication.data.services.ServiceReservationService;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -132,15 +134,26 @@ public class ServiceBookingDialog extends DialogFragment {
         PostServiceReservationDTO dto = new PostServiceReservationDTO(
                 selectedEvent.getId(), date, timeFrom, timeTo
         );
-
         reservationService.reserveService(serviceId, dto).enqueue(new Callback<CreatedServiceReservationDTO>() {
             @Override
             public void onResponse(Call<CreatedServiceReservationDTO> call, Response<CreatedServiceReservationDTO> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(requireContext(), "Service booked successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), "Service booked", Toast.LENGTH_LONG).show();
                     dismiss();
                 } else {
-                    Toast.makeText(requireContext(), "Booking failed", Toast.LENGTH_SHORT).show();
+                    try {
+                        String errorBody = response.errorBody() != null ? response.errorBody().string() : "Unknown error";
+                        String message;
+                        try {
+                            JSONObject json = new JSONObject(errorBody);
+                            message = json.optString("message", errorBody);
+                        } catch (Exception parseEx) {
+                            message = errorBody;
+                        }
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(requireContext(), "Booking failed (could not parse server message)", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -149,6 +162,8 @@ public class ServiceBookingDialog extends DialogFragment {
                 Toast.makeText(requireContext(), "Request error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
     private void fetchEvents() {
