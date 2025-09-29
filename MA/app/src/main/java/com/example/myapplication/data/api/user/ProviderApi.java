@@ -1,0 +1,12 @@
+package com.example.myapplication.data.api.user;
+
+import com.example.myapplication.data.models.dto.providerDTO.ProviderDetailsDTO;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
+public interface ProviderApi {
+    @GET("api/providers/{id}")
+    Call<ProviderDetailsDTO> getDetails(@Path("id") Integer providerId);
+}

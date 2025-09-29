@@ -27,43 +27,37 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBwNp4PhqhesGe-CfDLoba3Fi3R1KqmeJM" />
-        <activity android:name=".page.SplashScreenActivity" android:exported="true">
+        <activity android:name=".ui.view.page.navigation.SplashScreenActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".page.ProviderUpgradeActivity" android:exported="false"/>
-        <activity android:name=".page.UpgradeSelectionActivity" android:exported="false"/>
-        <activity android:name=".page.UpgradeActivity" android:exported="false"/>
-        <activity android:name=".page.activity_service_create" android:exported="false"
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.myapplication.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".ui.view.page.provider.ProviderUpgradeActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.profile.UpgradeSelectionActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.profile.UpgradeActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.services.activity_service_create" android:exported="false"
             android:label="@string/title_activity_service_create"
             android:theme="@style/Theme.MyApplication" />
 
-        <activity android:name=".page.MyInvitationsActivity" />
-        <activity android:name=".page.MainPageActivity" android:exported="false"/>
-        <activity android:name=".page.ProfileTypeActivity" android:exported="false"/>
-        <activity android:name=".OrgActivityMandatory" android:exported="false"/>
-        <activity android:name=".OrgActivityOptional" android:exported="false"/>
-        <activity android:name=".page.EventPlannerActivityOptional" android:exported="false"/>
-        <activity android:name=".page.EventPlannerActivityMandatory" android:exported="false"/>
-        <activity android:name=".reports.ReportsActivity" android:exported="false"/>
-        <activity android:name=".page.CommentsActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.invitations.MyInvitationsActivity" />
+        <activity android:name=".ui.view.page.navigation.MainPageActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.communication.ReportsActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.communication.CommentsActivity" android:exported="false"/>
+        <activity android:name=".ui.view.page.event.EventDetailsActivity" android:exported="true"/>
 
-        <activity android:name=".page.EventDetailsActivity" android:exported="true"/>
-
-        <activity android:name=".page.LoginActivity" android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="myapp" android:host="invitationlogin" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".page.QuickRegistrationActivity" android:exported="true">
+        <activity android:name=".ui.view.page.profile.QuickRegistrationActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -72,26 +66,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".page.VerificationActivity" android:exported="true">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:scheme="https"
-                    android:host="myapp.example.com"
-                    android:pathPrefix="/invitation"/>
-            </intent-filter>
-
+        <activity android:name=".ui.view.page.invitations.VerificationActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:scheme="http"
-                    android:host="localhost"
-                    android:port="8080"
-                    android:pathPrefix="/api/verify"/>
+                <data android:scheme="myapp" android:host="verification" />
             </intent-filter>
         </activity>
         <meta-data

@@ -68,13 +68,6 @@
             android:orientation="horizontal"
             android:layout_marginBottom="16dp"/>
 
-        <ImageButton
-            android:id="@+id/btnFavorite"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:background="@null"
-            android:src="@drawable/ic_star" />
 
 
         <!-- Event Info Section -->
@@ -180,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.example.myapplication.reviews.ReviewsSectionView
+        <com.example.myapplication.ui.view.page.communication.ReviewsSectionView
             android:id="@+id/reviewsSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

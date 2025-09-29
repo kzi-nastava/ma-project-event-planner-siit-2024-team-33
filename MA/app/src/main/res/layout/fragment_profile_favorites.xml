@@ -1,0 +1,118 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/superior_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvFavoritesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile.Favorites"
+                android:textColor="@color/dreadhead_blue"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Top Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/button_information"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/button_color"
+                    android:textColor="@color/black"
+                    android:text="Information" />
+                <Button
+                    android:id="@+id/button_favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/novi_sad_torquoise"
+                    android:textColor="@color/black"
+                    android:text="Favorites" />
+                <Button
+                    android:id="@+id/button_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dreadhead_blue"
+                    android:textColor="@color/black"
+                    android:text="Schedule" />
+            </LinearLayout>
+
+            <!-- Favorites Section -->
+            <LinearLayout
+                android:id="@+id/step_mandatory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/novi_sad_torquoise"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:id="@+id/favorites_buttons_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:background="@color/novi_sad_torquoise"
+                    android:padding="14dp">
+
+                    <Button
+                        android:id="@+id/events_favorites_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/freaky_green"
+                        android:textColor="@color/black"
+                        android:text="Favorite Events" />
+                    <Button
+                        android:id="@+id/offers_favorites_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/superior_white"
+                        android:textColor="@color/black"
+                        android:text="Favorite Offers" />
+                </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressBarFavorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/errorTextFavorites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:padding="8dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/favorites_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

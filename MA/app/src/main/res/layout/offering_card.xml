@@ -38,7 +38,6 @@
                 android:id="@+id/offering_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/trumpshot"
                 android:scaleType="centerCrop"
                 android:clipToOutline="true"
                 android:background="@drawable/rounded_corners"/>
