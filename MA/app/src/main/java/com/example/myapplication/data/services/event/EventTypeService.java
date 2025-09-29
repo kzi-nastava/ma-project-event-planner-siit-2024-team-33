@@ -1,7 +1,13 @@
 package com.example.myapplication.data.services.event;
 
 import com.example.myapplication.data.api.event.EventTypesApi;
+import com.example.myapplication.data.dto.PageResponse;
 import com.example.myapplication.data.dto.eventTypeDTO.MinimalEventTypeDTO;
+import com.example.myapplication.data.models.CreateEventTypeDTO;
+import com.example.myapplication.data.models.CreatedEventTypeDTO;
+import com.example.myapplication.data.models.GetEventTypeDTO;
+import com.example.myapplication.data.models.UpdateEventTypeDTO;
+import com.example.myapplication.data.models.UpdatedEventTypeDTO;
 import com.example.myapplication.data.services.ApiClient;
 import com.example.myapplication.utils.Settings;
 
@@ -19,5 +25,29 @@ public class EventTypeService {
 
     public Call<List<MinimalEventTypeDTO>> getEventTypes() {
         return eventTypesApi.getActiveTypes();
+    }
+
+    public Call<PageResponse<GetEventTypeDTO>> getEventTypes(int page, int size) {
+        return eventTypesApi.getEventTypes(page, size);
+    }
+
+    public Call<CreatedEventTypeDTO> createEventType(CreateEventTypeDTO dto) {
+        return eventTypesApi.createEventType(dto);
+    }
+
+    public Call<UpdatedEventTypeDTO> updateEventType(Integer id, UpdateEventTypeDTO dto) {
+        return eventTypesApi.updateEventType(id, dto);
+    }
+
+    public Call<UpdatedEventTypeDTO> activateEventType(Integer id) {
+        return eventTypesApi.activateEventType(id);
+    }
+
+    public Call<UpdatedEventTypeDTO> deactivateEventType(Integer id) {
+        return eventTypesApi.deactivateEventType(id);
+    }
+
+    public Call<Boolean> checkIfExists(String name) {
+        return eventTypesApi.checkIfExists(name);
     }
 }
